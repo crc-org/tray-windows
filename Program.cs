@@ -25,6 +25,7 @@ namespace tray_windows
     {
         private NotifyIcon notifyIcon;
         private Form about = new AboutForm();
+        private Form status = new StatusForm();
         public TrayContext()
         {
             Bitmap bm = new Bitmap(Resource.ocp_logo);
@@ -49,6 +50,7 @@ namespace tray_windows
             cm.Items.Add(new ToolStripSeparator());
             // Detailed status menu
             var detailedStatusMenu = cm.Items.Add(@"Detailed Status");
+            detailedStatusMenu.Click += ShowDetailedStatusForm;
             cm.Items.Add(new ToolStripSeparator());
 
             // Start Menu
@@ -89,6 +91,14 @@ namespace tray_windows
             if (!this.about.Visible)
             {
                 this.about.Show();
+            }
+        }
+
+        private void ShowDetailedStatusForm(object sender, EventArgs e)
+        {
+            if (!this.status.Visible)
+            {
+                this.status.Show();
             }
         }
     }

@@ -36,6 +36,9 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.CrcVersionLabel = new System.Windows.Forms.Label();
+            this.OcpVersion = new System.Windows.Forms.Label();
+            this.TrayVersion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -119,11 +122,41 @@
             this.pictureBox3.TabIndex = 11;
             this.pictureBox3.TabStop = false;
             // 
+            // CrcVersionLabel
+            // 
+            this.CrcVersionLabel.AutoSize = true;
+            this.CrcVersionLabel.Location = new System.Drawing.Point(384, 309);
+            this.CrcVersionLabel.Name = "CrcVersionLabel";
+            this.CrcVersionLabel.Size = new System.Drawing.Size(52, 25);
+            this.CrcVersionLabel.TabIndex = 12;
+            this.CrcVersionLabel.Text = "||||||||";
+            // 
+            // OcpVersion
+            // 
+            this.OcpVersion.AutoSize = true;
+            this.OcpVersion.Location = new System.Drawing.Point(507, 374);
+            this.OcpVersion.Name = "OcpVersion";
+            this.OcpVersion.Size = new System.Drawing.Size(47, 25);
+            this.OcpVersion.TabIndex = 14;
+            this.OcpVersion.Text = "|||||||";
+            // 
+            // TrayVersion
+            // 
+            this.TrayVersion.AutoSize = true;
+            this.TrayVersion.Location = new System.Drawing.Point(145, 453);
+            this.TrayVersion.Name = "TrayVersion";
+            this.TrayVersion.Size = new System.Drawing.Size(42, 25);
+            this.TrayVersion.TabIndex = 15;
+            this.TrayVersion.Text = "||||||";
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1087, 698);
+            this.Controls.Add(this.TrayVersion);
+            this.Controls.Add(this.OcpVersion);
+            this.Controls.Add(this.CrcVersionLabel);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.TrayGHRepoLabel);
@@ -157,5 +190,8 @@
         private System.Windows.Forms.LinkLabel TrayGHRepoLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label CrcVersionLabel;
+        private System.Windows.Forms.Label OcpVersion;
+        private System.Windows.Forms.Label TrayVersion;
     }
 }
