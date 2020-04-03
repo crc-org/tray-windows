@@ -63,6 +63,26 @@ namespace tray_windows {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap crc_logo {
+            get {
+                object obj = ResourceManager.GetObject("crc-logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gh_icon {
+            get {
+                object obj = ResourceManager.GetObject("gh-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ocp_logo {
             get {
                 object obj = ResourceManager.GetObject("ocp_logo", resourceCulture);
@@ -96,6 +116,16 @@ namespace tray_windows {
         internal static System.Drawing.Bitmap status_unknown {
             get {
                 object obj = ResourceManager.GetObject("status_unknown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap web_icon {
+            get {
+                object obj = ResourceManager.GetObject("web-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -112,5 +112,14 @@
   <ItemGroup>
     <None Include="Resources\ocp-logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo-Red_Hat-CodeReady_Containers-B-Standard-RGB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_language_326663.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_mark-github_298822.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

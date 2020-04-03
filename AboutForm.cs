@@ -24,5 +24,10 @@ namespace tray_windows
             this.Text = @"About CodeReady Containers";
             //this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
         }
+
+        private void TrayGHRepoLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/code-ready/tray-windows");
+        }
     }
 }

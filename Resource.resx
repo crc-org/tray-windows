@@ -118,6 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="crc-logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Logo-Red_Hat-CodeReady_Containers-B-Standard-RGB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gh-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\iconfinder_mark-github_298822.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ocp_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\ocp-logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -129,5 +135,8 @@
   </data>
   <data name="status_unknown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\status-unknown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="web-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\iconfinder_language_326663.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
