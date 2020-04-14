@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace tray_windows
 {
@@ -20,8 +21,40 @@ namespace tray_windows
         private void StatusForm_Load(object sender, EventArgs e)
         {
             Bitmap bm = new Bitmap(Resource.ocp_logo);
-            this.Icon = Icon.FromHandle(bm.GetHicon());
-            this.Text = @"CodeReady Containers Status";
+            Icon = Icon.FromHandle(bm.GetHicon());
+            Text = @"Status";
+            
+            
+            //FormClosing += StatusForm_Closing;
+            //Activated += GetStatus;
+
+            VisibleChanged += GetStatus;
+            //Shown += GetStatus;
+        }
+
+        private void GetStatus(object sender, EventArgs e)
+        {
+            var d = new Daemon.DaemonCommander();
+            try
+            {
+                var r = d.GetStatus();
+                StatusResult status = JsonConvert.DeserializeObject<StatusResult>(r);
+                CrcStatus.Text = status.CrcStatus;
+                OpenShiftStatus.Text = status.OpenshiftStatus;
+                //DiskUsage.Text = (string) status.DiskUsage;
+                //CacheFolderStatus.Text = status.DiskSize;
+            }
+            catch(Exception ex)
+            {
+                this.Hide();
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void StatusForm_Closing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
         }
     }
 }

@@ -24,8 +24,6 @@ namespace tray_windows
     internal class TrayContext : ApplicationContext
     {
         private NotifyIcon notifyIcon;
-        private Form about = new AboutForm();
-        private Form status = new StatusForm();
         public TrayContext()
         {
             Bitmap bm = new Bitmap(Resource.ocp_logo);
@@ -88,18 +86,18 @@ namespace tray_windows
 
         private void ShowAboutForm(object sender, EventArgs e)
         {
-            if (!this.about.Visible)
-            {
-                this.about.Show();
-            }
+            Form about = new AboutForm();
+            if (!about.Visible)
+                about.Show();
+            //about.Dispose();
         }
 
         private void ShowDetailedStatusForm(object sender, EventArgs e)
         {
-            if (!this.status.Visible)
-            {
-                this.status.Show();
-            }
+            Form status = new StatusForm();
+            if (!status.Visible)
+                status.Show();
+            //status.Dispose();
         }
     }
 }
