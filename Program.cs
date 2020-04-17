@@ -32,8 +32,14 @@ namespace tray_windows
                 Icon = Icon.FromHandle(bm.GetHicon()),
                 Visible = true
             };
+            notifyIcon.Click += NotifyIcon_Click;
             
             SetConextMenu();
+        }
+
+        private void NotifyIcon_Click(object sender, EventArgs e)
+        {
+            typeof(NotifyIcon).GetMethod("ShowContextMenu", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(notifyIcon, null);
         }
 
         private void SetConextMenu()

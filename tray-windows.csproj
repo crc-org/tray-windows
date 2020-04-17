@@ -100,6 +100,7 @@
     <Compile Include="DaemonCommander\ResponseClasses.cs" />
     <Compile Include="DaemonCommander\UnixEndPoint.cs" />
     <Compile Include="DaemonCommander\DaemonCommander.cs" />
+    <Compile Include="DisplayMessageBox.cs" />
     <Compile Include="StatusForm.cs">
       <SubType>Form</SubType>
     </Compile>
