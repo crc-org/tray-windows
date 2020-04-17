@@ -23,19 +23,83 @@ namespace tray_windows.Daemon
 		{
 			try
 			{
+				var resp = this.SendCommand("status");
+				return resp;
+			}
+			catch (SocketException e)
+			{
+				throw e;
+			}
+		}
+		
+		public string GetVersion()
+		{
+			try
+			{
+				var resp = this.SendCommand("version");
+				return resp;
+			}
+			catch (SocketException e)
+			{
+				throw e;
+			}
+		}
+
+		public string Start()
+		{
+			try
+			{
+				var resp = this.SendCommand("start");
+				return resp;
+			}
+			catch (SocketException e)
+			{
+				throw e;
+			}
+		}
+
+		public string Stop()
+		{
+			try
+			{
+				var resp = this.SendCommand("start");
+				return resp;
+			}
+			catch (SocketException e)
+			{
+				throw e;
+			}
+		}
+
+		public string Delete()
+		{
+			try
+			{
+				var resp = this.SendCommand("delete");
+				return resp;
+			}
+			catch (SocketException e)
+			{
+				throw e;
+			}
+		}
+		public string SendCommand(string command)
+		{
+			try
+			{
 				var resp = new byte[1024];
 				daemonSocket.Connect(daemonSocketEp);
-				var cmd = "{\"command\":\"status\"}";
+				var cmd = $"{{\"command\":\"{command}\"}}";
 				byte[] msg = Encoding.ASCII.GetBytes(cmd);
 				daemonSocket.Send(msg);
 				daemonSocket.Receive(resp);
 				daemonSocket.Close();
 				return Encoding.ASCII.GetString(resp);
 			}
-			catch (Exception e)
+			catch (SocketException e)
 			{
 				throw e;
 			}
-		} 
+		}
 	}
 }

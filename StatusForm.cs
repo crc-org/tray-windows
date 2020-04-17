@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
@@ -28,8 +22,8 @@ namespace tray_windows
             //FormClosing += StatusForm_Closing;
             //Activated += GetStatus;
 
-            VisibleChanged += GetStatus;
-            //Shown += GetStatus;
+            //VisibleChanged += GetStatus;
+            Shown += GetStatus;
         }
 
         private void GetStatus(object sender, EventArgs e)
@@ -41,13 +35,14 @@ namespace tray_windows
                 StatusResult status = JsonConvert.DeserializeObject<StatusResult>(r);
                 CrcStatus.Text = status.CrcStatus;
                 OpenShiftStatus.Text = status.OpenshiftStatus;
-                //DiskUsage.Text = (string) status.DiskUsage;
-                //CacheFolderStatus.Text = status.DiskSize;
+                //System.Diagnostics.EventLog.WriteEntry("crc-tray-windows", status.Error, System.Diagnostics.EventLogEntryType.Error);
+                DiskUsage.Text = status.DiskUsage.ToString();
+                CacheFolderStatus.Text = status.DiskSize.ToString();
             }
-            catch(Exception ex)
+            catch (System.Net.Sockets.SocketException ex)
             {
                 this.Hide();
-                MessageBox.Show(ex.Message);
+                DisplayMessageBox.Warn(ex.Message, "Error connecting to daemon");
             }
         }
 
