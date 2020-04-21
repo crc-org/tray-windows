@@ -118,22 +118,40 @@ namespace tray_windows
 
         private void CopyOCLoginForKubeadminMenu_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Clipboard.SetText("oc.exe login");
+            var consoleResult = Handlers.HandleOCLoginForKubeadmin();
+            if (consoleResult.Success)
+                Clipboard.SetText(string.Format("oc.exe login -u kubeadmin -p {1} {2}", consoleResult.ClusterConfig.KubeAdminPass, consoleResult.ClusterConfig.ClusterAPI));
+            else
+                ShowNotification(@"Could not find credentials, is CRC runnning?", ToolTipIcon.Error);
         }
 
         private void CopyOCLoginForDeveloperMenu_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var consoleResult = Handlers.HandleOCLogingForDeveloper();
+            if (consoleResult.Success)
+                Clipboard.SetText(string.Format("oc.exe login -u developer -p developer {1}", consoleResult.ClusterConfig.ClusterAPI));
+            else
+                ShowNotification(@"Could not find credentials, is CRC running?", ToolTipIcon.Error);
         }
 
         private void OpenWebConsoleMenu_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var consoleResult = Handlers.HandleOpenWebConsole();
+            if (consoleResult.Success)
+                System.Diagnostics.Process.Start(consoleResult.ClusterConfig.WebConsoleURL);
+            else
+                ShowNotification(@"Could not open web console, is CRC running?", ToolTipIcon.Error);
         }
 
         private void DeleteMenu_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            ShowNotification(@"Deleting Cluster", ToolTipIcon.Warning);
+            var deleteResult = Handlers.HandleDelete();
+            if (deleteResult.Success)
+                DisplayMessageBox.Info(@"CodeReady Containers cluster is deleted");
+            else
+                DisplayMessageBox.Warn(@"Could not delete the cluster");
         }
 
         private void StopMenu_Click(object sender, EventArgs e)
