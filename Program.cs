@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using Newtonsoft.Json;
 
 namespace tray_windows
 {
@@ -23,7 +21,23 @@ namespace tray_windows
 
     internal class TrayContext : ApplicationContext
     {
+        //tray Icon
         private NotifyIcon notifyIcon;
+
+        // MenuStrip Items
+        private ToolStripItem status;
+        private ToolStripItem detailedStatusMenu;
+        private ToolStripItem startMenu;
+        private ToolStripItem stopMenu;
+        private ToolStripItem deleteMenu;
+        private ToolStripItem openWebConsoleMenu;
+        private ToolStripItem copyOCLoginCommand;
+        private ToolStripItem copyOCLoginForDeveloperMenu;
+        private ToolStripItem copyOCLoginCommandForKubeadminMenu;
+        private ToolStripItem aboutMenu;
+        private ToolStripItem exitMenu;
+
+        // Initialize tray
         public TrayContext()
         {
             Bitmap bm = new Bitmap(Resource.ocp_logo);
@@ -32,62 +46,74 @@ namespace tray_windows
                 Icon = Icon.FromHandle(bm.GetHicon()),
                 Visible = true
             };
-            notifyIcon.Click += NotifyIcon_Click;
-            
+            notifyIcon.MouseClick += NotifyIcon_Click;
+
             SetConextMenu();
         }
 
-        private void NotifyIcon_Click(object sender, EventArgs e)
+        // event handlers and methods
+        private void NotifyIcon_Click(object sender, MouseEventArgs e)
         {
-            typeof(NotifyIcon).GetMethod("ShowContextMenu", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(notifyIcon, null);
+            if (e.Button == MouseButtons.Left)
+            {
+                typeof(NotifyIcon).GetMethod("ShowContextMenu", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(notifyIcon, null);
+                UpdateClusterStatusMenu();
+            }
         }
 
+        // populate the context menu for tray icon
         private void SetConextMenu()
         {
             ContextMenuStrip cm = new ContextMenuStrip();
 
             // Status Menu
-            var status = cm.Items.Add(@"Unknown");
-            status.Image = Resource.status_unknown;
+            status = cm.Items.Add(@"Unknown");
             status.Enabled = false;
 
             cm.Items.Add(new ToolStripSeparator());
             // Detailed status menu
-            var detailedStatusMenu = cm.Items.Add(@"Detailed Status");
+            detailedStatusMenu = cm.Items.Add(@"Detailed Status");
             detailedStatusMenu.Click += ShowDetailedStatusForm;
             cm.Items.Add(new ToolStripSeparator());
 
             // Start Menu
-            var startMenu = cm.Items.Add(@"Start");
+            startMenu = cm.Items.Add(@"Start");
 
             // Stop Menu
-            var stopMenu = cm.Items.Add(@"Stop");
+            stopMenu = cm.Items.Add(@"Stop");
 
             // Delete Menu
-            var deleteMenu = cm.Items.Add(@"Delete");
+            deleteMenu = cm.Items.Add(@"Delete");
 
             cm.Items.Add(new ToolStripSeparator());
             // Open web console menu
-            var openWebConsoleMenu = cm.Items.Add(@"Launch Web Console");
+            openWebConsoleMenu = cm.Items.Add(@"Launch Web Console");
 
             // Copy oc login command
-            var copyOCLoginCommand = cm.Items.Add(@"Copy OC Login Command");
+            copyOCLoginCommand = cm.Items.Add(@"Copy OC Login Command");
 
             // Copy oc login command: developer
-            var copyOCLoginForDeveloperMenu = (copyOCLoginCommand as ToolStripMenuItem).DropDownItems.Add(@"Developer");
+            copyOCLoginForDeveloperMenu = (copyOCLoginCommand as ToolStripMenuItem).DropDownItems.Add(@"Developer");
             // Copy oc login command: kubeadmin
-            var copyOCLoginCommandForKubeadminMenu = (copyOCLoginCommand as ToolStripMenuItem).DropDownItems.Add(@"Kubeadmin");
+            copyOCLoginCommandForKubeadminMenu = (copyOCLoginCommand as ToolStripMenuItem).DropDownItems.Add(@"Kubeadmin");
 
             cm.Items.Add(new ToolStripSeparator());
             // About menu
-            var aboutMenu = cm.Items.Add(@"About");
+            aboutMenu = cm.Items.Add(@"About");
             aboutMenu.Click += ShowAboutForm;
 
             // Exit menu
-            var exitMenu = cm.Items.Add(@"Exit");
+            exitMenu = cm.Items.Add(@"Exit");
+            exitMenu.Click += ExitMenu_Click;
 
 
             this.notifyIcon.ContextMenuStrip = cm;
+        }
+
+        private void ExitMenu_Click(object sender, EventArgs e)
+        {
+            notifyIcon.Visible = false;
+            Application.Exit();
         }
 
         private void ShowAboutForm(object sender, EventArgs e)
@@ -95,7 +121,6 @@ namespace tray_windows
             Form about = new AboutForm();
             if (!about.Visible)
                 about.Show();
-            //about.Dispose();
         }
 
         private void ShowDetailedStatusForm(object sender, EventArgs e)
@@ -103,7 +128,25 @@ namespace tray_windows
             Form status = new StatusForm();
             if (!status.Visible)
                 status.Show();
-            //status.Dispose();
+        }
+
+        private void UpdateClusterStatusMenu()
+        {
+            var d = new Daemon.DaemonCommander();
+            try
+            {
+                var r = d.GetStatus();
+                StatusResult status = JsonConvert.DeserializeObject<StatusResult>(r);
+                if (!string.IsNullOrEmpty(status.CrcStatus))
+                    this.status.Text = status.CrcStatus;
+                else
+                    this.status.Text = @"Unknown";
+            }
+            catch (System.Net.Sockets.SocketException ex)
+            {
+                notifyIcon.ContextMenuStrip.Hide();
+                DisplayMessageBox.Error(ex.Message, "Error connecting to daemon");
+            }
         }
     }
 }
