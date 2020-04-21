@@ -1,0 +1,18 @@
+﻿# Appveyor config for CodeReady Containers windows tray
+---
+image: Visual Studio 2019
+
+install:
+  ps: nuget restore tray-windows.sln
+
+build:
+  project: tray-windows.sln
+
+after_build:
+  ps: ls bin\
+  
+
+artifacts:
+  - path: bin\Release
+    name: crc-tray
+
