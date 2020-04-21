@@ -42,13 +42,13 @@ namespace tray_windows
                 }
                 else
                 {
-                    DisplayMessageBox.Warn("Unable to fetch version information from daemon", "Version");
+                    DisplayMessageBox.Warn("Unable to fetch version information from daemon");
                 }
             }
             catch (System.Net.Sockets.SocketException ex)
             {
                 this.Hide();
-                DisplayMessageBox.Warn(ex.Message, "Error connecting to daemon");
+                DisplayMessageBox.Warn(ex.Message);
             }
         }
         private void AboutForm_FormClosing(object sender, FormClosingEventArgs e)

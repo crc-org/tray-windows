@@ -97,6 +97,7 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DaemonCommander\Handlers.cs" />
     <Compile Include="DaemonCommander\ResponseClasses.cs" />
     <Compile Include="DaemonCommander\UnixEndPoint.cs" />
     <Compile Include="DaemonCommander\DaemonCommander.cs" />

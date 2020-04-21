@@ -42,7 +42,7 @@ namespace tray_windows
             catch (System.Net.Sockets.SocketException ex)
             {
                 this.Hide();
-                DisplayMessageBox.Warn(ex.Message, "Error connecting to daemon");
+                DisplayMessageBox.Warn(ex.Message);
             }
         }
 

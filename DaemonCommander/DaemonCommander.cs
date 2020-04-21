@@ -62,7 +62,7 @@ namespace tray_windows.Daemon
 		{
 			try
 			{
-				var resp = this.SendCommand("start");
+				var resp = this.SendCommand("stop");
 				return resp;
 			}
 			catch (SocketException e)
@@ -83,7 +83,20 @@ namespace tray_windows.Daemon
 				throw e;
 			}
 		}
-		public string SendCommand(string command)
+
+		public string GetWebconsoleURL()
+		{
+			try
+			{
+				var resp = this.SendCommand("webconsoleurl");
+				return resp;
+			}
+			catch (SocketException e)
+			{
+				throw e;
+			}
+		}
+		private string SendCommand(string command)
 		{
 			try
 			{

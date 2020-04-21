@@ -33,7 +33,7 @@ namespace tray_windows
         private ToolStripItem openWebConsoleMenu;
         private ToolStripItem copyOCLoginCommand;
         private ToolStripItem copyOCLoginForDeveloperMenu;
-        private ToolStripItem copyOCLoginCommandForKubeadminMenu;
+        private ToolStripItem copyOCLoginForKubeadminMenu;
         private ToolStripItem aboutMenu;
         private ToolStripItem exitMenu;
 
@@ -78,24 +78,30 @@ namespace tray_windows
 
             // Start Menu
             startMenu = cm.Items.Add(@"Start");
+            startMenu.Click += StartMenu_Click;
 
             // Stop Menu
             stopMenu = cm.Items.Add(@"Stop");
+            stopMenu.Click += StopMenu_Click;
 
             // Delete Menu
             deleteMenu = cm.Items.Add(@"Delete");
+            deleteMenu.Click += DeleteMenu_Click;
 
             cm.Items.Add(new ToolStripSeparator());
             // Open web console menu
             openWebConsoleMenu = cm.Items.Add(@"Launch Web Console");
+            openWebConsoleMenu.Click += OpenWebConsoleMenu_Click;
 
             // Copy oc login command
             copyOCLoginCommand = cm.Items.Add(@"Copy OC Login Command");
 
             // Copy oc login command: developer
             copyOCLoginForDeveloperMenu = (copyOCLoginCommand as ToolStripMenuItem).DropDownItems.Add(@"Developer");
+            copyOCLoginForDeveloperMenu.Click += CopyOCLoginForDeveloperMenu_Click;
             // Copy oc login command: kubeadmin
-            copyOCLoginCommandForKubeadminMenu = (copyOCLoginCommand as ToolStripMenuItem).DropDownItems.Add(@"Kubeadmin");
+            copyOCLoginForKubeadminMenu = (copyOCLoginCommand as ToolStripMenuItem).DropDownItems.Add(@"Kubeadmin");
+            copyOCLoginForKubeadminMenu.Click += CopyOCLoginForKubeadminMenu_Click;
 
             cm.Items.Add(new ToolStripSeparator());
             // About menu
@@ -108,6 +114,46 @@ namespace tray_windows
 
 
             this.notifyIcon.ContextMenuStrip = cm;
+        }
+
+        private void CopyOCLoginForKubeadminMenu_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CopyOCLoginForDeveloperMenu_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OpenWebConsoleMenu_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DeleteMenu_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void StopMenu_Click(object sender, EventArgs e)
+        {
+            ShowNotification(@"Stopping Cluster", ToolTipIcon.Info);
+            var stopResult = Handlers.HandleStop();
+            if (stopResult.Success)
+                DisplayMessageBox.Info(@"CodeReady Containers cluster is stopped");
+            else
+                DisplayMessageBox.Warn(@"Cluster did not stop. Please check detailed status");
+        }
+
+        private void StartMenu_Click(object sender, EventArgs e)
+        {
+            ShowNotification(@"Starting Cluster", ToolTipIcon.Info);
+            var startResult = Handlers.HandleStart();
+            if (startResult.KubeletStarted)
+                DisplayMessageBox.Info(@"CodeReady Containers cluster is started");
+            else
+                DisplayMessageBox.Warn(@"Cluster did not start. Please check detailed status");
         }
 
         private void ExitMenu_Click(object sender, EventArgs e)
@@ -145,8 +191,20 @@ namespace tray_windows
             catch (System.Net.Sockets.SocketException ex)
             {
                 notifyIcon.ContextMenuStrip.Hide();
-                DisplayMessageBox.Error(ex.Message, "Error connecting to daemon");
+                DisplayMessageBox.Error(ex.Message);
             }
+        }
+
+        private void SyncMenuItemStates()
+        {
+
+        }
+
+        public void ShowNotification(string msg, ToolTipIcon toolTipIcon)
+        {
+            notifyIcon.BalloonTipIcon = toolTipIcon;
+            notifyIcon.BalloonTipText = msg;
+            notifyIcon.ShowBalloonTip(10);
         }
     }
 }

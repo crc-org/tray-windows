@@ -9,14 +9,20 @@ namespace tray_windows
 {
     class DisplayMessageBox
     {
-        public static void Error(string message, string caption)
+        private static string caption = @"CodeReady Containers";
+        public static void Error(string message)
         {
             MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public static void Warn(string message, string caption)
+        public static void Warn(string message)
         {
             MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        public static void Info(string message)
+        {
+            MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
