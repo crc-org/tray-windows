@@ -13,6 +13,7 @@ namespace tray_windows
 {
     public partial class AboutForm : Form
     {
+        private VersionResult version;
         public AboutForm()
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace tray_windows
             try
             {
                 var r = d.GetVersion();
-                VersionResult version = JsonConvert.DeserializeObject<VersionResult>(r);
+                version = JsonConvert.DeserializeObject<VersionResult>(r);
                 if (version.Success) {
                     CrcVersionLabel.Text = String.Format("{0}+{1}", version.CrcVersion, version.CommitSha);
                     OcpVersion.Text = version.OpenshiftVersion;
@@ -60,6 +61,14 @@ namespace tray_windows
         private void TrayGHRepoLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/code-ready/tray-windows");
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var crcVersionWithGitSha = version.CrcVersion.Split('+');                  
+            var v = crcVersionWithGitSha[0].Substring(0, crcVersionWithGitSha[0].Length - 2);
+            var docsUrl = string.Format("https://access.redhat.com/documentation/en-us/red_hat_codeready_containers/{0}/", v);
+            System.Diagnostics.Process.Start(docsUrl);
         }
     }
 }
