@@ -5,9 +5,9 @@ using System.Net.Sockets;
 
 namespace tray_windows.Daemon
 {
-    class DaemonCommander
-    {
-		private String socketPath = "C:\\Users\\Anjan\\.crc\\crc.sock"; // make this path by getting users home dir
+	class DaemonCommander
+	{
+		private String socketPath = string.Format("{0}\\.crc\\crc.sock", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
 		private Socket daemonSocket;
 		private UnixEndPoint daemonSocketEp;
 		public DaemonCommander()
