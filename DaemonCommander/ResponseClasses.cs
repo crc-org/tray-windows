@@ -5,8 +5,8 @@
         public string Name { get; set; }
         public string CrcStatus { get; set; }
         public string OpenshiftStatus { get; set; }
-        public int DiskUsage { get; set; }
-        public int DiskSize { get; set; }
+        public long DiskUsage { get; set; }
+        public long DiskSize { get; set; }
         public string Error { get; set; }
         public bool Success { get; set; }
     }

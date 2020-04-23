@@ -53,6 +53,22 @@ namespace tray_windows
             }
         }
 
+        public static StatusResult HandleStatus()
+        {
+            var d = new Daemon.DaemonCommander();
+            try
+            {
+                var r = d.GetStatus();
+                StatusResult sr = JsonConvert.DeserializeObject<StatusResult>(r);
+                return sr;
+            }
+            catch (SocketException ex)
+            {
+                DisplayMessageBox.Error(ex.Message);
+                return null;
+            }
+        }
+
         public static ConsoleResult HandleOpenWebConsole()
         {
             var d = new Daemon.DaemonCommander();
@@ -78,5 +94,6 @@ namespace tray_windows
         {
             return HandleOpenWebConsole();
         }
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Drawing;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace tray_windows
 {
@@ -52,12 +53,17 @@ namespace tray_windows
         }
 
         // event handlers and methods
-        private void NotifyIcon_Click(object sender, MouseEventArgs e)
+        async private void NotifyIcon_Click(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
                 typeof(NotifyIcon).GetMethod("ShowContextMenu", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(notifyIcon, null);
-                UpdateClusterStatusMenu();
+                var status = await Task.Run(() => Handlers.HandleStatus());
+                if (status != null)
+                {
+                    UpdateClusterStatusMenu(status);
+                    SyncMenuItemStates(status);
+                }
             }
         }
 
@@ -116,62 +122,79 @@ namespace tray_windows
             this.notifyIcon.ContextMenuStrip = cm;
         }
 
-        private void CopyOCLoginForKubeadminMenu_Click(object sender, EventArgs e)
+        async private void CopyOCLoginForKubeadminMenu_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText("oc.exe login");
-            var consoleResult = Handlers.HandleOCLoginForKubeadmin();
-            if (consoleResult.Success)
-                Clipboard.SetText(string.Format("oc.exe login -u kubeadmin -p {1} {2}", consoleResult.ClusterConfig.KubeAdminPass, consoleResult.ClusterConfig.ClusterAPI));
-            else
-                ShowNotification(@"Could not find credentials, is CRC runnning?", ToolTipIcon.Error);
+            var consoleResult = await Task.Run(() => Handlers.HandleOCLoginForKubeadmin());
+            if (consoleResult != null)
+            {
+                if (consoleResult.Success)
+                    Clipboard.SetText(string.Format("oc.exe login -u kubeadmin -p {0} {1}", consoleResult.ClusterConfig.KubeAdminPass, consoleResult.ClusterConfig.ClusterAPI));
+                else
+                    ShowNotification(@"Could not find credentials, is CRC runnning?", ToolTipIcon.Error);
+            }
         }
 
-        private void CopyOCLoginForDeveloperMenu_Click(object sender, EventArgs e)
+        async private void CopyOCLoginForDeveloperMenu_Click(object sender, EventArgs e)
         {
-            var consoleResult = Handlers.HandleOCLogingForDeveloper();
-            if (consoleResult.Success)
-                Clipboard.SetText(string.Format("oc.exe login -u developer -p developer {1}", consoleResult.ClusterConfig.ClusterAPI));
-            else
-                ShowNotification(@"Could not find credentials, is CRC running?", ToolTipIcon.Error);
+            var consoleResult = await Task.Run(() => Handlers.HandleOCLogingForDeveloper());
+            if (consoleResult != null)
+            {
+                if (consoleResult.Success)
+                    Clipboard.SetText(string.Format("oc.exe login -u developer -p developer {0}", consoleResult.ClusterConfig.ClusterAPI));
+                else
+                    ShowNotification(@"Could not find credentials, is CRC running?", ToolTipIcon.Error);
+            }           
         }
 
-        private void OpenWebConsoleMenu_Click(object sender, EventArgs e)
+        async private void OpenWebConsoleMenu_Click(object sender, EventArgs e)
         {
-            var consoleResult = Handlers.HandleOpenWebConsole();
-            if (consoleResult.Success)
-                System.Diagnostics.Process.Start(consoleResult.ClusterConfig.WebConsoleURL);
-            else
-                ShowNotification(@"Could not open web console, is CRC running?", ToolTipIcon.Error);
+            var consoleResult = await Task.Run(() => Handlers.HandleOpenWebConsole());
+            if (consoleResult != null)
+            {
+                if (consoleResult.Success)
+                    System.Diagnostics.Process.Start(consoleResult.ClusterConfig.WebConsoleURL);
+                else
+                    ShowNotification(@"Could not open web console, is CRC running?", ToolTipIcon.Error);
+            }            
         }
 
-        private void DeleteMenu_Click(object sender, EventArgs e)
+        async private void DeleteMenu_Click(object sender, EventArgs e)
         {
             ShowNotification(@"Deleting Cluster", ToolTipIcon.Warning);
-            var deleteResult = Handlers.HandleDelete();
-            if (deleteResult.Success)
-                DisplayMessageBox.Info(@"CodeReady Containers cluster is deleted");
-            else
-                DisplayMessageBox.Warn(@"Could not delete the cluster");
+            var deleteResult = await Task.Run(() => Handlers.HandleDelete());
+            if (deleteResult != null)
+            {
+                if (deleteResult.Success)
+                    DisplayMessageBox.Info(@"CodeReady Containers cluster is deleted");
+                else
+                    DisplayMessageBox.Warn(@"Could not delete the cluster");
+            }            
         }
 
-        private void StopMenu_Click(object sender, EventArgs e)
+        async private void StopMenu_Click(object sender, EventArgs e)
         {
             ShowNotification(@"Stopping Cluster", ToolTipIcon.Info);
-            var stopResult = Handlers.HandleStop();
-            if (stopResult.Success)
-                DisplayMessageBox.Info(@"CodeReady Containers cluster is stopped");
-            else
-                DisplayMessageBox.Warn(@"Cluster did not stop. Please check detailed status");
+            var stopResult = await Task.Run(() => Handlers.HandleStop());
+            if (stopResult != null)
+            {
+                if (stopResult.Success)
+                    DisplayMessageBox.Info(@"CodeReady Containers cluster is stopped");
+                else
+                    DisplayMessageBox.Warn(@"Cluster did not stop. Please check detailed status");
+            }            
         }
 
-        private void StartMenu_Click(object sender, EventArgs e)
+        async private void StartMenu_Click(object sender, EventArgs e)
         {
             ShowNotification(@"Starting Cluster", ToolTipIcon.Info);
-            var startResult = Handlers.HandleStart();
-            if (startResult.KubeletStarted)
-                DisplayMessageBox.Info(@"CodeReady Containers cluster is started");
-            else
-                DisplayMessageBox.Warn(@"Cluster did not start. Please check detailed status");
+            var startResult = await Task.Run(() => Handlers.HandleStart());
+            if (startResult != null)
+            {
+                if (startResult.KubeletStarted)
+                    DisplayMessageBox.Info(@"CodeReady Containers cluster is started");
+                else
+                    DisplayMessageBox.Warn(@"Cluster did not start. Please check detailed status");
+            }
         }
 
         private void ExitMenu_Click(object sender, EventArgs e)
@@ -194,28 +217,46 @@ namespace tray_windows
                 status.Show();
         }
 
-        private void UpdateClusterStatusMenu()
+        private void UpdateClusterStatusMenu(StatusResult status)
         {
-            var d = new Daemon.DaemonCommander();
-            try
-            {
-                var r = d.GetStatus();
-                StatusResult status = JsonConvert.DeserializeObject<StatusResult>(r);
-                if (!string.IsNullOrEmpty(status.CrcStatus))
-                    this.status.Text = status.CrcStatus;
-                else
-                    this.status.Text = @"Unknown";
-            }
-            catch (System.Net.Sockets.SocketException ex)
-            {
-                notifyIcon.ContextMenuStrip.Hide();
-                DisplayMessageBox.Error(ex.Message);
-            }
+            if (!string.IsNullOrEmpty(status.CrcStatus))
+                this.status.Text = status.CrcStatus;
+            else
+                this.status.Text = @"Unknown";
         }
 
-        private void SyncMenuItemStates()
+        private void SyncMenuItemStates(StatusResult status)
         {
-
+            if (status.CrcStatus == @"Running")
+            {
+                startMenu.Enabled = false;
+                deleteMenu.Enabled = true;
+                stopMenu.Enabled = true;
+                openWebConsoleMenu.Enabled = true;
+                copyOCLoginCommand.Enabled = true;
+                copyOCLoginForDeveloperMenu.Enabled = true;
+                copyOCLoginForKubeadminMenu.Enabled = true;
+            }
+            else if (string.IsNullOrEmpty(status.Error) && (status.CrcStatus == @"Running"))
+            {
+                startMenu.Enabled = true;
+                deleteMenu.Enabled = true;
+                stopMenu.Enabled = false;
+                openWebConsoleMenu.Enabled = false;
+                copyOCLoginCommand.Enabled = false;
+                copyOCLoginForDeveloperMenu.Enabled = false;
+                copyOCLoginForKubeadminMenu.Enabled = false;
+            }
+            else
+            {
+                startMenu.Enabled = true;
+                stopMenu.Enabled = false;
+                deleteMenu.Enabled = false;
+                openWebConsoleMenu.Enabled = false;
+                copyOCLoginCommand.Enabled = false;
+                copyOCLoginForDeveloperMenu.Enabled = false;
+                copyOCLoginForKubeadminMenu.Enabled = false;
+            }
         }
 
         public void ShowNotification(string msg, ToolTipIcon toolTipIcon)

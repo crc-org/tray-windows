@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace tray_windows
 {
@@ -26,23 +27,15 @@ namespace tray_windows
             Shown += GetStatus;
         }
 
-        private void GetStatus(object sender, EventArgs e)
+        async private void GetStatus(object sender, EventArgs e)
         {
-            var d = new Daemon.DaemonCommander();
-            try
+            var status = await Task.Run(() => Handlers.HandleStatus());
+            if (status != null)
             {
-                var r = d.GetStatus();
-                StatusResult status = JsonConvert.DeserializeObject<StatusResult>(r);
                 CrcStatus.Text = status.CrcStatus;
                 OpenShiftStatus.Text = status.OpenshiftStatus;
-                //System.Diagnostics.EventLog.WriteEntry("crc-tray-windows", status.Error, System.Diagnostics.EventLogEntryType.Error);
                 DiskUsage.Text = status.DiskUsage.ToString();
                 CacheFolderStatus.Text = status.DiskSize.ToString();
-            }
-            catch (System.Net.Sockets.SocketException ex)
-            {
-                this.Hide();
-                DisplayMessageBox.Warn(ex.Message);
             }
         }
 
