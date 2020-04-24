@@ -37,8 +37,8 @@
             this.DiskUsage = new System.Windows.Forms.Label();
             this.CacheUsage = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.CacheFolder = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.CacheFolder = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +50,7 @@
             this.label2.Location = new System.Drawing.Point(6, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(158, 23);
+            this.label2.Size = new System.Drawing.Size(202, 23);
             this.label2.TabIndex = 1;
             this.label2.Text = "CodeReady Containers status:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -63,7 +63,7 @@
             this.label3.Location = new System.Drawing.Point(6, 23);
             this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(158, 23);
+            this.label3.Size = new System.Drawing.Size(202, 23);
             this.label3.TabIndex = 2;
             this.label3.Text = "OpenShift status:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -76,7 +76,7 @@
             this.label4.Location = new System.Drawing.Point(6, 46);
             this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(158, 23);
+            this.label4.Size = new System.Drawing.Size(202, 23);
             this.label4.TabIndex = 3;
             this.label4.Text = "Disk Usage:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -89,7 +89,7 @@
             this.label5.Location = new System.Drawing.Point(6, 69);
             this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(158, 23);
+            this.label5.Size = new System.Drawing.Size(202, 23);
             this.label5.TabIndex = 4;
             this.label5.Text = "Cache Usage:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -99,11 +99,11 @@
             this.CrcStatus.AutoSize = true;
             this.CrcStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CrcStatus.Font = new System.Drawing.Font("Segoe UI", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CrcStatus.Location = new System.Drawing.Point(176, 0);
+            this.CrcStatus.Location = new System.Drawing.Point(220, 0);
             this.CrcStatus.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.CrcStatus.Name = "CrcStatus";
             this.CrcStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.CrcStatus.Size = new System.Drawing.Size(322, 23);
+            this.CrcStatus.Size = new System.Drawing.Size(278, 23);
             this.CrcStatus.TabIndex = 5;
             this.CrcStatus.Text = "||||||||";
             this.CrcStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -113,10 +113,10 @@
             this.OpenShiftStatus.AutoSize = true;
             this.OpenShiftStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OpenShiftStatus.Font = new System.Drawing.Font("Segoe UI", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OpenShiftStatus.Location = new System.Drawing.Point(176, 23);
+            this.OpenShiftStatus.Location = new System.Drawing.Point(220, 23);
             this.OpenShiftStatus.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.OpenShiftStatus.Name = "OpenShiftStatus";
-            this.OpenShiftStatus.Size = new System.Drawing.Size(322, 23);
+            this.OpenShiftStatus.Size = new System.Drawing.Size(278, 23);
             this.OpenShiftStatus.TabIndex = 6;
             this.OpenShiftStatus.Text = "||||||||";
             this.OpenShiftStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -125,11 +125,11 @@
             // 
             this.DiskUsage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DiskUsage.Font = new System.Drawing.Font("Segoe UI", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DiskUsage.Location = new System.Drawing.Point(176, 46);
+            this.DiskUsage.Location = new System.Drawing.Point(220, 46);
             this.DiskUsage.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.DiskUsage.Name = "DiskUsage";
             this.DiskUsage.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.DiskUsage.Size = new System.Drawing.Size(322, 23);
+            this.DiskUsage.Size = new System.Drawing.Size(278, 23);
             this.DiskUsage.TabIndex = 7;
             this.DiskUsage.Text = "||||||||";
             this.DiskUsage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -139,10 +139,10 @@
             this.CacheUsage.AutoSize = true;
             this.CacheUsage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CacheUsage.Font = new System.Drawing.Font("Segoe UI", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CacheUsage.Location = new System.Drawing.Point(176, 69);
+            this.CacheUsage.Location = new System.Drawing.Point(220, 69);
             this.CacheUsage.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.CacheUsage.Name = "CacheUsage";
-            this.CacheUsage.Size = new System.Drawing.Size(322, 23);
+            this.CacheUsage.Size = new System.Drawing.Size(278, 23);
             this.CacheUsage.TabIndex = 8;
             this.CacheUsage.Text = "||||||||";
             this.CacheUsage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -150,8 +150,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.73254F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.26746F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.65873F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.34127F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.CacheFolder, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
@@ -175,19 +175,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(504, 119);
             this.tableLayoutPanel1.TabIndex = 9;
             // 
-            // CacheFolder
-            // 
-            this.CacheFolder.AutoSize = true;
-            this.CacheFolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CacheFolder.Font = new System.Drawing.Font("Segoe UI", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CacheFolder.Location = new System.Drawing.Point(176, 92);
-            this.CacheFolder.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.CacheFolder.Name = "CacheFolder";
-            this.CacheFolder.Size = new System.Drawing.Size(322, 27);
-            this.CacheFolder.TabIndex = 10;
-            this.CacheFolder.Text = "||||||||";
-            this.CacheFolder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -196,10 +183,23 @@
             this.label1.Location = new System.Drawing.Point(6, 92);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 27);
+            this.label1.Size = new System.Drawing.Size(202, 27);
             this.label1.TabIndex = 11;
             this.label1.Text = "Cache Folder:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CacheFolder
+            // 
+            this.CacheFolder.AutoSize = true;
+            this.CacheFolder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CacheFolder.Font = new System.Drawing.Font("Segoe UI", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CacheFolder.Location = new System.Drawing.Point(220, 92);
+            this.CacheFolder.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.CacheFolder.Name = "CacheFolder";
+            this.CacheFolder.Size = new System.Drawing.Size(278, 27);
+            this.CacheFolder.TabIndex = 10;
+            this.CacheFolder.Text = "||||||||";
+            this.CacheFolder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // StatusForm
             // 
