@@ -237,10 +237,20 @@ namespace tray_windows
                 copyOCLoginForDeveloperMenu.Enabled = true;
                 copyOCLoginForKubeadminMenu.Enabled = true;
             }
-            else if (string.IsNullOrEmpty(status.Error) && (status.CrcStatus == @"Running"))
+            else if (status.CrcStatus == @"Stopped")
             {
                 startMenu.Enabled = true;
                 deleteMenu.Enabled = true;
+                stopMenu.Enabled = false;
+                openWebConsoleMenu.Enabled = false;
+                copyOCLoginCommand.Enabled = false;
+                copyOCLoginForDeveloperMenu.Enabled = false;
+                copyOCLoginForKubeadminMenu.Enabled = false;
+            }
+            else if (!string.IsNullOrEmpty(status.Error) && status.Error.Contains("does not exist"))
+            {
+                startMenu.Enabled = true;
+                deleteMenu.Enabled = false;
                 stopMenu.Enabled = false;
                 openWebConsoleMenu.Enabled = false;
                 copyOCLoginCommand.Enabled = false;
@@ -251,7 +261,7 @@ namespace tray_windows
             {
                 startMenu.Enabled = true;
                 stopMenu.Enabled = false;
-                deleteMenu.Enabled = false;
+                deleteMenu.Enabled = true;
                 openWebConsoleMenu.Enabled = false;
                 copyOCLoginCommand.Enabled = false;
                 copyOCLoginForDeveloperMenu.Enabled = false;
