@@ -36,7 +36,7 @@ namespace tray_windows
 
                 CrcStatus.Text = status.CrcStatus;
                 OpenShiftStatus.Text = status.OpenshiftStatus;
-                DiskUsage.Text = string.Format("{0} of {1} (Inside the CRC VM)", FileSize.HumanReadable(status.DiskUsage), FileSize.HumanReadable(status.DiskSize));
+                DiskUsage.Text = string.Format("{0} of {1} (Inside the CRC VM)", FileSize.HumanReadable(status.DiskUse), FileSize.HumanReadable(status.DiskSize));
                 CacheUsage.Text = FileSize.HumanReadable(GetFolderSize.SizeInBytes(cacheFolderPath));
                 CacheFolder.Text = cacheFolderPath;
             }
