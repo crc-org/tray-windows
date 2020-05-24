@@ -3,7 +3,7 @@
 This is a companion app for CodeReady Containers, it works only on Windows
 For the CRC project head over to: https://github.com/code-ready/crc
 
-[![Build Status]()
+[![Build status](https://ci.appveyor.com/api/projects/status/11upwe64sapyhoq7/branch/master?retina=true)](https://ci.appveyor.com/project/anjannath/tray-windows/branch/master)
 
 ### How to use
 
@@ -14,7 +14,8 @@ For the CRC project head over to: https://github.com/code-ready/crc
 5. _Pull Secret_ and _Bundle_ must be configured with `crc config set pull-secret-file` and `crc config set bundle`
 
 ### Screenshots
-(need to be added...)
+
+<img src="https://i.imgur.com/wDXWrXH.png" alt="shot2" width="270" height="230"/>
 
 ### Steps to build
 
