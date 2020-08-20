@@ -52,7 +52,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(202, 23);
             this.label2.TabIndex = 1;
-            this.label2.Text = "CodeReady Containers status:";
+            this.label2.Text = "CodeReady Containers Status";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3
@@ -65,7 +65,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(202, 23);
             this.label3.TabIndex = 2;
-            this.label3.Text = "OpenShift status:";
+            this.label3.Text = "OpenShift Status";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4
@@ -78,7 +78,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(202, 23);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Disk Usage:";
+            this.label4.Text = "Disk Usage";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label5
@@ -91,7 +91,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(202, 23);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Cache Usage:";
+            this.label5.Text = "Cache Usage";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CrcStatus
@@ -185,7 +185,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(202, 27);
             this.label1.TabIndex = 11;
-            this.label1.Text = "Cache Folder:";
+            this.label1.Text = "Cache Folder";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CacheFolder
@@ -214,7 +214,7 @@
             this.MinimizeBox = false;
             this.Name = "StatusForm";
             this.ShowInTaskbar = false;
-            this.Text = "Status";
+            this.Text = "Detailed Status";
             this.Load += new System.EventHandler(this.StatusForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

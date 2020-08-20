@@ -17,7 +17,7 @@ namespace tray_windows
         {
             Bitmap bm = new Bitmap(Resource.ocp_logo);
             Icon = Icon.FromHandle(bm.GetHicon());
-            Text = @"Status";
+            Text = @"Detailed Status";
             
             
             //FormClosing += StatusForm_Closing;
