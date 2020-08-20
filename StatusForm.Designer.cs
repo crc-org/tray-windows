@@ -214,6 +214,7 @@
             this.MinimizeBox = false;
             this.Name = "StatusForm";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Detailed Status";
             this.Load += new System.EventHandler(this.StatusForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

@@ -258,6 +258,7 @@
             this.MinimizeBox = false;
             this.Name = "AboutForm";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AboutForm";
             this.Load += new System.EventHandler(this.AboutForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
