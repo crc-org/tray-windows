@@ -58,17 +58,17 @@ namespace tray_windows
             e.Cancel = true; // this cancels the close event.
         }
 
-        private void TrayGHRepoLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/code-ready/tray-windows");
-        }
-
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var crcVersionWithGitSha = version.CrcVersion.Split('+');                  
             var v = crcVersionWithGitSha[0].Substring(0, crcVersionWithGitSha[0].Length - 2);
             var docsUrl = string.Format("https://access.redhat.com/documentation/en-us/red_hat_codeready_containers/{0}/", v);
             System.Diagnostics.Process.Start(docsUrl);
+        }
+
+        private void linkLabel2_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/code-ready/tray-windows");
         }
     }
 }

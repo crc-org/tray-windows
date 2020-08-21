@@ -73,6 +73,16 @@ namespace tray_windows {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap external_link {
+            get {
+                object obj = ResourceManager.GetObject("external_link", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gh_icon {
             get {
                 object obj = ResourceManager.GetObject("gh-icon", resourceCulture);

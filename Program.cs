@@ -165,7 +165,7 @@ namespace tray_windows
             if (deleteResult != null)
             {
                 if (deleteResult.Success)
-                    DisplayMessageBox.Info(@"CodeReady Containers cluster is deleted");
+                    DisplayMessageBox.Info(@"CodeReady Containers Cluster has been deleted", @"Cluster Deleted");
                 else
                     DisplayMessageBox.Warn(@"Could not delete the cluster");
             }            
@@ -178,7 +178,7 @@ namespace tray_windows
             if (stopResult != null)
             {
                 if (stopResult.Success)
-                    DisplayMessageBox.Info(@"CodeReady Containers cluster is stopped");
+                    DisplayMessageBox.Info(@"CodeReady Containers Cluster has stopped", @"Cluster Stopped");
                 else
                     DisplayMessageBox.Warn(@"Cluster did not stop. Please check detailed status");
             }            
@@ -191,7 +191,7 @@ namespace tray_windows
             if (startResult != null)
             {
                 if (startResult.KubeletStarted)
-                    DisplayMessageBox.Info(@"CodeReady Containers cluster is started");
+                    DisplayMessageBox.Info(@"CodeReady Containers Cluster has started", @"Cluster Started");
                 else
                     DisplayMessageBox.Warn(@"Cluster did not start. Please check detailed status");
             }
