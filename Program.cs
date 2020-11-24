@@ -37,6 +37,7 @@ namespace tray_windows
         private ToolStripItem copyOCLoginForKubeadminMenu;
         private ToolStripItem aboutMenu;
         private ToolStripItem exitMenu;
+        private ToolStripItem settingsMenu;
 
         // Initialize tray
         public TrayContext()
@@ -110,6 +111,11 @@ namespace tray_windows
             copyOCLoginForKubeadminMenu.Click += CopyOCLoginForKubeadminMenu_Click;
 
             cm.Items.Add(new ToolStripSeparator());
+            // Settings menu
+            settingsMenu = cm.Items.Add(@"Settings");
+            settingsMenu.Click += SettingsMenu_Click;
+
+            cm.Items.Add(new ToolStripSeparator());
             // About menu
             aboutMenu = cm.Items.Add(@"About");
             aboutMenu.Click += ShowAboutForm;
@@ -120,6 +126,13 @@ namespace tray_windows
 
 
             this.notifyIcon.ContextMenuStrip = cm;
+        }
+
+        private void SettingsMenu_Click(object sender, EventArgs e)
+        {
+            Form settings = new CrcSettingsForm();
+            if (!settings.Visible)
+                settings.Show();
         }
 
         async private void CopyOCLoginForKubeadminMenu_Click(object sender, EventArgs e)

@@ -102,6 +102,12 @@
     <Compile Include="DaemonCommander\UnixEndPoint.cs" />
     <Compile Include="DaemonCommander\DaemonCommander.cs" />
     <Compile Include="DisplayMessageBox.cs" />
+    <Compile Include="CrcSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrcSettingsForm.Designer.cs">
+      <DependentUpon>CrcSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StatusForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,9 @@
     </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrcSettingsForm.resx">
+      <DependentUpon>CrcSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StatusForm.resx">
       <DependentUpon>StatusForm.cs</DependentUpon>
