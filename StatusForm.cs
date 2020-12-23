@@ -20,7 +20,7 @@ namespace tray_windows
             Text = @"Detailed Status";
             
             
-            //FormClosing += StatusForm_Closing;
+            this.FormClosing += StatusForm_Closing;
             //Activated += GetStatus;
 
             //VisibleChanged += GetStatus;

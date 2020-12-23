@@ -39,6 +39,11 @@ namespace tray_windows
         private ToolStripItem exitMenu;
         private ToolStripItem settingsMenu;
 
+        // Forms
+        private Form settingsWindow = new CrcSettingsForm();
+        private Form about = new AboutForm();
+        private Form statusForm = new StatusForm();
+
         // Initialize tray
         public TrayContext()
         {
@@ -130,9 +135,9 @@ namespace tray_windows
 
         private void SettingsMenu_Click(object sender, EventArgs e)
         {
-            Form settings = new CrcSettingsForm();
-            if (!settings.Visible)
-                settings.Show();
+            if (!settingsWindow.Visible)
+                settingsWindow.Show();
+            settingsWindow.Focus();
         }
 
         async private void CopyOCLoginForKubeadminMenu_Click(object sender, EventArgs e)
@@ -218,16 +223,16 @@ namespace tray_windows
 
         private void ShowAboutForm(object sender, EventArgs e)
         {
-            Form about = new AboutForm();
             if (!about.Visible)
                 about.Show();
+            about.Focus();
         }
 
         private void ShowDetailedStatusForm(object sender, EventArgs e)
         {
-            Form status = new StatusForm();
-            if (!status.Visible)
-                status.Show();
+            if (!statusForm.Visible)
+                statusForm.Show();
+            statusForm.Focus();
         }
 
         private void UpdateClusterStatusMenu(StatusResult status)
