@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,9 +30,17 @@ namespace tray_windows
             Bitmap bm = new Bitmap(Resource.ocp_logo);
             Icon = Icon.FromHandle(bm.GetHicon());
             Text = @"CodeReady Containers - Settings";
+            this.FormClosing += CrcSettingsForm_FormClosing;
+            
 
             currentConfig = Handlers.GetConfig();
             LoadConfigs(currentConfig);
+        }
+
+        private void CrcSettingsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
         }
 
         private void LoadConfigs(ConfigResult cr)
@@ -325,4 +334,5 @@ namespace tray_windows
             
         }
     }
+
 }
