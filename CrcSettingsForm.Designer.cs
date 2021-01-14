@@ -69,19 +69,11 @@
             this.disableUpdateCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.SkipCheckBundle = new System.Windows.Forms.CheckBox();
-            this.SkipCheckPodmanCached = new System.Windows.Forms.CheckBox();
-            this.SkipCheckRunningAsAdmin = new System.Windows.Forms.CheckBox();
-            this.SkipCheckWindowsVersion = new System.Windows.Forms.CheckBox();
-            this.SkipCheckWindowsEdition = new System.Windows.Forms.CheckBox();
-            this.SkipCheckHypervInstalled = new System.Windows.Forms.CheckBox();
-            this.SkipCheckUserInHypervAdminsGroup = new System.Windows.Forms.CheckBox();
-            this.SkipCheckHypervServiceRunning = new System.Windows.Forms.CheckBox();
-            this.SkipCheckHypervSwitch = new System.Windows.Forms.CheckBox();
-            this.SkipCheckVsock = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.SkipCheckRam = new System.Windows.Forms.CheckBox();
+            this.SkipCheckUserInHypervAdminsGroup = new System.Windows.Forms.CheckBox();
+            this.SkipCheckRunningAsAdmin = new System.Windows.Forms.CheckBox();
+            this.SkipCheckWindowsVersion = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.properties_tab.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -484,7 +476,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(304, 319);
+            this.button7.Location = new System.Drawing.Point(304, 187);
             this.button7.Margin = new System.Windows.Forms.Padding(2);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(61, 22);
@@ -495,7 +487,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(393, 319);
+            this.button6.Location = new System.Drawing.Point(393, 187);
             this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(63, 22);
@@ -509,7 +501,7 @@
             this.groupBox4.Controls.Add(this.nameServerTxtBox);
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Controls.Add(this.disableUpdateCheckBox);
-            this.groupBox4.Location = new System.Drawing.Point(4, 248);
+            this.groupBox4.Location = new System.Drawing.Point(4, 117);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
@@ -562,151 +554,27 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(455, 240);
+            this.groupBox3.Size = new System.Drawing.Size(455, 109);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Preflight Checks";
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.11136F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.88864F));
-            this.tableLayoutPanel1.Controls.Add(this.SkipCheckBundle, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.SkipCheckPodmanCached, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.SkipCheckRunningAsAdmin, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.SkipCheckWindowsVersion, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.SkipCheckWindowsEdition, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.SkipCheckHypervInstalled, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.SkipCheckUserInHypervAdminsGroup, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.SkipCheckHypervServiceRunning, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.SkipCheckHypervSwitch, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.SkipCheckVsock, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.SkipCheckRam, 1, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 15);
+            this.tableLayoutPanel1.Controls.Add(this.SkipCheckWindowsVersion, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.SkipCheckRunningAsAdmin, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.SkipCheckUserInHypervAdminsGroup, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 17);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 8;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(449, 221);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(448, 79);
             this.tableLayoutPanel1.TabIndex = 32;
-            // 
-            // SkipCheckBundle
-            // 
-            this.SkipCheckBundle.AutoSize = true;
-            this.SkipCheckBundle.Location = new System.Drawing.Point(3, 3);
-            this.SkipCheckBundle.Name = "SkipCheckBundle";
-            this.SkipCheckBundle.Size = new System.Drawing.Size(177, 17);
-            this.SkipCheckBundle.TabIndex = 0;
-            this.SkipCheckBundle.Text = "Skip check for bundle extracted";
-            this.SkipCheckBundle.UseVisualStyleBackColor = true;
-            this.SkipCheckBundle.CheckedChanged += new System.EventHandler(this.SkipCheckBundle_CheckedChanged);
-            // 
-            // SkipCheckPodmanCached
-            // 
-            this.SkipCheckPodmanCached.AutoSize = true;
-            this.SkipCheckPodmanCached.Location = new System.Drawing.Point(3, 31);
-            this.SkipCheckPodmanCached.Name = "SkipCheckPodmanCached";
-            this.SkipCheckPodmanCached.Size = new System.Drawing.Size(175, 17);
-            this.SkipCheckPodmanCached.TabIndex = 1;
-            this.SkipCheckPodmanCached.Text = "Skip check for podman cached";
-            this.SkipCheckPodmanCached.UseVisualStyleBackColor = true;
-            this.SkipCheckPodmanCached.CheckedChanged += new System.EventHandler(this.SkipCheckPodmanCached_CheckedChanged);
-            // 
-            // SkipCheckRunningAsAdmin
-            // 
-            this.SkipCheckRunningAsAdmin.AutoSize = true;
-            this.SkipCheckRunningAsAdmin.Location = new System.Drawing.Point(3, 59);
-            this.SkipCheckRunningAsAdmin.Name = "SkipCheckRunningAsAdmin";
-            this.SkipCheckRunningAsAdmin.Size = new System.Drawing.Size(201, 17);
-            this.SkipCheckRunningAsAdmin.TabIndex = 2;
-            this.SkipCheckRunningAsAdmin.Text = "Skip check for running as admin user";
-            this.SkipCheckRunningAsAdmin.UseVisualStyleBackColor = true;
-            this.SkipCheckRunningAsAdmin.CheckedChanged += new System.EventHandler(this.SkipCheckRunningAsAdmin_CheckedChanged);
-            // 
-            // SkipCheckWindowsVersion
-            // 
-            this.SkipCheckWindowsVersion.AutoSize = true;
-            this.SkipCheckWindowsVersion.Location = new System.Drawing.Point(3, 87);
-            this.SkipCheckWindowsVersion.Name = "SkipCheckWindowsVersion";
-            this.SkipCheckWindowsVersion.Size = new System.Drawing.Size(161, 17);
-            this.SkipCheckWindowsVersion.TabIndex = 3;
-            this.SkipCheckWindowsVersion.Text = "Skip windows version check";
-            this.SkipCheckWindowsVersion.UseVisualStyleBackColor = true;
-            this.SkipCheckWindowsVersion.CheckedChanged += new System.EventHandler(this.SkipCheckWindowsVersion_CheckedChanged);
-            // 
-            // SkipCheckWindowsEdition
-            // 
-            this.SkipCheckWindowsEdition.AutoSize = true;
-            this.SkipCheckWindowsEdition.Location = new System.Drawing.Point(3, 115);
-            this.SkipCheckWindowsEdition.Name = "SkipCheckWindowsEdition";
-            this.SkipCheckWindowsEdition.Size = new System.Drawing.Size(158, 17);
-            this.SkipCheckWindowsEdition.TabIndex = 4;
-            this.SkipCheckWindowsEdition.Text = "Skip windows edition check";
-            this.SkipCheckWindowsEdition.UseVisualStyleBackColor = true;
-            this.SkipCheckWindowsEdition.CheckedChanged += new System.EventHandler(this.SkipCheckWindowsEdition_CheckedChanged);
-            // 
-            // SkipCheckHypervInstalled
-            // 
-            this.SkipCheckHypervInstalled.AutoSize = true;
-            this.SkipCheckHypervInstalled.Location = new System.Drawing.Point(3, 143);
-            this.SkipCheckHypervInstalled.Name = "SkipCheckHypervInstalled";
-            this.SkipCheckHypervInstalled.Size = new System.Drawing.Size(156, 17);
-            this.SkipCheckHypervInstalled.TabIndex = 5;
-            this.SkipCheckHypervInstalled.Text = "Skip hyperv installed check";
-            this.SkipCheckHypervInstalled.UseVisualStyleBackColor = true;
-            this.SkipCheckHypervInstalled.CheckedChanged += new System.EventHandler(this.SkipCheckHypervInstalled_CheckedChanged);
-            // 
-            // SkipCheckUserInHypervAdminsGroup
-            // 
-            this.SkipCheckUserInHypervAdminsGroup.AutoSize = true;
-            this.SkipCheckUserInHypervAdminsGroup.Location = new System.Drawing.Point(3, 171);
-            this.SkipCheckUserInHypervAdminsGroup.Name = "SkipCheckUserInHypervAdminsGroup";
-            this.SkipCheckUserInHypervAdminsGroup.Size = new System.Drawing.Size(215, 17);
-            this.SkipCheckUserInHypervAdminsGroup.TabIndex = 6;
-            this.SkipCheckUserInHypervAdminsGroup.Text = "Skip user in hyperv admins group check";
-            this.SkipCheckUserInHypervAdminsGroup.UseVisualStyleBackColor = true;
-            this.SkipCheckUserInHypervAdminsGroup.CheckedChanged += new System.EventHandler(this.SkipCheckUserInHypervAdminsGroup_CheckedChanged);
-            // 
-            // SkipCheckHypervServiceRunning
-            // 
-            this.SkipCheckHypervServiceRunning.AutoSize = true;
-            this.SkipCheckHypervServiceRunning.Location = new System.Drawing.Point(3, 199);
-            this.SkipCheckHypervServiceRunning.Name = "SkipCheckHypervServiceRunning";
-            this.SkipCheckHypervServiceRunning.Size = new System.Drawing.Size(190, 17);
-            this.SkipCheckHypervServiceRunning.TabIndex = 7;
-            this.SkipCheckHypervServiceRunning.Text = "Skip hyperv service running check";
-            this.SkipCheckHypervServiceRunning.UseVisualStyleBackColor = true;
-            this.SkipCheckHypervServiceRunning.CheckedChanged += new System.EventHandler(this.SkipCheckHypervServiceRunning_CheckedChanged);
-            // 
-            // SkipCheckHypervSwitch
-            // 
-            this.SkipCheckHypervSwitch.AutoSize = true;
-            this.SkipCheckHypervSwitch.Location = new System.Drawing.Point(228, 3);
-            this.SkipCheckHypervSwitch.Name = "SkipCheckHypervSwitch";
-            this.SkipCheckHypervSwitch.Size = new System.Drawing.Size(179, 17);
-            this.SkipCheckHypervSwitch.TabIndex = 8;
-            this.SkipCheckHypervSwitch.Text = "Skip hyperv virtual switch check";
-            this.SkipCheckHypervSwitch.UseVisualStyleBackColor = true;
-            this.SkipCheckHypervSwitch.CheckedChanged += new System.EventHandler(this.SkipCheckHypervSwitch_CheckedChanged);
-            // 
-            // SkipCheckVsock
-            // 
-            this.SkipCheckVsock.AutoSize = true;
-            this.SkipCheckVsock.Location = new System.Drawing.Point(228, 31);
-            this.SkipCheckVsock.Name = "SkipCheckVsock";
-            this.SkipCheckVsock.Size = new System.Drawing.Size(127, 17);
-            this.SkipCheckVsock.TabIndex = 11;
-            this.SkipCheckVsock.Text = "Skip check for vsock";
-            this.SkipCheckVsock.UseVisualStyleBackColor = true;
-            this.SkipCheckVsock.CheckedChanged += new System.EventHandler(this.SkipCheckVsock_CheckedChanged);
             // 
             // contextMenuStrip1
             // 
@@ -718,16 +586,38 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.InitialDirectory = "$env:USERPROFILE";
             // 
-            // SkipCheckRam
+            // SkipCheckUserInHypervAdminsGroup
             // 
-            this.SkipCheckRam.AutoSize = true;
-            this.SkipCheckRam.Location = new System.Drawing.Point(228, 59);
-            this.SkipCheckRam.Name = "SkipCheckRam";
-            this.SkipCheckRam.Size = new System.Drawing.Size(167, 17);
-            this.SkipCheckRam.TabIndex = 12;
-            this.SkipCheckRam.Text = "Skip check for memory (RAM)";
-            this.SkipCheckRam.UseVisualStyleBackColor = true;
-            this.SkipCheckRam.CheckedChanged += new System.EventHandler(this.SkipCheckRam_CheckedChanged);
+            this.SkipCheckUserInHypervAdminsGroup.AutoSize = true;
+            this.SkipCheckUserInHypervAdminsGroup.Location = new System.Drawing.Point(3, 3);
+            this.SkipCheckUserInHypervAdminsGroup.Name = "SkipCheckUserInHypervAdminsGroup";
+            this.SkipCheckUserInHypervAdminsGroup.Size = new System.Drawing.Size(215, 17);
+            this.SkipCheckUserInHypervAdminsGroup.TabIndex = 7;
+            this.SkipCheckUserInHypervAdminsGroup.Text = "Skip user in hyperv admins group check";
+            this.SkipCheckUserInHypervAdminsGroup.UseVisualStyleBackColor = true;
+            this.SkipCheckUserInHypervAdminsGroup.CheckedChanged += new System.EventHandler(this.SkipCheckUserInHypervAdminsGroup_CheckedChanged);
+            // 
+            // SkipCheckRunningAsAdmin
+            // 
+            this.SkipCheckRunningAsAdmin.AutoSize = true;
+            this.SkipCheckRunningAsAdmin.Location = new System.Drawing.Point(3, 29);
+            this.SkipCheckRunningAsAdmin.Name = "SkipCheckRunningAsAdmin";
+            this.SkipCheckRunningAsAdmin.Size = new System.Drawing.Size(201, 17);
+            this.SkipCheckRunningAsAdmin.TabIndex = 8;
+            this.SkipCheckRunningAsAdmin.Text = "Skip check for running as admin user";
+            this.SkipCheckRunningAsAdmin.UseVisualStyleBackColor = true;
+            this.SkipCheckRunningAsAdmin.CheckedChanged += new System.EventHandler(this.SkipCheckRunningAsAdmin_CheckedChanged);
+            // 
+            // SkipCheckWindowsVersion
+            // 
+            this.SkipCheckWindowsVersion.AutoSize = true;
+            this.SkipCheckWindowsVersion.Location = new System.Drawing.Point(3, 55);
+            this.SkipCheckWindowsVersion.Name = "SkipCheckWindowsVersion";
+            this.SkipCheckWindowsVersion.Size = new System.Drawing.Size(161, 17);
+            this.SkipCheckWindowsVersion.TabIndex = 9;
+            this.SkipCheckWindowsVersion.Text = "Skip windows version check";
+            this.SkipCheckWindowsVersion.UseVisualStyleBackColor = true;
+            this.SkipCheckWindowsVersion.CheckedChanged += new System.EventHandler(this.SkipCheckWindowsVersion_CheckedChanged);
             // 
             // CrcSettingsForm
             // 
@@ -806,16 +696,8 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.NumericUpDown diskSizeNumBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.CheckBox SkipCheckBundle;
-        private System.Windows.Forms.CheckBox SkipCheckPodmanCached;
-        private System.Windows.Forms.CheckBox SkipCheckRunningAsAdmin;
         private System.Windows.Forms.CheckBox SkipCheckWindowsVersion;
-        private System.Windows.Forms.CheckBox SkipCheckWindowsEdition;
-        private System.Windows.Forms.CheckBox SkipCheckHypervInstalled;
+        private System.Windows.Forms.CheckBox SkipCheckRunningAsAdmin;
         private System.Windows.Forms.CheckBox SkipCheckUserInHypervAdminsGroup;
-        private System.Windows.Forms.CheckBox SkipCheckHypervServiceRunning;
-        private System.Windows.Forms.CheckBox SkipCheckHypervSwitch;
-        private System.Windows.Forms.CheckBox SkipCheckVsock;
-        private System.Windows.Forms.CheckBox SkipCheckRam;
     }
 }
