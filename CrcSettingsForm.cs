@@ -19,7 +19,7 @@ namespace tray_windows
         List<string> configsNeedingUnset = new List<string>();
         ConfigResult currentConfig = new ConfigResult();
         Dictionary<string, dynamic> changedConfigs = new Dictionary<string, dynamic>();
-
+        
         public CrcSettingsForm()
         {
             InitializeComponent();
@@ -31,10 +31,26 @@ namespace tray_windows
             Icon = Icon.FromHandle(bm.GetHicon());
             Text = @"CodeReady Containers - Settings";
             this.FormClosing += CrcSettingsForm_FormClosing;
+            this.tabControl1.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             
 
             currentConfig = Handlers.GetConfig();
             LoadConfigs(currentConfig);
+        }
+
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var controls = tabControl1.SelectedTab.Controls.Cast<Control>();
+            Console.WriteLine("Inside the handler");
+            if (controls.Any())
+            {
+                Console.WriteLine(tabControl1.Height);
+                var lastControlHeight = controls.Max(x => x.Bottom);
+                tabControl1.Height = lastControlHeight + 45;
+                this.Height = tabControl1.Height + 57;
+                Console.WriteLine(this.Height);
+                Console.WriteLine(tabControl1.Height);
+            }
         }
 
         private void CrcSettingsForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -65,21 +81,14 @@ namespace tray_windows
             }
 
             // Advanced tab configs
-            this.SkipCheckBundle.Checked = cr.Configs.SkipCheckBundleExtracted;
-            this.SkipCheckPodmanCached.Checked = cr.Configs.SkipCheckPodmanCached;
             this.SkipCheckRunningAsAdmin.Checked = cr.Configs.SkipCheckAdminUser;
             this.SkipCheckWindowsVersion.Checked = cr.Configs.SkipCheckWindowsVersion;
-            this.SkipCheckWindowsEdition.Checked = cr.Configs.SkipCheckWindowsEdition;
-            this.SkipCheckHypervInstalled.Checked = cr.Configs.SkipCheckHypervInstalled;
             this.SkipCheckUserInHypervAdminsGroup.Checked = cr.Configs.SkipCheckUserInHypervGroup;
-            this.SkipCheckHypervServiceRunning.Checked = cr.Configs.SkipCheckHypervServiceRunning;
-            this.SkipCheckHypervSwitch.Checked = cr.Configs.SkipCheckHypervSwitch;
-            this.SkipCheckVsock.Checked = cr.Configs.SkipCheckVsock;
-            this.SkipCheckRam.Checked = cr.Configs.SkipCheckRam;
             this.nameServerTxtBox.Text = cr.Configs.nameserver;
             this.disableUpdateCheckBox.Checked = cr.Configs.DisableUpdateCheck;
             
         }
+
 
         private void EnableProxyFields()
         {
@@ -268,16 +277,6 @@ namespace tray_windows
             handleConfigChangesForTextBoxes("nameserver", currentConfig.Configs.nameserver, this.nameServerTxtBox);
         }
 
-        private void SkipCheckBundle_CheckedChanged(object sender, EventArgs e)
-        {
-            handleConfigChangesForCheckBoxes("skip-check-bundle-extracted", this.SkipCheckBundle);
-        }
-
-        private void SkipCheckPodmanCached_CheckedChanged(object sender, EventArgs e)
-        {
-            handleConfigChangesForCheckBoxes("skip-check-podman-cached", this.SkipCheckPodmanCached);
-        }
-
         private void SkipCheckRunningAsAdmin_CheckedChanged(object sender, EventArgs e)
         {
             handleConfigChangesForCheckBoxes("skip-check-administrator-user", this.SkipCheckRunningAsAdmin);
@@ -288,39 +287,9 @@ namespace tray_windows
             handleConfigChangesForCheckBoxes("skip-check-windows-version", this.SkipCheckWindowsVersion);
         }
 
-        private void SkipCheckWindowsEdition_CheckedChanged(object sender, EventArgs e)
-        {
-            handleConfigChangesForCheckBoxes("skip-check-windows-edition", this.SkipCheckWindowsEdition);
-        }
-
-        private void SkipCheckHypervInstalled_CheckedChanged(object sender, EventArgs e)
-        {
-            handleConfigChangesForCheckBoxes("skip-check-hyperv-installed", this.SkipCheckHypervInstalled);
-        }
-
         private void SkipCheckUserInHypervAdminsGroup_CheckedChanged(object sender, EventArgs e)
         {
             handleConfigChangesForCheckBoxes("skip-check-user-in-hyperv-group", this.SkipCheckUserInHypervAdminsGroup);
-        }
-
-        private void SkipCheckHypervServiceRunning_CheckedChanged(object sender, EventArgs e)
-        {
-            handleConfigChangesForCheckBoxes("skip-check-hyperv-service-running", this.SkipCheckUserInHypervAdminsGroup);
-        }
-
-        private void SkipCheckHypervSwitch_CheckedChanged(object sender, EventArgs e)
-        {
-            handleConfigChangesForCheckBoxes("skip-check-hyperv-switch", this.SkipCheckHypervSwitch);
-        }
-
-        private void SkipCheckVsock_CheckedChanged(object sender, EventArgs e)
-        {
-            handleConfigChangesForCheckBoxes("skip-check-vsock", this.SkipCheckVsock);
-        }
-
-        private void SkipCheckRam_CheckedChanged(object sender, EventArgs e)
-        {
-            handleConfigChangesForCheckBoxes("skip-check-ram", this.SkipCheckRam);
         }
 
         private void button7_Click(object sender, EventArgs e)
