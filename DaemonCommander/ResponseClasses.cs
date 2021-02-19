@@ -24,10 +24,20 @@ namespace tray_windows
 
     public class ClusterConfig
     {
+        public string ClusterCACert { get; set; }
         public string KubeConfig { get; set; }
         public string KubeAdminPass { get; set; }
         public string ClusterAPI { get; set; }
         public string WebConsoleURL { get; set; }
+        public ProxyConfig ProxyConfig;
+    }
+
+    public struct ProxyConfig
+    {
+        public string HTTPProxy;
+        public string HTTPSProxy;
+        public string[] noProxy;
+        public string ProxyCACert;
     }
 
     public class StopResult
