@@ -22,6 +22,11 @@ namespace tray_windows
                 DisplayMessageBox.Error(ex.Message);
                 return null;
             }
+            catch (JsonException ex)
+            {
+                DisplayMessageBox.Error(ex.Message);
+                return null;
+            }
         }
 
         public static StopResult HandleStop()
