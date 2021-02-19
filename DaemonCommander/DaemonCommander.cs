@@ -161,7 +161,7 @@ namespace tray_windows.Daemon
 		{
 			try
 			{
-				var resp = new byte[2048];
+				var resp = new byte[16 * 1024];
 				daemonSocket.Connect(daemonSocketEp);
 				var cmd = $"{{\"command\":\"{command}\"}}";
 				byte[] msg = Encoding.ASCII.GetBytes(cmd);
