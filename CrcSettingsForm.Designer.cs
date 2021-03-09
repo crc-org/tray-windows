@@ -53,7 +53,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.PullSecretSelectButton = new System.Windows.Forms.Button();
             this.BundleSelectButton = new System.Windows.Forms.Button();
-            this.enableExperimentalFeatures = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.pullSecretTxtBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -69,11 +68,12 @@
             this.disableUpdateCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.SkipCheckWindowsVersion = new System.Windows.Forms.CheckBox();
+            this.SkipCheckRunningAsAdmin = new System.Windows.Forms.CheckBox();
+            this.SkipCheckUserInHypervAdminsGroup = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.SkipCheckUserInHypervAdminsGroup = new System.Windows.Forms.CheckBox();
-            this.SkipCheckRunningAsAdmin = new System.Windows.Forms.CheckBox();
-            this.SkipCheckWindowsVersion = new System.Windows.Forms.CheckBox();
+            this.enableExperimentalFeatures = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.properties_tab.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -115,7 +115,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(393, 320);
+            this.button4.Location = new System.Drawing.Point(393, 323);
             this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(62, 21);
@@ -126,7 +126,7 @@
             // 
             // refresh_button
             // 
-            this.refresh_button.Location = new System.Drawing.Point(306, 320);
+            this.refresh_button.Location = new System.Drawing.Point(306, 323);
             this.refresh_button.Margin = new System.Windows.Forms.Padding(2);
             this.refresh_button.Name = "refresh_button";
             this.refresh_button.Size = new System.Drawing.Size(60, 21);
@@ -269,7 +269,6 @@
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.PullSecretSelectButton);
             this.groupBox1.Controls.Add(this.BundleSelectButton);
-            this.groupBox1.Controls.Add(this.enableExperimentalFeatures);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.pullSecretTxtBox);
             this.groupBox1.Controls.Add(this.label3);
@@ -389,18 +388,6 @@
             this.BundleSelectButton.UseVisualStyleBackColor = true;
             this.BundleSelectButton.Click += new System.EventHandler(this.BundleSelectButton_Click);
             // 
-            // enableExperimentalFeatures
-            // 
-            this.enableExperimentalFeatures.AutoSize = true;
-            this.enableExperimentalFeatures.Location = new System.Drawing.Point(213, 118);
-            this.enableExperimentalFeatures.Margin = new System.Windows.Forms.Padding(2);
-            this.enableExperimentalFeatures.Name = "enableExperimentalFeatures";
-            this.enableExperimentalFeatures.Size = new System.Drawing.Size(162, 17);
-            this.enableExperimentalFeatures.TabIndex = 8;
-            this.enableExperimentalFeatures.Text = "Enable experimental features";
-            this.enableExperimentalFeatures.UseVisualStyleBackColor = true;
-            this.enableExperimentalFeatures.CheckedChanged += new System.EventHandler(this.enableExperimentalFeatures_CheckedChanged);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -461,6 +448,7 @@
             // 
             // advance_tab
             // 
+            this.advance_tab.Controls.Add(this.enableExperimentalFeatures);
             this.advance_tab.Controls.Add(this.button7);
             this.advance_tab.Controls.Add(this.button6);
             this.advance_tab.Controls.Add(this.groupBox4);
@@ -476,7 +464,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(304, 187);
+            this.button7.Location = new System.Drawing.Point(304, 322);
             this.button7.Margin = new System.Windows.Forms.Padding(2);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(61, 22);
@@ -487,7 +475,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(393, 187);
+            this.button6.Location = new System.Drawing.Point(393, 322);
             this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(63, 22);
@@ -576,26 +564,16 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(448, 79);
             this.tableLayoutPanel1.TabIndex = 32;
             // 
-            // contextMenuStrip1
+            // SkipCheckWindowsVersion
             // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.InitialDirectory = "$env:USERPROFILE";
-            // 
-            // SkipCheckUserInHypervAdminsGroup
-            // 
-            this.SkipCheckUserInHypervAdminsGroup.AutoSize = true;
-            this.SkipCheckUserInHypervAdminsGroup.Location = new System.Drawing.Point(3, 3);
-            this.SkipCheckUserInHypervAdminsGroup.Name = "SkipCheckUserInHypervAdminsGroup";
-            this.SkipCheckUserInHypervAdminsGroup.Size = new System.Drawing.Size(215, 17);
-            this.SkipCheckUserInHypervAdminsGroup.TabIndex = 7;
-            this.SkipCheckUserInHypervAdminsGroup.Text = "Skip user in hyperv admins group check";
-            this.SkipCheckUserInHypervAdminsGroup.UseVisualStyleBackColor = true;
-            this.SkipCheckUserInHypervAdminsGroup.CheckedChanged += new System.EventHandler(this.SkipCheckUserInHypervAdminsGroup_CheckedChanged);
+            this.SkipCheckWindowsVersion.AutoSize = true;
+            this.SkipCheckWindowsVersion.Location = new System.Drawing.Point(3, 55);
+            this.SkipCheckWindowsVersion.Name = "SkipCheckWindowsVersion";
+            this.SkipCheckWindowsVersion.Size = new System.Drawing.Size(161, 17);
+            this.SkipCheckWindowsVersion.TabIndex = 9;
+            this.SkipCheckWindowsVersion.Text = "Skip windows version check";
+            this.SkipCheckWindowsVersion.UseVisualStyleBackColor = true;
+            this.SkipCheckWindowsVersion.CheckedChanged += new System.EventHandler(this.SkipCheckWindowsVersion_CheckedChanged);
             // 
             // SkipCheckRunningAsAdmin
             // 
@@ -608,16 +586,37 @@
             this.SkipCheckRunningAsAdmin.UseVisualStyleBackColor = true;
             this.SkipCheckRunningAsAdmin.CheckedChanged += new System.EventHandler(this.SkipCheckRunningAsAdmin_CheckedChanged);
             // 
-            // SkipCheckWindowsVersion
+            // SkipCheckUserInHypervAdminsGroup
             // 
-            this.SkipCheckWindowsVersion.AutoSize = true;
-            this.SkipCheckWindowsVersion.Location = new System.Drawing.Point(3, 55);
-            this.SkipCheckWindowsVersion.Name = "SkipCheckWindowsVersion";
-            this.SkipCheckWindowsVersion.Size = new System.Drawing.Size(161, 17);
-            this.SkipCheckWindowsVersion.TabIndex = 9;
-            this.SkipCheckWindowsVersion.Text = "Skip windows version check";
-            this.SkipCheckWindowsVersion.UseVisualStyleBackColor = true;
-            this.SkipCheckWindowsVersion.CheckedChanged += new System.EventHandler(this.SkipCheckWindowsVersion_CheckedChanged);
+            this.SkipCheckUserInHypervAdminsGroup.AutoSize = true;
+            this.SkipCheckUserInHypervAdminsGroup.Location = new System.Drawing.Point(3, 3);
+            this.SkipCheckUserInHypervAdminsGroup.Name = "SkipCheckUserInHypervAdminsGroup";
+            this.SkipCheckUserInHypervAdminsGroup.Size = new System.Drawing.Size(215, 17);
+            this.SkipCheckUserInHypervAdminsGroup.TabIndex = 7;
+            this.SkipCheckUserInHypervAdminsGroup.Text = "Skip user in hyperv admins group check";
+            this.SkipCheckUserInHypervAdminsGroup.UseVisualStyleBackColor = true;
+            this.SkipCheckUserInHypervAdminsGroup.CheckedChanged += new System.EventHandler(this.SkipCheckUserInHypervAdminsGroup_CheckedChanged);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.InitialDirectory = "$env:USERPROFILE";
+            // 
+            // enableExperimentalFeatures
+            // 
+            this.enableExperimentalFeatures.AutoSize = true;
+            this.enableExperimentalFeatures.Location = new System.Drawing.Point(8, 187);
+            this.enableExperimentalFeatures.Margin = new System.Windows.Forms.Padding(2);
+            this.enableExperimentalFeatures.Name = "enableExperimentalFeatures";
+            this.enableExperimentalFeatures.Size = new System.Drawing.Size(162, 17);
+            this.enableExperimentalFeatures.TabIndex = 9;
+            this.enableExperimentalFeatures.Text = "Enable experimental features";
+            this.enableExperimentalFeatures.UseVisualStyleBackColor = true;
             // 
             // CrcSettingsForm
             // 
@@ -643,6 +642,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.memoryNumBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cpusNumBox)).EndInit();
             this.advance_tab.ResumeLayout(false);
+            this.advance_tab.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -662,7 +662,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button PullSecretSelectButton;
         private System.Windows.Forms.Button BundleSelectButton;
-        private System.Windows.Forms.CheckBox enableExperimentalFeatures;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox pullSecretTxtBox;
         private System.Windows.Forms.Label label3;
@@ -699,5 +698,6 @@
         private System.Windows.Forms.CheckBox SkipCheckWindowsVersion;
         private System.Windows.Forms.CheckBox SkipCheckRunningAsAdmin;
         private System.Windows.Forms.CheckBox SkipCheckUserInHypervAdminsGroup;
+        private System.Windows.Forms.CheckBox enableExperimentalFeatures;
     }
 }

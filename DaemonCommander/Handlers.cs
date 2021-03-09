@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Sockets;
-using System.Runtime.InteropServices;
 using tray_windows.Daemon;
 
 namespace tray_windows

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace tray_windows
