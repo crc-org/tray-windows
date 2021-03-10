@@ -104,7 +104,7 @@
             this.CrcStatus.Name = "CrcStatus";
             this.CrcStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.CrcStatus.Size = new System.Drawing.Size(278, 23);
-            this.CrcStatus.TabIndex = 5;
+            this.CrcStatus.TabIndex = 1;
             this.CrcStatus.Text = "||||||||";
             this.CrcStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -117,7 +117,7 @@
             this.OpenShiftStatus.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.OpenShiftStatus.Name = "OpenShiftStatus";
             this.OpenShiftStatus.Size = new System.Drawing.Size(278, 23);
-            this.OpenShiftStatus.TabIndex = 6;
+            this.OpenShiftStatus.TabIndex = 2;
             this.OpenShiftStatus.Text = "||||||||";
             this.OpenShiftStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -130,7 +130,7 @@
             this.DiskUsage.Name = "DiskUsage";
             this.DiskUsage.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.DiskUsage.Size = new System.Drawing.Size(278, 23);
-            this.DiskUsage.TabIndex = 7;
+            this.DiskUsage.TabIndex = 3;
             this.DiskUsage.Text = "||||||||";
             this.DiskUsage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -143,7 +143,7 @@
             this.CacheUsage.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.CacheUsage.Name = "CacheUsage";
             this.CacheUsage.Size = new System.Drawing.Size(278, 23);
-            this.CacheUsage.TabIndex = 8;
+            this.CacheUsage.TabIndex = 4;
             this.CacheUsage.Text = "||||||||";
             this.CacheUsage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -197,7 +197,7 @@
             this.CacheFolder.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.CacheFolder.Name = "CacheFolder";
             this.CacheFolder.Size = new System.Drawing.Size(278, 27);
-            this.CacheFolder.TabIndex = 10;
+            this.CacheFolder.TabIndex = 5;
             this.CacheFolder.Text = "||||||||";
             this.CacheFolder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
