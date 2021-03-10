@@ -31,7 +31,7 @@ namespace tray_windows.Daemon
 
 	class DaemonCommander
 	{
-		private String socketPath = string.Format("{0}\\.crc\\crc.sock", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+		private string socketPath = string.Format("{0}\\.crc\\crc.sock", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
 		private Socket daemonSocket;
 		private UnixEndPoint daemonSocketEp;
 		public DaemonCommander()
@@ -42,60 +42,47 @@ namespace tray_windows.Daemon
 
 		public string GetStatus()
 		{
-			return TryAndSendCommand("status");
+			return SendCommand("status");
 		}
 		
 		public string GetVersion()
 		{
-			return TryAndSendCommand("version");
+			return SendCommand("version");
 		}
 
 		public string Start()
 		{
-			return TryAndSendCommand("start");
+			return SendCommand("start");
 		}
 
 		public string Stop()
 		{
-			return TryAndSendCommand("stop");
+			return SendCommand("stop");
 		}
 
 		public string Delete()
 		{
-			return TryAndSendCommand("delete");
+			return SendCommand("delete");
 		}
 
 		public string GetWebconsoleURL()
 		{
-			return TryAndSendCommand("webconsoleurl");
+			return SendCommand("webconsoleurl");
 		}
 
 		public string GetAllConfig()
 		{
-			return TryAndSendCommand("getconfig");
+			return SendCommand("getconfig");
 		}
 
 		public string SetConfig(ConfigSetCommand cmd)
 		{
-			return TryAndSendCommand(cmd);
+			return SendCommand(cmd);
 		}
 
 		public string UnsetConfig(ConfigUnsetCommand cmd)
 		{
-			return TryAndSendCommand(cmd);
-		}
-
-		private string TryAndSendCommand(string command)
-		{
-			try
-			{
-				var resp = this.SendCommand(command);
-				return resp;
-			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
+			return SendCommand(cmd);
 		}
 
 		private string SendCommand(string command)
@@ -110,19 +97,6 @@ namespace tray_windows.Daemon
 				daemonSocket.Receive(resp);
 				daemonSocket.Close();
 				return Encoding.ASCII.GetString(resp);
-			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
-		}
-
-		private string TryAndSendCommand(ConfigSetCommand command)
-		{
-			try
-			{
-				var resp = this.SendCommand(command);
-				return resp;
 			}
 			catch (SocketException e)
 			{
@@ -151,18 +125,7 @@ namespace tray_windows.Daemon
 				throw e;
 			}
 		}
-		private string TryAndSendCommand(ConfigUnsetCommand cmd)
-		{
-			try
-			{
-				var resp = this.SendCommand(cmd);
-				return resp;
-			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
-		}
+
 		private string SendCommand(ConfigUnsetCommand command)
 		{
 			try
