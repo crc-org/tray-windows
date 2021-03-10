@@ -42,113 +42,54 @@ namespace tray_windows.Daemon
 
 		public string GetStatus()
 		{
-			try
-			{
-				var resp = this.SendCommand("status");
-				return resp;
-			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
+			return TryAndSendCommand("status");
 		}
 		
 		public string GetVersion()
 		{
-			try
-			{
-				var resp = this.SendCommand("version");
-				return resp;
-			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
+			return TryAndSendCommand("version");
 		}
 
 		public string Start()
 		{
-			try
-			{
-				var resp = this.SendCommand("start");
-				return resp;
-			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
+			return TryAndSendCommand("start");
 		}
 
 		public string Stop()
 		{
-			try
-			{
-				var resp = this.SendCommand("stop");
-				return resp;
-			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
+			return TryAndSendCommand("stop");
 		}
 
 		public string Delete()
 		{
-			try
-			{
-				var resp = this.SendCommand("delete");
-				return resp;
-			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
+			return TryAndSendCommand("delete");
 		}
 
 		public string GetWebconsoleURL()
 		{
-			try
-			{
-				var resp = this.SendCommand("webconsoleurl");
-				return resp;
-			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
+			return TryAndSendCommand("webconsoleurl");
 		}
 
 		public string GetAllConfig()
 		{
-			try
-			{
-				var resp = this.SendCommand("getconfig");
-				return resp;
-			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
+			return TryAndSendCommand("getconfig");
 		}
 
 		public string SetConfig(ConfigSetCommand cmd)
 		{
-			try
-			{
-				var resp = this.SendCommand(cmd);
-				return resp;
-			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
+			return TryAndSendCommand(cmd);
 		}
 
 		public string UnsetConfig(ConfigUnsetCommand cmd)
 		{
+			return TryAndSendCommand(cmd);
+		}
+
+		private string TryAndSendCommand(string command)
+		{
 			try
 			{
-				var resp = this.SendCommand(cmd);
+				var resp = this.SendCommand(command);
 				return resp;
 			}
 			catch (SocketException e)
@@ -169,6 +110,19 @@ namespace tray_windows.Daemon
 				daemonSocket.Receive(resp);
 				daemonSocket.Close();
 				return Encoding.ASCII.GetString(resp);
+			}
+			catch (SocketException e)
+			{
+				throw e;
+			}
+		}
+
+		private string TryAndSendCommand(ConfigSetCommand command)
+		{
+			try
+			{
+				var resp = this.SendCommand(command);
+				return resp;
 			}
 			catch (SocketException e)
 			{
@@ -197,7 +151,18 @@ namespace tray_windows.Daemon
 				throw e;
 			}
 		}
-
+		private string TryAndSendCommand(ConfigUnsetCommand cmd)
+		{
+			try
+			{
+				var resp = this.SendCommand(cmd);
+				return resp;
+			}
+			catch (SocketException e)
+			{
+				throw e;
+			}
+		}
 		private string SendCommand(ConfigUnsetCommand command)
 		{
 			try
