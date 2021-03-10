@@ -96,6 +96,9 @@
             // 
             // CrcStatus
             // 
+            this.CrcStatus.AccessibleDescription = "Status of CodeReady Containers";
+            this.CrcStatus.AccessibleName = "CRC Status";
+            this.CrcStatus.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
             this.CrcStatus.AutoSize = true;
             this.CrcStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CrcStatus.Font = new System.Drawing.Font("Segoe UI", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -110,6 +113,9 @@
             // 
             // OpenShiftStatus
             // 
+            this.OpenShiftStatus.AccessibleDescription = "Status of OpenShift Container Platform";
+            this.OpenShiftStatus.AccessibleName = "OCP Status";
+            this.OpenShiftStatus.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
             this.OpenShiftStatus.AutoSize = true;
             this.OpenShiftStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OpenShiftStatus.Font = new System.Drawing.Font("Segoe UI", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -123,6 +129,9 @@
             // 
             // DiskUsage
             // 
+            this.DiskUsage.AccessibleDescription = "Disk space used inside the VM";
+            this.DiskUsage.AccessibleName = "Disk usage";
+            this.DiskUsage.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
             this.DiskUsage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DiskUsage.Font = new System.Drawing.Font("Segoe UI", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DiskUsage.Location = new System.Drawing.Point(220, 46);
@@ -136,6 +145,9 @@
             // 
             // CacheUsage
             // 
+            this.CacheUsage.AccessibleDescription = "Disk space usage by the cache on the host";
+            this.CacheUsage.AccessibleName = "Cache usage";
+            this.CacheUsage.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
             this.CacheUsage.AutoSize = true;
             this.CacheUsage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CacheUsage.Font = new System.Drawing.Font("Segoe UI", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -190,6 +202,9 @@
             // 
             // CacheFolder
             // 
+            this.CacheFolder.AccessibleDescription = "Location of the cache on the host";
+            this.CacheFolder.AccessibleName = "Cache folder";
+            this.CacheFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
             this.CacheFolder.AutoSize = true;
             this.CacheFolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CacheFolder.Font = new System.Drawing.Font("Segoe UI", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
