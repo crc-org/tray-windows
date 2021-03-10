@@ -2,10 +2,10 @@
 ---
 image: Visual Studio 2019
 
-install:
-  ps: nuget restore tray-windows.sln
-
 configuration: Release
+
+before_build:
+  ps: nuget restore tray-windows.sln
 
 build:
   project: tray-windows.sln
@@ -16,4 +16,3 @@ after_build:
 artifacts:
   - path: bin\Release
     name: crc-tray
-
