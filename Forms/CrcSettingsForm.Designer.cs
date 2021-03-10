@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.properties_tab = new System.Windows.Forms.TabPage();
-            this.button4 = new System.Windows.Forms.Button();
-            this.refresh_button = new System.Windows.Forms.Button();
+            this.applyButton = new System.Windows.Forms.Button();
+            this.refreshButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.proxyCABrowseButton = new System.Windows.Forms.Button();
             this.proxyCAFileTxtBox = new System.Windows.Forms.TextBox();
@@ -61,8 +61,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.advance_tab = new System.Windows.Forms.TabPage();
             this.enableExperimentalFeatures = new System.Windows.Forms.CheckBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.refreshButton2 = new System.Windows.Forms.Button();
+            this.applyButton2 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.nameServerTxtBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -89,6 +89,7 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.AccessibleName = "Settings tab";
             this.tabControl1.Controls.Add(this.properties_tab);
             this.tabControl1.Controls.Add(this.advance_tab);
             this.tabControl1.Location = new System.Drawing.Point(7, 7);
@@ -100,8 +101,8 @@
             // 
             // properties_tab
             // 
-            this.properties_tab.Controls.Add(this.button4);
-            this.properties_tab.Controls.Add(this.refresh_button);
+            this.properties_tab.Controls.Add(this.applyButton);
+            this.properties_tab.Controls.Add(this.refreshButton);
             this.properties_tab.Controls.Add(this.groupBox2);
             this.properties_tab.Controls.Add(this.groupBox1);
             this.properties_tab.Location = new System.Drawing.Point(4, 22);
@@ -113,27 +114,29 @@
             this.properties_tab.Text = "Properties";
             this.properties_tab.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // applyButton
             // 
-            this.button4.Location = new System.Drawing.Point(393, 323);
-            this.button4.Margin = new System.Windows.Forms.Padding(2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(62, 21);
-            this.button4.TabIndex = 15;
-            this.button4.Text = "Apply";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.applyButton.AccessibleName = "Apply button";
+            this.applyButton.Location = new System.Drawing.Point(393, 323);
+            this.applyButton.Margin = new System.Windows.Forms.Padding(2);
+            this.applyButton.Name = "applyButton";
+            this.applyButton.Size = new System.Drawing.Size(62, 21);
+            this.applyButton.TabIndex = 15;
+            this.applyButton.Text = "Apply";
+            this.applyButton.UseVisualStyleBackColor = true;
+            this.applyButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
-            // refresh_button
+            // refreshButton
             // 
-            this.refresh_button.Location = new System.Drawing.Point(306, 323);
-            this.refresh_button.Margin = new System.Windows.Forms.Padding(2);
-            this.refresh_button.Name = "refresh_button";
-            this.refresh_button.Size = new System.Drawing.Size(60, 21);
-            this.refresh_button.TabIndex = 14;
-            this.refresh_button.Text = "Refresh";
-            this.refresh_button.UseVisualStyleBackColor = true;
-            this.refresh_button.Click += new System.EventHandler(this.RefreshButton_Click);
+            this.refreshButton.AccessibleName = "Refresh button";
+            this.refreshButton.Location = new System.Drawing.Point(306, 323);
+            this.refreshButton.Margin = new System.Windows.Forms.Padding(2);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(60, 21);
+            this.refreshButton.TabIndex = 14;
+            this.refreshButton.Text = "Refresh";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // groupBox2
             // 
@@ -158,6 +161,7 @@
             // 
             // proxyCABrowseButton
             // 
+            this.proxyCABrowseButton.AccessibleName = "Proxy CA filerequester";
             this.proxyCABrowseButton.Location = new System.Drawing.Point(390, 115);
             this.proxyCABrowseButton.Margin = new System.Windows.Forms.Padding(2);
             this.proxyCABrowseButton.Name = "proxyCABrowseButton";
@@ -169,6 +173,7 @@
             // 
             // proxyCAFileTxtBox
             // 
+            this.proxyCAFileTxtBox.AccessibleName = "Proxy CA file";
             this.proxyCAFileTxtBox.Enabled = false;
             this.proxyCAFileTxtBox.Location = new System.Drawing.Point(105, 116);
             this.proxyCAFileTxtBox.Margin = new System.Windows.Forms.Padding(2);
@@ -199,6 +204,7 @@
             // 
             // noProxyTxtBox
             // 
+            this.noProxyTxtBox.AccessibleName = "No proxy";
             this.noProxyTxtBox.Enabled = false;
             this.noProxyTxtBox.Location = new System.Drawing.Point(105, 89);
             this.noProxyTxtBox.Margin = new System.Windows.Forms.Padding(2);
@@ -209,6 +215,7 @@
             // 
             // httpsProxyTxtBox
             // 
+            this.httpsProxyTxtBox.AccessibleName = "HTTPS proxy";
             this.httpsProxyTxtBox.Enabled = false;
             this.httpsProxyTxtBox.Location = new System.Drawing.Point(105, 63);
             this.httpsProxyTxtBox.Margin = new System.Windows.Forms.Padding(2);
@@ -229,6 +236,7 @@
             // 
             // httpProxyTxtBox
             // 
+            this.httpProxyTxtBox.AccessibleName = "HTTP proxy";
             this.httpProxyTxtBox.Enabled = false;
             this.httpProxyTxtBox.Location = new System.Drawing.Point(105, 37);
             this.httpProxyTxtBox.Margin = new System.Windows.Forms.Padding(2);
@@ -249,6 +257,7 @@
             // 
             // useProxyTick
             // 
+            this.useProxyTick.AccessibleName = "Use proxy";
             this.useProxyTick.AutoSize = true;
             this.useProxyTick.Location = new System.Drawing.Point(6, 15);
             this.useProxyTick.Margin = new System.Windows.Forms.Padding(2);
@@ -306,6 +315,7 @@
             // 
             // diskSizeNumBox
             // 
+            this.diskSizeNumBox.AccessibleName = "Disk size";
             this.diskSizeNumBox.Location = new System.Drawing.Point(79, 117);
             this.diskSizeNumBox.Margin = new System.Windows.Forms.Padding(2);
             this.diskSizeNumBox.Name = "diskSizeNumBox";
@@ -315,6 +325,7 @@
             // 
             // memoryNumBox
             // 
+            this.memoryNumBox.AccessibleName = "Memory";
             this.memoryNumBox.Location = new System.Drawing.Point(79, 64);
             this.memoryNumBox.Margin = new System.Windows.Forms.Padding(2);
             this.memoryNumBox.Maximum = new decimal(new int[] {
@@ -339,6 +350,7 @@
             // 
             // cpusNumBox
             // 
+            this.cpusNumBox.AccessibleName = "vCPUs";
             this.cpusNumBox.Location = new System.Drawing.Point(79, 38);
             this.cpusNumBox.Margin = new System.Windows.Forms.Padding(2);
             this.cpusNumBox.Minimum = new decimal(new int[] {
@@ -368,6 +380,7 @@
             // 
             // PullSecretSelectButton
             // 
+            this.PullSecretSelectButton.AccessibleName = "PullSecret filerequester";
             this.PullSecretSelectButton.Location = new System.Drawing.Point(390, 87);
             this.PullSecretSelectButton.Margin = new System.Windows.Forms.Padding(2);
             this.PullSecretSelectButton.Name = "PullSecretSelectButton";
@@ -379,6 +392,7 @@
             // 
             // BundleSelectButton
             // 
+            this.BundleSelectButton.AccessibleName = "Bundle filerequester";
             this.BundleSelectButton.Location = new System.Drawing.Point(390, 10);
             this.BundleSelectButton.Margin = new System.Windows.Forms.Padding(2);
             this.BundleSelectButton.Name = "BundleSelectButton";
@@ -400,6 +414,7 @@
             // 
             // pullSecretTxtBox
             // 
+            this.pullSecretTxtBox.AccessibleName = "PullSecret location";
             this.pullSecretTxtBox.Location = new System.Drawing.Point(79, 90);
             this.pullSecretTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.pullSecretTxtBox.Name = "pullSecretTxtBox";
@@ -429,6 +444,7 @@
             // 
             // bundleTxtBox
             // 
+            this.bundleTxtBox.AccessibleName = "Bundle location";
             this.bundleTxtBox.Location = new System.Drawing.Point(79, 11);
             this.bundleTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.bundleTxtBox.Name = "bundleTxtBox";
@@ -449,8 +465,8 @@
             // advance_tab
             // 
             this.advance_tab.Controls.Add(this.enableExperimentalFeatures);
-            this.advance_tab.Controls.Add(this.button7);
-            this.advance_tab.Controls.Add(this.button6);
+            this.advance_tab.Controls.Add(this.refreshButton2);
+            this.advance_tab.Controls.Add(this.applyButton2);
             this.advance_tab.Controls.Add(this.groupBox4);
             this.advance_tab.Controls.Add(this.groupBox3);
             this.advance_tab.Location = new System.Drawing.Point(4, 22);
@@ -464,6 +480,7 @@
             // 
             // enableExperimentalFeatures
             // 
+            this.enableExperimentalFeatures.AccessibleName = "Enable experimental features";
             this.enableExperimentalFeatures.AutoSize = true;
             this.enableExperimentalFeatures.Location = new System.Drawing.Point(8, 187);
             this.enableExperimentalFeatures.Margin = new System.Windows.Forms.Padding(2);
@@ -473,27 +490,29 @@
             this.enableExperimentalFeatures.Text = "Enable experimental features";
             this.enableExperimentalFeatures.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // refreshButton2
             // 
-            this.button7.Location = new System.Drawing.Point(304, 322);
-            this.button7.Margin = new System.Windows.Forms.Padding(2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(61, 22);
-            this.button7.TabIndex = 22;
-            this.button7.Text = "Refresh";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.refreshButton2.AccessibleName = "Refresh button";
+            this.refreshButton2.Location = new System.Drawing.Point(304, 322);
+            this.refreshButton2.Margin = new System.Windows.Forms.Padding(2);
+            this.refreshButton2.Name = "refreshButton2";
+            this.refreshButton2.Size = new System.Drawing.Size(61, 22);
+            this.refreshButton2.TabIndex = 22;
+            this.refreshButton2.Text = "Refresh";
+            this.refreshButton2.UseVisualStyleBackColor = true;
+            this.refreshButton2.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
-            // button6
+            // applyButton2
             // 
-            this.button6.Location = new System.Drawing.Point(393, 322);
-            this.button6.Margin = new System.Windows.Forms.Padding(2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(63, 22);
-            this.button6.TabIndex = 23;
-            this.button6.Text = "Apply";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.applyButton2.AccessibleName = "Apply button";
+            this.applyButton2.Location = new System.Drawing.Point(393, 322);
+            this.applyButton2.Margin = new System.Windows.Forms.Padding(2);
+            this.applyButton2.Name = "applyButton2";
+            this.applyButton2.Size = new System.Drawing.Size(63, 22);
+            this.applyButton2.TabIndex = 23;
+            this.applyButton2.Text = "Apply";
+            this.applyButton2.UseVisualStyleBackColor = true;
+            this.applyButton2.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
             // groupBox4
             // 
@@ -511,6 +530,7 @@
             // 
             // nameServerTxtBox
             // 
+            this.nameServerTxtBox.AccessibleName = "Nameserver";
             this.nameServerTxtBox.AutoCompleteCustomSource.AddRange(new string[] {
             "1.1.1.1",
             "8.8.8.8",
@@ -536,6 +556,7 @@
             // 
             // disableUpdateCheckBox
             // 
+            this.disableUpdateCheckBox.AccessibleName = "Disable update check";
             this.disableUpdateCheckBox.AutoSize = true;
             this.disableUpdateCheckBox.Location = new System.Drawing.Point(3, 21);
             this.disableUpdateCheckBox.Margin = new System.Windows.Forms.Padding(2);
@@ -577,6 +598,7 @@
             // 
             // SkipCheckWindowsVersion
             // 
+            this.SkipCheckWindowsVersion.AccessibleName = "Skip Windows version check";
             this.SkipCheckWindowsVersion.AutoSize = true;
             this.SkipCheckWindowsVersion.Location = new System.Drawing.Point(3, 55);
             this.SkipCheckWindowsVersion.Name = "SkipCheckWindowsVersion";
@@ -588,6 +610,8 @@
             // 
             // SkipCheckRunningAsAdmin
             // 
+            this.SkipCheckRunningAsAdmin.AccessibleDescription = "Skip check if user is administrator";
+            this.SkipCheckRunningAsAdmin.AccessibleName = "Skip administrator check";
             this.SkipCheckRunningAsAdmin.AutoSize = true;
             this.SkipCheckRunningAsAdmin.Location = new System.Drawing.Point(3, 29);
             this.SkipCheckRunningAsAdmin.Name = "SkipCheckRunningAsAdmin";
@@ -599,6 +623,8 @@
             // 
             // SkipCheckUserInHypervAdminsGroup
             // 
+            this.SkipCheckUserInHypervAdminsGroup.AccessibleDescription = "Skip check if user in Hyper-V administrators group";
+            this.SkipCheckUserInHypervAdminsGroup.AccessibleName = "Skip Hyper-V admin check";
             this.SkipCheckUserInHypervAdminsGroup.AutoSize = true;
             this.SkipCheckUserInHypervAdminsGroup.Location = new System.Drawing.Point(3, 3);
             this.SkipCheckUserInHypervAdminsGroup.Name = "SkipCheckUserInHypervAdminsGroup";
@@ -680,15 +706,15 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button refresh_button;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.Button applyButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox nameServerTxtBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox disableUpdateCheckBox;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button refreshButton2;
+        private System.Windows.Forms.Button applyButton2;
         private System.Windows.Forms.NumericUpDown memoryNumBox;
         private System.Windows.Forms.NumericUpDown cpusNumBox;
         private System.Windows.Forms.Label label23;

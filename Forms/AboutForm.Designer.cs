@@ -107,6 +107,9 @@
             // 
             // CrcVersionLabel
             // 
+            this.CrcVersionLabel.AccessibleDescription = "The version of CodeReady Containers";
+            this.CrcVersionLabel.AccessibleName = "CRC Version";
+            this.CrcVersionLabel.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
             this.CrcVersionLabel.AutoSize = true;
             this.CrcVersionLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CrcVersionLabel.Location = new System.Drawing.Point(365, 0);
@@ -118,6 +121,9 @@
             // 
             // OcpVersion
             // 
+            this.OcpVersion.AccessibleDescription = "The version of the OpenShift Container Platform";
+            this.OcpVersion.AccessibleName = "OCP Version";
+            this.OcpVersion.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
             this.OcpVersion.AutoSize = true;
             this.OcpVersion.Font = new System.Drawing.Font("Segoe UI Semibold", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OcpVersion.Location = new System.Drawing.Point(365, 21);
@@ -129,6 +135,9 @@
             // 
             // TrayVersion
             // 
+            this.TrayVersion.AccessibleDescription = "Version of the tray application of CodeReady Containers";
+            this.TrayVersion.AccessibleName = "Tray version";
+            this.TrayVersion.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
             this.TrayVersion.AutoSize = true;
             this.TrayVersion.Font = new System.Drawing.Font("Segoe UI Semibold", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TrayVersion.Location = new System.Drawing.Point(365, 42);

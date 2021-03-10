@@ -134,7 +134,7 @@ namespace tray_windows
             this.configsNeedingUnset = new List<string>();
         }
         // Apply button on properties tab
-        private void button4_Click(object sender, EventArgs e)
+        private void ApplyButton_Click(object sender, EventArgs e)
         {
            if (this.configChanged && changedConfigs.Count > 0)
             {
@@ -286,17 +286,5 @@ namespace tray_windows
         {
             handleConfigChangesForCheckBoxes("skip-check-user-in-hyperv-group", this.SkipCheckUserInHypervAdminsGroup);
         }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            RefreshButton_Click(sender, e);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            button4_Click(sender, e);
-            
-        }
     }
-
 }
