@@ -92,27 +92,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutForm.cs">
+    <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutForm.Designer.cs">
+    <Compile Include="Forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DaemonCommander\Handlers.cs" />
     <Compile Include="DaemonCommander\ResponseClasses.cs" />
     <Compile Include="DaemonCommander\UnixEndPoint.cs" />
     <Compile Include="DaemonCommander\DaemonCommander.cs" />
-    <Compile Include="DisplayMessageBox.cs" />
-    <Compile Include="CrcSettingsForm.cs">
+    <Compile Include="Forms\DisplayMessageBox.cs" />
+    <Compile Include="Forms\CrcSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CrcSettingsForm.Designer.cs">
+    <Compile Include="Forms\CrcSettingsForm.Designer.cs">
       <DependentUpon>CrcSettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="StatusForm.cs">
+    <Compile Include="Forms\StatusForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StatusForm.Designer.cs">
+    <Compile Include="Forms\StatusForm.Designer.cs">
       <DependentUpon>StatusForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -122,13 +122,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AboutForm.resx">
+    <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CrcSettingsForm.resx">
+    <EmbeddedResource Include="Forms\CrcSettingsForm.resx">
       <DependentUpon>CrcSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StatusForm.resx">
+    <EmbeddedResource Include="Forms\StatusForm.resx">
       <DependentUpon>StatusForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

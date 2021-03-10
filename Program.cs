@@ -54,7 +54,7 @@ namespace tray_windows
             };
             notifyIcon.MouseClick += NotifyIcon_Click;
 
-            SetConextMenu();
+            SetContextMenu();
         }
 
         // event handlers and methods
@@ -73,7 +73,7 @@ namespace tray_windows
         }
 
         // populate the context menu for tray icon
-        private void SetConextMenu()
+        private void SetContextMenu()
         {
             ContextMenuStrip cm = new ContextMenuStrip();
 
