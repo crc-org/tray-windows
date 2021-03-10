@@ -60,6 +60,7 @@
             this.bundleTxtBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.advance_tab = new System.Windows.Forms.TabPage();
+            this.enableExperimentalFeatures = new System.Windows.Forms.CheckBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -73,7 +74,6 @@
             this.SkipCheckUserInHypervAdminsGroup = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.enableExperimentalFeatures = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.properties_tab.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -119,7 +119,7 @@
             this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(62, 21);
-            this.button4.TabIndex = 10;
+            this.button4.TabIndex = 15;
             this.button4.Text = "Apply";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -130,7 +130,7 @@
             this.refresh_button.Margin = new System.Windows.Forms.Padding(2);
             this.refresh_button.Name = "refresh_button";
             this.refresh_button.Size = new System.Drawing.Size(60, 21);
-            this.refresh_button.TabIndex = 11;
+            this.refresh_button.TabIndex = 14;
             this.refresh_button.Text = "Refresh";
             this.refresh_button.UseVisualStyleBackColor = true;
             this.refresh_button.Click += new System.EventHandler(this.RefreshButton_Click);
@@ -162,7 +162,7 @@
             this.proxyCABrowseButton.Margin = new System.Windows.Forms.Padding(2);
             this.proxyCABrowseButton.Name = "proxyCABrowseButton";
             this.proxyCABrowseButton.Size = new System.Drawing.Size(62, 22);
-            this.proxyCABrowseButton.TabIndex = 9;
+            this.proxyCABrowseButton.TabIndex = 13;
             this.proxyCABrowseButton.Text = "Select file";
             this.proxyCABrowseButton.UseVisualStyleBackColor = true;
             this.proxyCABrowseButton.Click += new System.EventHandler(this.proxyCABrowseButton_Click);
@@ -174,7 +174,7 @@
             this.proxyCAFileTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.proxyCAFileTxtBox.Name = "proxyCAFileTxtBox";
             this.proxyCAFileTxtBox.Size = new System.Drawing.Size(260, 20);
-            this.proxyCAFileTxtBox.TabIndex = 8;
+            this.proxyCAFileTxtBox.TabIndex = 12;
             this.proxyCAFileTxtBox.TextChanged += new System.EventHandler(this.proxyCAFileTxtBox_TextChanged);
             // 
             // label8
@@ -204,7 +204,7 @@
             this.noProxyTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.noProxyTxtBox.Name = "noProxyTxtBox";
             this.noProxyTxtBox.Size = new System.Drawing.Size(260, 20);
-            this.noProxyTxtBox.TabIndex = 5;
+            this.noProxyTxtBox.TabIndex = 11;
             this.noProxyTxtBox.TextChanged += new System.EventHandler(this.noProxyTxtBox_TextChanged);
             // 
             // httpsProxyTxtBox
@@ -214,7 +214,7 @@
             this.httpsProxyTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.httpsProxyTxtBox.Name = "httpsProxyTxtBox";
             this.httpsProxyTxtBox.Size = new System.Drawing.Size(260, 20);
-            this.httpsProxyTxtBox.TabIndex = 4;
+            this.httpsProxyTxtBox.TabIndex = 10;
             this.httpsProxyTxtBox.TextChanged += new System.EventHandler(this.httpsProxyTxtBox_TextChanged);
             // 
             // label6
@@ -234,7 +234,7 @@
             this.httpProxyTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.httpProxyTxtBox.Name = "httpProxyTxtBox";
             this.httpProxyTxtBox.Size = new System.Drawing.Size(260, 20);
-            this.httpProxyTxtBox.TabIndex = 2;
+            this.httpProxyTxtBox.TabIndex = 9;
             this.httpProxyTxtBox.TextChanged += new System.EventHandler(this.httpProxyTxtBox_TextChanged);
             // 
             // label5
@@ -254,7 +254,7 @@
             this.useProxyTick.Margin = new System.Windows.Forms.Padding(2);
             this.useProxyTick.Name = "useProxyTick";
             this.useProxyTick.Size = new System.Drawing.Size(74, 17);
-            this.useProxyTick.TabIndex = 0;
+            this.useProxyTick.TabIndex = 8;
             this.useProxyTick.Text = "Use Proxy";
             this.useProxyTick.UseVisualStyleBackColor = true;
             this.useProxyTick.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
@@ -310,7 +310,7 @@
             this.diskSizeNumBox.Margin = new System.Windows.Forms.Padding(2);
             this.diskSizeNumBox.Name = "diskSizeNumBox";
             this.diskSizeNumBox.Size = new System.Drawing.Size(65, 20);
-            this.diskSizeNumBox.TabIndex = 14;
+            this.diskSizeNumBox.TabIndex = 7;
             this.diskSizeNumBox.ValueChanged += new System.EventHandler(this.diskSizeNumBox_ValueChanged);
             // 
             // memoryNumBox
@@ -329,7 +329,7 @@
             0});
             this.memoryNumBox.Name = "memoryNumBox";
             this.memoryNumBox.Size = new System.Drawing.Size(65, 20);
-            this.memoryNumBox.TabIndex = 13;
+            this.memoryNumBox.TabIndex = 4;
             this.memoryNumBox.Value = new decimal(new int[] {
             9126,
             0,
@@ -348,7 +348,7 @@
             0});
             this.cpusNumBox.Name = "cpusNumBox";
             this.cpusNumBox.Size = new System.Drawing.Size(65, 20);
-            this.cpusNumBox.TabIndex = 12;
+            this.cpusNumBox.TabIndex = 3;
             this.cpusNumBox.Value = new decimal(new int[] {
             4,
             0,
@@ -372,7 +372,7 @@
             this.PullSecretSelectButton.Margin = new System.Windows.Forms.Padding(2);
             this.PullSecretSelectButton.Name = "PullSecretSelectButton";
             this.PullSecretSelectButton.Size = new System.Drawing.Size(62, 21);
-            this.PullSecretSelectButton.TabIndex = 10;
+            this.PullSecretSelectButton.TabIndex = 6;
             this.PullSecretSelectButton.Text = "Select file";
             this.PullSecretSelectButton.UseVisualStyleBackColor = true;
             this.PullSecretSelectButton.Click += new System.EventHandler(this.PullSecretSelectButton_Click);
@@ -383,7 +383,7 @@
             this.BundleSelectButton.Margin = new System.Windows.Forms.Padding(2);
             this.BundleSelectButton.Name = "BundleSelectButton";
             this.BundleSelectButton.Size = new System.Drawing.Size(62, 20);
-            this.BundleSelectButton.TabIndex = 9;
+            this.BundleSelectButton.TabIndex = 2;
             this.BundleSelectButton.Text = "Select file";
             this.BundleSelectButton.UseVisualStyleBackColor = true;
             this.BundleSelectButton.Click += new System.EventHandler(this.BundleSelectButton_Click);
@@ -404,7 +404,7 @@
             this.pullSecretTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.pullSecretTxtBox.Name = "pullSecretTxtBox";
             this.pullSecretTxtBox.Size = new System.Drawing.Size(285, 20);
-            this.pullSecretTxtBox.TabIndex = 6;
+            this.pullSecretTxtBox.TabIndex = 5;
             this.pullSecretTxtBox.TextChanged += new System.EventHandler(this.pullSecretTxtBox_TextChanged);
             // 
             // label3
@@ -462,13 +462,24 @@
             this.advance_tab.Text = "Advanced";
             this.advance_tab.UseVisualStyleBackColor = true;
             // 
+            // enableExperimentalFeatures
+            // 
+            this.enableExperimentalFeatures.AutoSize = true;
+            this.enableExperimentalFeatures.Location = new System.Drawing.Point(8, 187);
+            this.enableExperimentalFeatures.Margin = new System.Windows.Forms.Padding(2);
+            this.enableExperimentalFeatures.Name = "enableExperimentalFeatures";
+            this.enableExperimentalFeatures.Size = new System.Drawing.Size(162, 17);
+            this.enableExperimentalFeatures.TabIndex = 21;
+            this.enableExperimentalFeatures.Text = "Enable experimental features";
+            this.enableExperimentalFeatures.UseVisualStyleBackColor = true;
+            // 
             // button7
             // 
             this.button7.Location = new System.Drawing.Point(304, 322);
             this.button7.Margin = new System.Windows.Forms.Padding(2);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(61, 22);
-            this.button7.TabIndex = 2;
+            this.button7.TabIndex = 22;
             this.button7.Text = "Refresh";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
@@ -479,7 +490,7 @@
             this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(63, 22);
-            this.button6.TabIndex = 0;
+            this.button6.TabIndex = 23;
             this.button6.Text = "Apply";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
@@ -510,7 +521,7 @@
             this.nameServerTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.nameServerTxtBox.Name = "nameServerTxtBox";
             this.nameServerTxtBox.Size = new System.Drawing.Size(116, 20);
-            this.nameServerTxtBox.TabIndex = 2;
+            this.nameServerTxtBox.TabIndex = 20;
             this.nameServerTxtBox.TextChanged += new System.EventHandler(this.nameServerTxtBox_TextChanged);
             // 
             // label9
@@ -530,7 +541,7 @@
             this.disableUpdateCheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.disableUpdateCheckBox.Name = "disableUpdateCheckBox";
             this.disableUpdateCheckBox.Size = new System.Drawing.Size(130, 17);
-            this.disableUpdateCheckBox.TabIndex = 0;
+            this.disableUpdateCheckBox.TabIndex = 19;
             this.disableUpdateCheckBox.Text = "Disable update check";
             this.disableUpdateCheckBox.UseVisualStyleBackColor = true;
             this.disableUpdateCheckBox.CheckedChanged += new System.EventHandler(this.disableUpdateCheckBox_CheckedChanged);
@@ -570,7 +581,7 @@
             this.SkipCheckWindowsVersion.Location = new System.Drawing.Point(3, 55);
             this.SkipCheckWindowsVersion.Name = "SkipCheckWindowsVersion";
             this.SkipCheckWindowsVersion.Size = new System.Drawing.Size(161, 17);
-            this.SkipCheckWindowsVersion.TabIndex = 9;
+            this.SkipCheckWindowsVersion.TabIndex = 18;
             this.SkipCheckWindowsVersion.Text = "Skip windows version check";
             this.SkipCheckWindowsVersion.UseVisualStyleBackColor = true;
             this.SkipCheckWindowsVersion.CheckedChanged += new System.EventHandler(this.SkipCheckWindowsVersion_CheckedChanged);
@@ -581,7 +592,7 @@
             this.SkipCheckRunningAsAdmin.Location = new System.Drawing.Point(3, 29);
             this.SkipCheckRunningAsAdmin.Name = "SkipCheckRunningAsAdmin";
             this.SkipCheckRunningAsAdmin.Size = new System.Drawing.Size(201, 17);
-            this.SkipCheckRunningAsAdmin.TabIndex = 8;
+            this.SkipCheckRunningAsAdmin.TabIndex = 17;
             this.SkipCheckRunningAsAdmin.Text = "Skip check for running as admin user";
             this.SkipCheckRunningAsAdmin.UseVisualStyleBackColor = true;
             this.SkipCheckRunningAsAdmin.CheckedChanged += new System.EventHandler(this.SkipCheckRunningAsAdmin_CheckedChanged);
@@ -592,7 +603,7 @@
             this.SkipCheckUserInHypervAdminsGroup.Location = new System.Drawing.Point(3, 3);
             this.SkipCheckUserInHypervAdminsGroup.Name = "SkipCheckUserInHypervAdminsGroup";
             this.SkipCheckUserInHypervAdminsGroup.Size = new System.Drawing.Size(215, 17);
-            this.SkipCheckUserInHypervAdminsGroup.TabIndex = 7;
+            this.SkipCheckUserInHypervAdminsGroup.TabIndex = 16;
             this.SkipCheckUserInHypervAdminsGroup.Text = "Skip user in hyperv admins group check";
             this.SkipCheckUserInHypervAdminsGroup.UseVisualStyleBackColor = true;
             this.SkipCheckUserInHypervAdminsGroup.CheckedChanged += new System.EventHandler(this.SkipCheckUserInHypervAdminsGroup_CheckedChanged);
@@ -606,17 +617,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.InitialDirectory = "$env:USERPROFILE";
-            // 
-            // enableExperimentalFeatures
-            // 
-            this.enableExperimentalFeatures.AutoSize = true;
-            this.enableExperimentalFeatures.Location = new System.Drawing.Point(8, 187);
-            this.enableExperimentalFeatures.Margin = new System.Windows.Forms.Padding(2);
-            this.enableExperimentalFeatures.Name = "enableExperimentalFeatures";
-            this.enableExperimentalFeatures.Size = new System.Drawing.Size(162, 17);
-            this.enableExperimentalFeatures.TabIndex = 9;
-            this.enableExperimentalFeatures.Text = "Enable experimental features";
-            this.enableExperimentalFeatures.UseVisualStyleBackColor = true;
             // 
             // CrcSettingsForm
             // 

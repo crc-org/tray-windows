@@ -102,7 +102,7 @@
     <Compile Include="DaemonCommander\ResponseClasses.cs" />
     <Compile Include="DaemonCommander\UnixEndPoint.cs" />
     <Compile Include="DaemonCommander\DaemonCommander.cs" />
-    <Compile Include="Forms\DisplayMessageBox.cs" />
+    <Compile Include="Helpers\DisplayMessageBox.cs" />
     <Compile Include="Forms\CrcSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
