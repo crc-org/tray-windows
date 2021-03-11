@@ -3,6 +3,7 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using tray_windows.Communication;
 
 namespace tray_windows
 {

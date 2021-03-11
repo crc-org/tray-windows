@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using tray_windows.Communication;
 
 namespace tray_windows
 {

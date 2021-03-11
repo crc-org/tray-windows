@@ -117,16 +117,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Communication\Structs.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DaemonCommander\Handlers.cs" />
-    <Compile Include="DaemonCommander\ResponseClasses.cs" />
-    <Compile Include="DaemonCommander\UnixEndPoint.cs" />
-    <Compile Include="DaemonCommander\DaemonCommander.cs" />
+    <Compile Include="Communication\Handlers.cs" />
+    <Compile Include="Communication\ResponseClasses.cs" />
+    <Compile Include="Communication\UnixEndPoint.cs" />
+    <Compile Include="Communication\DaemonCommander.cs" />
     <Compile Include="Helpers\DisplayMessageBox.cs" />
     <Compile Include="Forms\CrcSettingsForm.cs">
       <SubType>Form</SubType>
