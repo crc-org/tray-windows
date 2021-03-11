@@ -1,4 +1,4 @@
-﻿namespace tray_windows
+﻿namespace CRCTray
 {
     partial class CrcSettingsForm
     {

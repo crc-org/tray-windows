@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace tray_windows.Communication
+namespace CRCTray.Communication
 {
 	struct ConfigSetCommand
 	{

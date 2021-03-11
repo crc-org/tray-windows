@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace tray_windows.Communication
+namespace CRCTray.Communication
 {
 
 	static class DaemonCommander
