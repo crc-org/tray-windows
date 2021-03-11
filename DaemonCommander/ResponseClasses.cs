@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace tray_windows
 {
@@ -77,67 +77,67 @@ namespace tray_windows
         public string nameserver;
         public int memory;
 
-        [JsonProperty("disable-update-check")]
+        [JsonPropertyName("disable-update-check")]
         public bool DisableUpdateCheck { get; set; }
 
-        [JsonProperty("disk-size")]
+        [JsonPropertyName("disk-size")]
         public int DiskSize {get; set;}
         
-        [JsonProperty("enable-experimental-features")]
+        [JsonPropertyName("enable-experimental-features")]
         public bool EnableExperimentalFeatures { get; set; }
         
-        [JsonProperty("http-proxy")]
+        [JsonPropertyName("http-proxy")]
         public string HttpProxy { get; set; }
         
-        [JsonProperty("https-proxy")]
+        [JsonPropertyName("https-proxy")]
         public string HttpsProxy { get; set; }
         
-        [JsonProperty("no-proxy")]
+        [JsonPropertyName("no-proxy")]
         public string NoProxy { get; set; }
         
-        [JsonProperty("proxy-ca-file")]
+        [JsonPropertyName("proxy-ca-file")]
         public string ProxyCAFile { get; set; }
         
-        [JsonProperty("pull-secret-file")]
+        [JsonPropertyName("pull-secret-file")]
         public string PullSecretFile { get; set; }
 
-        [JsonProperty("network-mode")]
+        [JsonPropertyName("network-mode")]
         public string NetworkMode { get; set; }
 
-        [JsonProperty("skip-check-admin-helper-cached")]
+        [JsonPropertyName("skip-check-admin-helper-cached")]
         public bool SkipCheckAdminHelperCached { get; set; }
 
-        [JsonProperty("skip-check-administrator-user")]
+        [JsonPropertyName("skip-check-administrator-user")]
         public bool SkipCheckAdminUser { get; set; }
 
-        [JsonProperty("skip-check-bundle-extracted")]
+        [JsonPropertyName("skip-check-bundle-extracted")]
         public bool SkipCheckBundleExtracted { get; set; }
 
-        [JsonProperty("skip-check-hyperv-installed")]
+        [JsonPropertyName("skip-check-hyperv-installed")]
         public bool SkipCheckHypervInstalled { get; set; }
 
-        [JsonProperty("skip-check-hyperv-service-running")]
+        [JsonPropertyName("skip-check-hyperv-service-running")]
         public bool SkipCheckHypervServiceRunning;
 
-        [JsonProperty("skip-check-hyperv-switch")]
+        [JsonPropertyName("skip-check-hyperv-switch")]
         public bool SkipCheckHypervSwitch { get; set; }
 
-        [JsonProperty("skip-check-podman-cached")]
+        [JsonPropertyName("skip-check-podman-cached")]
         public bool SkipCheckPodmanCached { get; set; }
 
-        [JsonProperty("skip-check-ram")]
+        [JsonPropertyName("skip-check-ram")]
         public bool SkipCheckRam { get; set; }
 
-        [JsonProperty("skip-check-user-in-hyperv-group")]
+        [JsonPropertyName("skip-check-user-in-hyperv-group")]
         public bool SkipCheckUserInHypervGroup { get; set; }
 
-        [JsonProperty("skip-check-vscok")]
+        [JsonPropertyName("skip-check-vscok")]
         public bool SkipCheckVsock { get; set; }
 
-        [JsonProperty("skip-check-windows-edition")]
+        [JsonPropertyName("skip-check-windows-edition")]
         public bool SkipCheckWindowsEdition { get; set; }
 
-        [JsonProperty("skip-check-windows-version")]
+        [JsonPropertyName("skip-check-windows-version")]
         public bool SkipCheckWindowsVersion { get; set; }
     }
 

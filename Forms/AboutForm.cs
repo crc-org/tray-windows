@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.Text.Json;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 
 namespace tray_windows
 {
@@ -26,11 +26,11 @@ namespace tray_windows
 
         private void GetVersion(object sender, EventArgs e)
         {
-            var d = new Daemon.DaemonCommander();
+            var daemon = new Daemon.DaemonCommander();
             try
             {
-                var r = d.GetVersion();
-                version = JsonConvert.DeserializeObject<VersionResult>(r);
+                var result = daemon.GetVersion();
+                version = JsonSerializer.Deserialize<VersionResult>(result);
                 if (version.Success) {
                     CrcVersionLabel.Text = String.Format("{0}+{1}", version.CrcVersion, version.CommitSha);
                     OcpVersion.Text = version.OpenshiftVersion;
