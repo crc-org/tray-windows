@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text.Json;
-using tray_windows.Daemon;
 
-namespace tray_windows
+namespace tray_windows.Communication
 {
     class Handlers
     {
         public static StartResult HandleStart() 
         {
-            var daemon = new DaemonCommander();
             try
             {
-                var result = daemon.Start();
+                var result = DaemonCommander.Start();
                 return JsonSerializer.Deserialize<StartResult>(result);
             }
             catch (SocketException ex)
@@ -29,11 +27,9 @@ namespace tray_windows
 
         public static StopResult HandleStop()
         {
-            var daemon = new DaemonCommander(); 
-
             try
             {
-                var result = daemon.Stop();
+                var result = DaemonCommander.Stop();
                 return JsonSerializer.Deserialize<StopResult>(result);
             }
             catch (SocketException ex)
@@ -45,10 +41,9 @@ namespace tray_windows
 
         public static DeleteResult HandleDelete()
         {
-            var daemon = new DaemonCommander();
             try
             {
-                var result = daemon.Delete();
+                var result = DaemonCommander.Delete();
                 return JsonSerializer.Deserialize<DeleteResult>(result);
             }
             catch (SocketException ex)
@@ -60,10 +55,9 @@ namespace tray_windows
 
         public static StatusResult HandleStatus()
         {
-            var daemon = new DaemonCommander();
             try
             {
-                var result = daemon.GetStatus();
+                var result = DaemonCommander.GetStatus();
                 return JsonSerializer.Deserialize<StatusResult>(result);
             }
             catch (SocketException ex)
@@ -75,10 +69,9 @@ namespace tray_windows
 
         public static ConsoleResult HandleOpenWebConsole()
         {
-            var daemon = new DaemonCommander();
             try
             {
-                var result = daemon.GetWebconsoleURL();
+                var result = DaemonCommander.GetWebconsoleURL();
                 return JsonSerializer.Deserialize<ConsoleResult>(result);
             }
             catch (SocketException ex)
@@ -90,10 +83,9 @@ namespace tray_windows
 
         public static ConfigResult GetConfig() 
         {
-            var daemon = new DaemonCommander();
             try
             {
-                var result = daemon.GetAllConfig();
+                var result = DaemonCommander.GetAllConfig();
                 return JsonSerializer.Deserialize<ConfigResult>(result);
             }
             catch (SocketException ex)
@@ -112,10 +104,9 @@ namespace tray_windows
             config.command = "setconfig";
             config.args = configArgs;
             
-            var daemon = new DaemonCommander();
             try
             {
-                var result = daemon.SetConfig(config);
+                var result = DaemonCommander.SetConfig(config);
                 return JsonSerializer.Deserialize<SetUnsetConfig>(result);
             }
             catch (SocketException ex)
@@ -134,10 +125,9 @@ namespace tray_windows
             config.command = "unsetconfig";
             config.args = configArgs;
 
-            var daemon = new Daemon.DaemonCommander();
             try
             {
-                var result = daemon.UnsetConfig(config);
+                var result = DaemonCommander.UnsetConfig(config);
                 return JsonSerializer.Deserialize<SetUnsetConfig>(result);
             }
             catch (SocketException ex)

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System.Threading.Tasks;
+using tray_windows.Communication;
 
 namespace tray_windows
 {

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Text.Json;
 using System.Windows.Forms;
+using tray_windows.Communication;
 
 namespace tray_windows
 {
@@ -26,10 +27,9 @@ namespace tray_windows
 
         private void GetVersion(object sender, EventArgs e)
         {
-            var daemon = new Daemon.DaemonCommander();
             try
             {
-                var result = daemon.GetVersion();
+                var result = DaemonCommander.GetVersion();
                 version = JsonSerializer.Deserialize<VersionResult>(result);
                 if (version.Success) {
                     CrcVersionLabel.Text = String.Format("{0}+{1}", version.CrcVersion, version.CommitSha);

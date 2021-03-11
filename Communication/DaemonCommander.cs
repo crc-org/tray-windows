@@ -2,94 +2,75 @@
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace tray_windows.Daemon
+namespace tray_windows.Communication
 {
-	struct ConfigSetCommand
-	{
-		public string command;
-		public ConfigSetCommandArg args;
-	}
 
-	struct ConfigSetCommandArg
+	static class DaemonCommander
 	{
-		public Dictionary<string, dynamic> properties;
-	}
-
-	struct ConfigUnsetCommand
-	{
-		public string command;
-		public ConfigUnsetCommandArg args;
-	}
-
-	struct ConfigUnsetCommandArg
-	{
-		public List<string> properties;
-	}
-
-	class DaemonCommander
-	{
-		private string socketPath = string.Format("{0}\\.crc\\crc.sock", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
-		private Socket daemonSocket;
-		private UnixEndPoint daemonSocketEp;
-		public DaemonCommander()
+		static private string socketPath = string.Format("{0}\\.crc\\crc.sock", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+		static private Socket daemonSocket;
+		static private UnixEndPoint daemonSocketEp;
+		
+		public static void Initialize()
 		{
 			daemonSocket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
 			daemonSocketEp = new UnixEndPoint(socketPath);
 		}
 
-		public string GetStatus()
+		public static string GetStatus()
 		{
 			return SendCommand("status");
 		}
-		
-		public string GetVersion()
+
+		public static string GetVersion()
 		{
 			return SendCommand("version");
 		}
 
-		public string Start()
+		public static string Start()
 		{
 			return SendCommand("start");
 		}
 
-		public string Stop()
+		public static string Stop()
 		{
 			return SendCommand("stop");
 		}
 
-		public string Delete()
+		public static string Delete()
 		{
 			return SendCommand("delete");
 		}
 
-		public string GetWebconsoleURL()
+		public static string GetWebconsoleURL()
 		{
 			return SendCommand("webconsoleurl");
 		}
 
-		public string GetAllConfig()
+		public static string GetAllConfig()
 		{
 			return SendCommand("getconfig");
 		}
 
-		public string SetConfig(ConfigSetCommand cmd)
+		public static string SetConfig(ConfigSetCommand cmd)
 		{
 			return SendCommand(cmd);
 		}
 
-		public string UnsetConfig(ConfigUnsetCommand cmd)
+		public static string UnsetConfig(ConfigUnsetCommand cmd)
 		{
 			return SendCommand(cmd);
 		}
 
-		private string SendCommand(string command)
+		private static string SendCommand(string command)
 		{
 			try
 			{
+				Initialize();
+
 				var resp = new byte[16 * 1024];
 				daemonSocket.Connect(daemonSocketEp);
 				var cmd = $"{{\"command\":\"{command}\"}}";
@@ -107,10 +88,12 @@ namespace tray_windows.Daemon
 			}
 		}
 
-		private string SendCommand(ConfigSetCommand command)
+		private static string SendCommand(ConfigSetCommand command)
 		{
 			try
 			{
+				Initialize();
+				
 				var resp = new byte[2048];
 				daemonSocket.Connect(daemonSocketEp);
 
@@ -132,10 +115,12 @@ namespace tray_windows.Daemon
 			}
 		}
 
-		private string SendCommand(ConfigUnsetCommand command)
+		private static string SendCommand(ConfigUnsetCommand command)
 		{
 			try
 			{
+				Initialize();
+
 				var resp = new byte[2048];
 				daemonSocket.Connect(daemonSocketEp);
 
