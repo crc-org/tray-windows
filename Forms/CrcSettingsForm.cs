@@ -28,7 +28,6 @@ namespace tray_windows
             this.FormClosing += CrcSettingsForm_FormClosing;
             this.tabControl1.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             
-
             currentConfig = Handlers.GetConfig();
             LoadConfigs(currentConfig);
         }

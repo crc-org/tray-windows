@@ -2,8 +2,9 @@
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace tray_windows.Daemon
 {
@@ -96,7 +97,9 @@ namespace tray_windows.Daemon
 				daemonSocket.Send(msg);
 				daemonSocket.Receive(resp);
 				daemonSocket.Close();
-				return Encoding.ASCII.GetString(resp);
+
+				var result = Encoding.ASCII.GetString(resp);
+				return result.Replace("\0", string.Empty);
 			}
 			catch (SocketException e)
 			{
@@ -110,15 +113,18 @@ namespace tray_windows.Daemon
 			{
 				var resp = new byte[2048];
 				daemonSocket.Connect(daemonSocketEp);
-				var cmd = JsonConvert.SerializeObject(command, new JsonSerializerSettings
-				{
-					NullValueHandling = NullValueHandling.Ignore
-				});
+
+				JsonSerializerOptions options = new JsonSerializerOptions();
+				options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+				var cmd = JsonSerializer.Serialize<ConfigSetCommand>(command, options);
+
 				byte[] msg = Encoding.ASCII.GetBytes(cmd);
 				daemonSocket.Send(msg);
 				daemonSocket.Receive(resp);
 				daemonSocket.Close();
-				return Encoding.ASCII.GetString(resp);
+
+				var result = Encoding.ASCII.GetString(resp);
+				return result.Replace("\0", string.Empty);
 			}
 			catch (SocketException e)
 			{
@@ -132,15 +138,18 @@ namespace tray_windows.Daemon
 			{
 				var resp = new byte[2048];
 				daemonSocket.Connect(daemonSocketEp);
-				var cmd = JsonConvert.SerializeObject(command, new JsonSerializerSettings
-				{
-					NullValueHandling = NullValueHandling.Ignore
-				});
+
+				JsonSerializerOptions options = new JsonSerializerOptions();
+				options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+				var cmd = JsonSerializer.Serialize<ConfigUnsetCommand>(command, options);
+
 				byte[] msg = Encoding.ASCII.GetBytes(cmd);
 				daemonSocket.Send(msg);
 				daemonSocket.Receive(resp);
 				daemonSocket.Close();
-				return Encoding.ASCII.GetString(resp);
+
+				var result = Encoding.ASCII.GetString(resp);
+				return result.Replace("\0", string.Empty);
 			}
 			catch (SocketException e)
 			{

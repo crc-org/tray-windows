@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Sockets;
+using System.Text.Json;
 using tray_windows.Daemon;
 
 namespace tray_windows
@@ -9,12 +9,11 @@ namespace tray_windows
     {
         public static StartResult HandleStart() 
         {
-            var d = new Daemon.DaemonCommander();
+            var daemon = new DaemonCommander();
             try
             {
-                var r = d.Start();
-                StartResult sr = JsonConvert.DeserializeObject<StartResult>(r);
-                return sr;
+                var result = daemon.Start();
+                return JsonSerializer.Deserialize<StartResult>(result);
             }
             catch (SocketException ex)
             {
@@ -30,13 +29,12 @@ namespace tray_windows
 
         public static StopResult HandleStop()
         {
-            var d = new Daemon.DaemonCommander(); 
+            var daemon = new DaemonCommander(); 
 
             try
             {
-                var r = d.Stop();
-                StopResult sr = JsonConvert.DeserializeObject<StopResult>(r);
-                return sr;
+                var result = daemon.Stop();
+                return JsonSerializer.Deserialize<StopResult>(result);
             }
             catch (SocketException ex)
             {
@@ -47,12 +45,11 @@ namespace tray_windows
 
         public static DeleteResult HandleDelete()
         {
-            var d = new Daemon.DaemonCommander();
+            var daemon = new DaemonCommander();
             try
             {
-                var r = d.Delete();
-                DeleteResult dr = JsonConvert.DeserializeObject<DeleteResult>(r);
-                return dr;
+                var result = daemon.Delete();
+                return JsonSerializer.Deserialize<DeleteResult>(result);
             }
             catch (SocketException ex)
             {
@@ -63,12 +60,11 @@ namespace tray_windows
 
         public static StatusResult HandleStatus()
         {
-            var d = new Daemon.DaemonCommander();
+            var daemon = new DaemonCommander();
             try
             {
-                var r = d.GetStatus();
-                StatusResult sr = JsonConvert.DeserializeObject<StatusResult>(r);
-                return sr;
+                var result = daemon.GetStatus();
+                return JsonSerializer.Deserialize<StatusResult>(result);
             }
             catch (SocketException ex)
             {
@@ -79,12 +75,11 @@ namespace tray_windows
 
         public static ConsoleResult HandleOpenWebConsole()
         {
-            var d = new Daemon.DaemonCommander();
+            var daemon = new DaemonCommander();
             try
             {
-                var r = d.GetWebconsoleURL();
-                ConsoleResult cr = JsonConvert.DeserializeObject<ConsoleResult>(r);
-                return cr;
+                var result = daemon.GetWebconsoleURL();
+                return JsonSerializer.Deserialize<ConsoleResult>(result);
             }
             catch (SocketException ex)
             {
@@ -95,24 +90,21 @@ namespace tray_windows
 
         public static ConfigResult GetConfig() 
         {
-            ConfigResult cr = new ConfigResult();
-            var d = new Daemon.DaemonCommander();
+            var daemon = new DaemonCommander();
             try
             {
-                var r = d.GetAllConfig();
-                cr = JsonConvert.DeserializeObject<ConfigResult>(r);
-                return cr;
+                var result = daemon.GetAllConfig();
+                return JsonSerializer.Deserialize<ConfigResult>(result);
             }
             catch (SocketException ex)
             {
                 DisplayMessageBox.Error(ex.Message);
-                return cr;
+                return new ConfigResult();  // returning an empty result?
             }
         }
 
         public static SetUnsetConfig SetConfig(Dictionary<string, dynamic> cfg)
         {
-            var result = new SetUnsetConfig();
             var config = new ConfigSetCommand();
             var configArgs = new ConfigSetCommandArg();
             configArgs.properties = cfg;
@@ -120,23 +112,21 @@ namespace tray_windows
             config.command = "setconfig";
             config.args = configArgs;
             
-            var d = new Daemon.DaemonCommander();
+            var daemon = new DaemonCommander();
             try
             {
-                var r = d.SetConfig(config);
-                result = JsonConvert.DeserializeObject<SetUnsetConfig>(r);
-                return result;
+                var result = daemon.SetConfig(config);
+                return JsonSerializer.Deserialize<SetUnsetConfig>(result);
             }
             catch (SocketException ex)
             {
                 DisplayMessageBox.Error(ex.Message);
-                return result;
+                return new SetUnsetConfig();  // returning an empty result?   
             }
         }
 
         public static SetUnsetConfig UnsetConfig(List<string> cfg)
         {
-            var result = new SetUnsetConfig();
             var config = new ConfigUnsetCommand();
             var configArgs = new ConfigUnsetCommandArg();
             configArgs.properties = cfg;
@@ -144,17 +134,16 @@ namespace tray_windows
             config.command = "unsetconfig";
             config.args = configArgs;
 
-            var d = new Daemon.DaemonCommander();
+            var daemon = new Daemon.DaemonCommander();
             try
             {
-                var r = d.UnsetConfig(config);
-                result = JsonConvert.DeserializeObject<SetUnsetConfig>(r);
-                return result;
+                var result = daemon.UnsetConfig(config);
+                return JsonSerializer.Deserialize<SetUnsetConfig>(result);
             }
             catch (SocketException ex)
             {
                 DisplayMessageBox.Error(ex.Message);
-                return result;
+                return new SetUnsetConfig();  // returning an empty result?
             }
         }
         
