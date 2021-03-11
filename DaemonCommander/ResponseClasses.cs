@@ -72,10 +72,17 @@ namespace tray_windows
 
     struct Config
     {
-        public string bundle;
-        public int cpus;
-        public string nameserver;
-        public int memory;
+        [JsonPropertyName("bundle")]
+        public string bundle { get; set; }
+
+        [JsonPropertyName("cpus")]
+        public int cpus { get; set; }
+
+        [JsonPropertyName("nameserver")]
+        public string nameserver { get; set; }
+
+        [JsonPropertyName("memory")]
+        public int memory { get; set; }
 
         [JsonPropertyName("disable-update-check")]
         public bool DisableUpdateCheck { get; set; }
@@ -117,7 +124,7 @@ namespace tray_windows
         public bool SkipCheckHypervInstalled { get; set; }
 
         [JsonPropertyName("skip-check-hyperv-service-running")]
-        public bool SkipCheckHypervServiceRunning;
+        public bool SkipCheckHypervServiceRunning { get; set; }
 
         [JsonPropertyName("skip-check-hyperv-switch")]
         public bool SkipCheckHypervSwitch { get; set; }
