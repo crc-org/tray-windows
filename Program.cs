@@ -2,9 +2,10 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System.Threading.Tasks;
-using tray_windows.Communication;
+using CRCTray.Communication;
+using CRCTray.Helpers;
 
-namespace tray_windows
+namespace CRCTray
 {
     static class Program
     {

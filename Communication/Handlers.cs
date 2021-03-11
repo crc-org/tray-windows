@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text.Json;
+using CRCTray.Helpers;
 
-namespace tray_windows.Communication
+namespace CRCTray.Communication
 {
     class Handlers
     {

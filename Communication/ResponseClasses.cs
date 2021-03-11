@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace tray_windows.Communication
+namespace CRCTray.Communication
 {
     public class StatusResult
     {

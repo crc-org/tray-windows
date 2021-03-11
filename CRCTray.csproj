@@ -11,8 +11,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{13AFC4D0-BA4B-437E-8994-D57B61F915B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>tray_windows</RootNamespace>
-    <AssemblyName>tray-windows</AssemblyName>
+    <RootNamespace>CRCTray</RootNamespace>
+    <AssemblyName>CRC-tray</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

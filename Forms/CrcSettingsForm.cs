@@ -4,9 +4,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using tray_windows.Communication;
+using CRCTray.Communication;
+using CRCTray.Helpers;
 
-namespace tray_windows
+namespace CRCTray
 {
     public partial class CrcSettingsForm : Form
     {

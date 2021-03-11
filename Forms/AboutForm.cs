@@ -2,9 +2,10 @@
 using System.Drawing;
 using System.Text.Json;
 using System.Windows.Forms;
-using tray_windows.Communication;
+using CRCTray.Communication;
+using CRCTray.Helpers;
 
-namespace tray_windows
+namespace CRCTray
 {
     public partial class AboutForm : Form
     {

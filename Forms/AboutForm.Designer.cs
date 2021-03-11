@@ -1,4 +1,4 @@
-﻿namespace tray_windows
+﻿namespace CRCTray
 {
     partial class AboutForm
     {
@@ -188,7 +188,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox3.Image = global::tray_windows.Resource.external_link;
+            this.pictureBox3.Image = global::CRCTray.Resource.external_link;
             this.pictureBox3.Location = new System.Drawing.Point(104, 2);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox3.Name = "pictureBox3";
@@ -215,7 +215,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::tray_windows.Resource.gh_icon;
+            this.pictureBox1.Image = global::CRCTray.Resource.gh_icon;
             this.pictureBox1.Location = new System.Drawing.Point(2, 2);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
@@ -244,7 +244,7 @@
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.Image = global::tray_windows.Resource.crc_logo;
+            this.pictureBox2.Image = global::CRCTray.Resource.crc_logo;
             this.pictureBox2.Location = new System.Drawing.Point(157, 7);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
