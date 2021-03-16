@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabs = new System.Windows.Forms.TabControl();
             this.properties_tab = new System.Windows.Forms.TabPage();
             this.applyButton = new System.Windows.Forms.Button();
             this.refreshButton = new System.Windows.Forms.Button();
@@ -73,8 +73,8 @@
             this.SkipCheckRunningAsAdmin = new System.Windows.Forms.CheckBox();
             this.SkipCheckUserInHypervAdminsGroup = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.tabControl1.SuspendLayout();
+            this.fileRequester = new System.Windows.Forms.OpenFileDialog();
+            this.tabs.SuspendLayout();
             this.properties_tab.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -89,15 +89,15 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.AccessibleName = "Settings tab";
-            this.tabControl1.Controls.Add(this.properties_tab);
-            this.tabControl1.Controls.Add(this.advance_tab);
-            this.tabControl1.Location = new System.Drawing.Point(7, 7);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(471, 374);
-            this.tabControl1.TabIndex = 0;
+            this.tabs.AccessibleName = "Settings tab";
+            this.tabs.Controls.Add(this.properties_tab);
+            this.tabs.Controls.Add(this.advance_tab);
+            this.tabs.Location = new System.Drawing.Point(7, 7);
+            this.tabs.Margin = new System.Windows.Forms.Padding(2);
+            this.tabs.Name = "tabControl1";
+            this.tabs.SelectedIndex = 0;
+            this.tabs.Size = new System.Drawing.Size(471, 374);
+            this.tabs.TabIndex = 0;
             // 
             // properties_tab
             // 
@@ -266,7 +266,7 @@
             this.useProxyTick.TabIndex = 8;
             this.useProxyTick.Text = "Use Proxy";
             this.useProxyTick.UseVisualStyleBackColor = true;
-            this.useProxyTick.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.useProxyTick.CheckedChanged += new System.EventHandler(this.useProxy_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -641,15 +641,15 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.InitialDirectory = "$env:USERPROFILE";
+            this.fileRequester.FileName = "openFileDialog1";
+            this.fileRequester.InitialDirectory = "$env:USERPROFILE";
             // 
             // CrcSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 387);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
@@ -658,7 +658,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.CrcSettingsForm_Load);
-            this.tabControl1.ResumeLayout(false);
+            this.tabs.ResumeLayout(false);
             this.properties_tab.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -680,7 +680,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabs;
         private System.Windows.Forms.TabPage properties_tab;
         private System.Windows.Forms.TabPage advance_tab;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -708,7 +708,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button refreshButton;
         private System.Windows.Forms.Button applyButton;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog fileRequester;
         private System.Windows.Forms.TextBox nameServerTxtBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox disableUpdateCheckBox;
