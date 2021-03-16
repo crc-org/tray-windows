@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using CRCTray.Helpers;
+using CRCTray.Communication;
 
-namespace CRCTray.Communication
+namespace CRCTray.Helpers
 {
-    class Handlers
+    static class TaskHandlers
     {
-        public static StartResult HandleStart() 
+        public static StartResult Start() 
         {
             try
             {
@@ -19,7 +19,7 @@ namespace CRCTray.Communication
             }
         }
 
-        public static StopResult HandleStop()
+        public static StopResult Stop()
         {
             try
             {
@@ -32,7 +32,7 @@ namespace CRCTray.Communication
             }
         }
 
-        public static DeleteResult HandleDelete()
+        public static DeleteResult Delete()
         {
             try
             {
@@ -45,7 +45,7 @@ namespace CRCTray.Communication
             }
         }
 
-        public static StatusResult HandleStatus()
+        public static StatusResult Status()
         {
             try
             {
@@ -58,7 +58,7 @@ namespace CRCTray.Communication
             }
         }
 
-        public static ConsoleResult HandleOpenWebConsole()
+        public static ConsoleResult WebConsole()
         {
             try
             {
@@ -114,14 +114,14 @@ namespace CRCTray.Communication
             }
         }
         
-        public static ConsoleResult HandleOCLogingForDeveloper()
+        public static ConsoleResult LoginForDeveloper()
         {
-            return HandleOpenWebConsole();
+            return WebConsole();
         }
 
-        public static ConsoleResult HandleOCLoginForKubeadmin()
+        public static ConsoleResult LoginForKubeadmin()
         {
-            return HandleOpenWebConsole();
+            return WebConsole();
         }
 
     }
