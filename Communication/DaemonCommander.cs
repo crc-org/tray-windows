@@ -20,9 +20,9 @@ namespace CRCTray.Communication
 			daemonSocketEp = new UnixEndPoint(socketPath);
 		}
 
-		public static string GetStatus()
+		public static StatusResult GetStatus()
 		{
-			return SendCommand("status");
+			return JsonSerializer.Deserialize<StatusResult>(SendCommand("status"));
 		}
 
 		public static string GetVersion()
@@ -30,39 +30,39 @@ namespace CRCTray.Communication
 			return SendCommand("version");
 		}
 
-		public static string Start()
+		public static StartResult Start()
 		{
-			return SendCommand("start");
+			return JsonSerializer.Deserialize<StartResult>(SendCommand("start"));
 		}
 
-		public static string Stop()
+		public static StopResult Stop()
 		{
-			return SendCommand("stop");
+			return JsonSerializer.Deserialize<StopResult>(SendCommand("stop"));
 		}
 
-		public static string Delete()
+		public static DeleteResult Delete()
 		{
-			return SendCommand("delete");
+			return JsonSerializer.Deserialize<DeleteResult>(SendCommand("delete"));
 		}
 
-		public static string GetWebconsoleURL()
+		public static ConsoleResult GetWebconsoleURL()
 		{
-			return SendCommand("webconsoleurl");
+			return JsonSerializer.Deserialize<ConsoleResult>(SendCommand("webconsoleurl"));
 		}
 
-		public static string GetAllConfig()
+		public static ConfigResult GetAllConfig()
 		{
-			return SendCommand("getconfig");
+			return JsonSerializer.Deserialize<ConfigResult>(SendCommand("getconfig"));
 		}
 
-		public static string SetConfig(ConfigSetCommand cmd)
+		public static SetUnsetConfig SetConfig(ConfigSetCommand cmd)
 		{
-			return SendCommand(cmd);
+			return JsonSerializer.Deserialize<SetUnsetConfig>(SendCommand(cmd));
 		}
 
-		public static string UnsetConfig(ConfigUnsetCommand cmd)
+		public static SetUnsetConfig UnsetConfig(ConfigUnsetCommand cmd)
 		{
-			return SendCommand(cmd);
+			return JsonSerializer.Deserialize<SetUnsetConfig>(SendCommand(cmd));
 		}
 
 		private static string SendCommand(string command)
