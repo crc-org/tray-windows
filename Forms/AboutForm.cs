@@ -28,23 +28,14 @@ namespace CRCTray
 
         private void GetVersion(object sender, EventArgs e)
         {
-            try
-            {
-                var result = DaemonCommander.GetVersion();
-                version = JsonSerializer.Deserialize<VersionResult>(result);
-                if (version.Success) {
-                    CrcVersionLabel.Text = String.Format("{0}+{1}", version.CrcVersion, version.CommitSha);
-                    OcpVersion.Text = version.OpenshiftVersion;
-                }
-                else
-                {
-                    DisplayMessageBox.Warn("Unable to fetch version information from daemon");
-                }
+            version = TaskHandlers.Version();
+            if (version.Success) {
+                CrcVersionLabel.Text = String.Format("{0}+{1}", version.CrcVersion, version.CommitSha);
+                OcpVersion.Text = version.OpenshiftVersion;
             }
-            catch (System.Net.Sockets.SocketException ex)
+            else
             {
-                this.Hide();
-                DisplayMessageBox.Warn(ex.Message);
+                DisplayMessageBox.Warn("Unable to fetch version information from daemon");
             }
         }
         private void AboutForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -58,6 +49,7 @@ namespace CRCTray
             var crcVersionWithGitSha = version.CrcVersion.Split('+');                  
             var v = crcVersionWithGitSha[0].Substring(0, crcVersionWithGitSha[0].Length - 2);
             var docsUrl = string.Format("https://access.redhat.com/documentation/en-us/red_hat_codeready_containers/{0}/", v);
+
             System.Diagnostics.Process.Start(docsUrl);
         }
 
