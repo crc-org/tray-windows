@@ -25,9 +25,9 @@ namespace CRCTray.Communication
 			return JsonSerializer.Deserialize<StatusResult>(SendCommand("status"));
 		}
 
-		public static string GetVersion()
+		public static VersionResult GetVersion()
 		{
-			return SendCommand("version");
+			return JsonSerializer.Deserialize<VersionResult>(SendCommand("version"));
 		}
 
 		public static StartResult Start()

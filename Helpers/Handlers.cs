@@ -6,6 +6,20 @@ namespace CRCTray.Helpers
 {
     static class TaskHandlers
     {
+
+        public static VersionResult Version()
+        {
+            try
+            {
+                return DaemonCommander.GetVersion();
+            }
+            catch (Exception ex)
+            {
+                DisplayMessageBox.Error(ex.Message);
+                return null;
+            }
+        }
+
         public static StartResult Start() 
         {
             try
