@@ -23,7 +23,7 @@ namespace CRCTray.Communication
             {
                 DisplayMessageBox.Error(ex.Message);
                 return null;
-            }
+            } 
         }
 
         public static StopResult HandleStop()
@@ -98,13 +98,7 @@ namespace CRCTray.Communication
 
         public static SetUnsetConfig SetConfig(Dictionary<string, dynamic> cfg)
         {
-            var config = new ConfigSetCommand();
-            var configArgs = new ConfigSetCommandArg();
-            configArgs.properties = cfg;
-
-            config.command = "setconfig";
-            config.args = configArgs;
-            
+            var config = new ConfigSetCommand(cfg);
             try
             {
                 var result = DaemonCommander.SetConfig(config);
@@ -119,13 +113,7 @@ namespace CRCTray.Communication
 
         public static SetUnsetConfig UnsetConfig(List<string> cfg)
         {
-            var config = new ConfigUnsetCommand();
-            var configArgs = new ConfigUnsetCommandArg();
-            configArgs.properties = cfg;
-
-            config.command = "unsetconfig";
-            config.args = configArgs;
-
+            var config = new ConfigUnsetCommand(cfg);
             try
             {
                 var result = DaemonCommander.UnsetConfig(config);

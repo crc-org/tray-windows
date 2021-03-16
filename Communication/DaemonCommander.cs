@@ -73,7 +73,8 @@ namespace CRCTray.Communication
 
 				var resp = new byte[16 * 1024];
 				daemonSocket.Connect(daemonSocketEp);
-				var cmd = $"{{\"command\":\"{command}\"}}";
+				var cmd = JsonSerializer.Serialize<BasicCommand>(new BasicCommand(command));
+
 				byte[] msg = Encoding.ASCII.GetBytes(cmd);
 				daemonSocket.Send(msg);
 				daemonSocket.Receive(resp);
