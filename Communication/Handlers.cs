@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Net.Sockets;
-using System.Text.Json;
+﻿using System;
+using System.Collections.Generic;
 using CRCTray.Helpers;
 
 namespace CRCTray.Communication
@@ -11,29 +10,22 @@ namespace CRCTray.Communication
         {
             try
             {
-                var result = DaemonCommander.Start();
-                return JsonSerializer.Deserialize<StartResult>(result);
+                return DaemonCommander.Start();
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
                 DisplayMessageBox.Error(ex.Message);
                 return null;
             }
-            catch (JsonException ex)
-            {
-                DisplayMessageBox.Error(ex.Message);
-                return null;
-            } 
         }
 
         public static StopResult HandleStop()
         {
             try
             {
-                var result = DaemonCommander.Stop();
-                return JsonSerializer.Deserialize<StopResult>(result);
+                return DaemonCommander.Stop();
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
                 DisplayMessageBox.Error(ex.Message);
                 return null;
@@ -44,10 +36,9 @@ namespace CRCTray.Communication
         {
             try
             {
-                var result = DaemonCommander.Delete();
-                return JsonSerializer.Deserialize<DeleteResult>(result);
+                return DaemonCommander.Delete();
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
                 DisplayMessageBox.Error(ex.Message);
                 return null;
@@ -58,10 +49,9 @@ namespace CRCTray.Communication
         {
             try
             {
-                var result = DaemonCommander.GetStatus();
-                return JsonSerializer.Deserialize<StatusResult>(result);
+                return DaemonCommander.GetStatus();
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
                 DisplayMessageBox.Error(ex.Message);
                 return null;
@@ -72,10 +62,9 @@ namespace CRCTray.Communication
         {
             try
             {
-                var result = DaemonCommander.GetWebconsoleURL();
-                return JsonSerializer.Deserialize<ConsoleResult>(result);
+                return DaemonCommander.GetWebconsoleURL();
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
                 DisplayMessageBox.Error(ex.Message);
                 return null;
@@ -86,10 +75,9 @@ namespace CRCTray.Communication
         {
             try
             {
-                var result = DaemonCommander.GetAllConfig();
-                return JsonSerializer.Deserialize<ConfigResult>(result);
+                return DaemonCommander.GetAllConfig();
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
                 DisplayMessageBox.Error(ex.Message);
                 return new ConfigResult();  // returning an empty result?
@@ -98,13 +86,13 @@ namespace CRCTray.Communication
 
         public static SetUnsetConfig SetConfig(Dictionary<string, dynamic> cfg)
         {
+            // TODO: unnecessary wrapping
             var config = new ConfigSetCommand(cfg);
             try
             {
-                var result = DaemonCommander.SetConfig(config);
-                return JsonSerializer.Deserialize<SetUnsetConfig>(result);
+                return DaemonCommander.SetConfig(config);
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
                 DisplayMessageBox.Error(ex.Message);
                 return new SetUnsetConfig();  // returning an empty result?   
@@ -113,13 +101,13 @@ namespace CRCTray.Communication
 
         public static SetUnsetConfig UnsetConfig(List<string> cfg)
         {
+            // TODO: unnecessary wrapping
             var config = new ConfigUnsetCommand(cfg);
             try
             {
-                var result = DaemonCommander.UnsetConfig(config);
-                return JsonSerializer.Deserialize<SetUnsetConfig>(result);
+                return DaemonCommander.UnsetConfig(config);
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
                 DisplayMessageBox.Error(ex.Message);
                 return new SetUnsetConfig();  // returning an empty result?
