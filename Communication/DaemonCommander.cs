@@ -67,14 +67,36 @@ namespace CRCTray.Communication
 
 		private static string SendCommand(string command)
 		{
+            var cmd = JsonSerializer.Serialize<BasicCommand>(new BasicCommand(command));
+            return getSocketResponse(cmd);
+		}
+
+        private static string SendCommand(ConfigSetCommand command)
+		{
+			JsonSerializerOptions options = new JsonSerializerOptions();
+			options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+			var cmd = JsonSerializer.Serialize<ConfigSetCommand>(command, options);
+
+			return getSocketResponse(cmd);
+		}
+
+		private static string SendCommand(ConfigUnsetCommand command)
+		{
+			JsonSerializerOptions options = new JsonSerializerOptions();
+			options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+			var cmd = JsonSerializer.Serialize<ConfigUnsetCommand>(command, options);
+
+			return getSocketResponse(cmd);
+		}
+
+		private static string getSocketResponse(string cmd)
+		{
 			try
 			{
 				Initialize();
 
 				var resp = new byte[16 * 1024];
 				daemonSocket.Connect(daemonSocketEp);
-				var cmd = JsonSerializer.Serialize<BasicCommand>(new BasicCommand(command));
-
 				byte[] msg = Encoding.ASCII.GetBytes(cmd);
 				daemonSocket.Send(msg);
 				daemonSocket.Receive(resp);
@@ -83,60 +105,7 @@ namespace CRCTray.Communication
 				var result = Encoding.ASCII.GetString(resp);
 				return result.Replace("\0", string.Empty);
 			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
-		}
 
-		private static string SendCommand(ConfigSetCommand command)
-		{
-			try
-			{
-				Initialize();
-				
-				var resp = new byte[2048];
-				daemonSocket.Connect(daemonSocketEp);
-
-				JsonSerializerOptions options = new JsonSerializerOptions();
-				options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-				var cmd = JsonSerializer.Serialize<ConfigSetCommand>(command, options);
-
-				byte[] msg = Encoding.ASCII.GetBytes(cmd);
-				daemonSocket.Send(msg);
-				daemonSocket.Receive(resp);
-				daemonSocket.Close();
-
-				var result = Encoding.ASCII.GetString(resp);
-				return result.Replace("\0", string.Empty);
-			}
-			catch (SocketException e)
-			{
-				throw e;
-			}
-		}
-
-		private static string SendCommand(ConfigUnsetCommand command)
-		{
-			try
-			{
-				Initialize();
-
-				var resp = new byte[2048];
-				daemonSocket.Connect(daemonSocketEp);
-
-				JsonSerializerOptions options = new JsonSerializerOptions();
-				options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-				var cmd = JsonSerializer.Serialize<ConfigUnsetCommand>(command, options);
-
-				byte[] msg = Encoding.ASCII.GetBytes(cmd);
-				daemonSocket.Send(msg);
-				daemonSocket.Receive(resp);
-				daemonSocket.Close();
-
-				var result = Encoding.ASCII.GetString(resp);
-				return result.Replace("\0", string.Empty);
-			}
 			catch (SocketException e)
 			{
 				throw e;
