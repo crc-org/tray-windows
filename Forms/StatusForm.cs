@@ -3,7 +3,7 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading.Tasks;
-using CRCTray.Communication;
+using CRCTray.Helpers;
 
 namespace CRCTray
 {
@@ -30,7 +30,7 @@ namespace CRCTray
 
         async private void GetStatus(object sender, EventArgs e)
         {
-            var status = await Task.Run(() => Handlers.HandleStatus());
+            var status = await Task.Run(() => TaskHandlers.Status());
             if (status != null)
             {
                 var cacheFolderPath = string.Format("{0}\\.crc\\cache", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));

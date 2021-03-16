@@ -65,7 +65,7 @@ namespace CRCTray
             if (e.Button == MouseButtons.Left)
             {
                 typeof(NotifyIcon).GetMethod("ShowContextMenu", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(notifyIcon, null);
-                var status = await Task.Run(() => Handlers.HandleStatus());
+                var status = await Task.Run(() => TaskHandlers.Status());
                 if (status != null)
                 {
                     UpdateClusterStatusMenu(status);
@@ -143,7 +143,7 @@ namespace CRCTray
 
         async private void CopyOCLoginForKubeadminMenu_Click(object sender, EventArgs e)
         {
-            var consoleResult = await Task.Run(() => Handlers.HandleOCLoginForKubeadmin());
+            var consoleResult = await Task.Run(() => TaskHandlers.LoginForKubeadmin());
             if (consoleResult != null)
             {
                 if (consoleResult.Success)
@@ -155,7 +155,7 @@ namespace CRCTray
 
         async private void CopyOCLoginForDeveloperMenu_Click(object sender, EventArgs e)
         {
-            var consoleResult = await Task.Run(() => Handlers.HandleOCLogingForDeveloper());
+            var consoleResult = await Task.Run(() => TaskHandlers.LoginForDeveloper());
             if (consoleResult != null)
             {
                 if (consoleResult.Success)
@@ -167,7 +167,7 @@ namespace CRCTray
 
         async private void OpenWebConsoleMenu_Click(object sender, EventArgs e)
         {
-            var consoleResult = await Task.Run(() => Handlers.HandleOpenWebConsole());
+            var consoleResult = await Task.Run(() => TaskHandlers.WebConsole());
             if (consoleResult != null)
             {
                 if (consoleResult.Success)
@@ -180,7 +180,7 @@ namespace CRCTray
         async private void DeleteMenu_Click(object sender, EventArgs e)
         {
             ShowNotification(@"Deleting Cluster", ToolTipIcon.Warning);
-            var deleteResult = await Task.Run(() => Handlers.HandleDelete());
+            var deleteResult = await Task.Run(() => TaskHandlers.Delete());
             if (deleteResult != null)
             {
                 if (deleteResult.Success)
@@ -193,7 +193,7 @@ namespace CRCTray
         async private void StopMenu_Click(object sender, EventArgs e)
         {
             ShowNotification(@"Stopping Cluster", ToolTipIcon.Info);
-            var stopResult = await Task.Run(() => Handlers.HandleStop());
+            var stopResult = await Task.Run(() => TaskHandlers.Stop());
             if (stopResult != null)
             {
                 if (stopResult.Success)
@@ -206,7 +206,7 @@ namespace CRCTray
         async private void StartMenu_Click(object sender, EventArgs e)
         {
             ShowNotification(@"Starting Cluster", ToolTipIcon.Info);
-            var startResult = await Task.Run(() => Handlers.HandleStart());
+            var startResult = await Task.Run(() => TaskHandlers.Start());
             if (startResult != null)
             {
                 if (startResult.KubeletStarted)

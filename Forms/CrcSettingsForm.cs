@@ -30,7 +30,7 @@ namespace CRCTray
             this.FormClosing += CrcSettingsForm_FormClosing;
             this.tabControl1.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             
-            currentConfig = Handlers.GetConfig();
+            currentConfig = TaskHandlers.GetConfig();
             LoadConfigs(currentConfig);
         }
 
@@ -129,7 +129,7 @@ namespace CRCTray
         // refresh button on properties tab
         private void RefreshButton_Click(object sender, EventArgs e)
         {
-            currentConfig = Handlers.GetConfig();
+            currentConfig = TaskHandlers.GetConfig();
             LoadConfigs(currentConfig);
             this.changedConfigs = new Dictionary<string, dynamic>();
             this.configsNeedingUnset = new List<string>();
@@ -139,7 +139,7 @@ namespace CRCTray
         {
            if (this.configChanged && changedConfigs.Count > 0)
             {
-                SetUnsetConfig r = Handlers.SetConfig(changedConfigs);
+                SetUnsetConfig r = TaskHandlers.SetConfig(changedConfigs);
                 if (r.Error == "")
                     DisplayMessageBox.Info("Properties configured: " + String.Join(",", r.Properties), "CodeReady Containers - Settings Applied");
                 else
@@ -147,7 +147,7 @@ namespace CRCTray
             }
            if (this.configsNeedingUnset.Count > 0)
             {
-                SetUnsetConfig r = Handlers.UnsetConfig(configsNeedingUnset);
+                SetUnsetConfig r = TaskHandlers.UnsetConfig(configsNeedingUnset);
                 if (r.Error == "")
                     DisplayMessageBox.Info("Properties unset: " + String.Join(",", r.Properties), "CodeReady Containers - Settings Applied");
                 else
@@ -155,7 +155,7 @@ namespace CRCTray
             }
 
             // Load the configs again and reset the change trackers
-            currentConfig = Handlers.GetConfig();
+            currentConfig = TaskHandlers.GetConfig();
             LoadConfigs(currentConfig);
             this.changedConfigs = new Dictionary<string, dynamic>();
             this.configsNeedingUnset = new List<string>();
