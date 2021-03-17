@@ -20,39 +20,44 @@ namespace CRCTray.Communication
 			daemonSocketEp = new UnixEndPoint(socketPath);
 		}
 
+		private static T getResultsForBasicCommand<T>(String command)
+		{
+			return JsonSerializer.Deserialize<T>(SendBasicCommand(command));
+		}
+
 		public static StatusResult GetStatus()
 		{
-			return JsonSerializer.Deserialize<StatusResult>(SendCommand("status"));
+			return getResultsForBasicCommand<StatusResult>("status");
 		}
 
 		public static VersionResult GetVersion()
 		{
-			return JsonSerializer.Deserialize<VersionResult>(SendCommand("version"));
+			return getResultsForBasicCommand<VersionResult>("version");
 		}
 
 		public static StartResult Start()
 		{
-			return JsonSerializer.Deserialize<StartResult>(SendCommand("start"));
+			return getResultsForBasicCommand<StartResult>("start");
 		}
 
 		public static StopResult Stop()
 		{
-			return JsonSerializer.Deserialize<StopResult>(SendCommand("stop"));
+			return getResultsForBasicCommand<StopResult>("stop");
 		}
 
 		public static DeleteResult Delete()
 		{
-			return JsonSerializer.Deserialize<DeleteResult>(SendCommand("delete"));
+			return getResultsForBasicCommand<DeleteResult>("delete");
 		}
 
 		public static ConsoleResult GetWebconsoleURL()
 		{
-			return JsonSerializer.Deserialize<ConsoleResult>(SendCommand("webconsoleurl"));
+			return getResultsForBasicCommand<ConsoleResult>("webconsoleurl");
 		}
 
 		public static ConfigResult GetAllConfig()
 		{
-			return JsonSerializer.Deserialize<ConfigResult>(SendCommand("getconfig"));
+			return getResultsForBasicCommand<ConfigResult>("getconfig");
 		}
 
 		public static SetUnsetConfig SetConfig(ConfigSetCommand cmd)
@@ -65,7 +70,7 @@ namespace CRCTray.Communication
 			return JsonSerializer.Deserialize<SetUnsetConfig>(SendCommand(cmd));
 		}
 
-		private static string SendCommand(string command)
+		private static string SendBasicCommand(string command)
 		{
             var cmd = JsonSerializer.Serialize<BasicCommand>(new BasicCommand(command));
             return getSocketResponse(cmd);

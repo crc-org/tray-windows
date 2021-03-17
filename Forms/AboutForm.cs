@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Text.Json;
 using System.Windows.Forms;
 using CRCTray.Communication;
 using CRCTray.Helpers;
