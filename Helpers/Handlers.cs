@@ -6,126 +6,79 @@ namespace CRCTray.Helpers
 {
     static class TaskHandlers
     {
-
-        public static VersionResult Version()
+        private static T getResultsOrShowMessage<T>(Func<T> function)
         {
             try
             {
-                return DaemonCommander.GetVersion();
+                return function();
             }
             catch (Exception ex)
             {
                 DisplayMessageBox.Error(ex.Message);
-                return null;
+                return default;
+            }
+        }
+        private static T getResultsOrShowMessage<T, TArgs>(Func<TArgs, T> function, TArgs args)
+        {
+            try
+            {
+                return function(args);
+            }
+            catch (Exception ex)
+            {
+                DisplayMessageBox.Error(ex.Message);
+                return default;
             }
         }
 
+        public static VersionResult Version()
+        {
+            return getResultsOrShowMessage<VersionResult>(DaemonCommander.GetVersion);
+        }
+
+
         public static StartResult Start() 
         {
-            try
-            {
-                return DaemonCommander.Start();
-            }
-            catch (Exception ex)
-            {
-                DisplayMessageBox.Error(ex.Message);
-                return null;
-            }
+            return getResultsOrShowMessage<StartResult>(DaemonCommander.Start);
         }
 
         public static StopResult Stop()
         {
-            try
-            {
-                return DaemonCommander.Stop();
-            }
-            catch (Exception ex)
-            {
-                DisplayMessageBox.Error(ex.Message);
-                return null;
-            }
+            return getResultsOrShowMessage<StopResult>(DaemonCommander.Stop);
         }
 
         public static DeleteResult Delete()
         {
-            try
-            {
-                return DaemonCommander.Delete();
-            }
-            catch (Exception ex)
-            {
-                DisplayMessageBox.Error(ex.Message);
-                return null;
-            }
+            return getResultsOrShowMessage<DeleteResult>(DaemonCommander.Delete);
         }
 
         public static StatusResult Status()
         {
-            try
-            {
-                return DaemonCommander.GetStatus();
-            }
-            catch (Exception ex)
-            {
-                DisplayMessageBox.Error(ex.Message);
-                return null;
-            }
+            return getResultsOrShowMessage<StatusResult>(DaemonCommander.GetStatus);
         }
 
         public static ConsoleResult WebConsole()
         {
-            try
-            {
-                return DaemonCommander.GetWebconsoleURL();
-            }
-            catch (Exception ex)
-            {
-                DisplayMessageBox.Error(ex.Message);
-                return null;
-            }
+            return getResultsOrShowMessage<ConsoleResult>(DaemonCommander.GetWebconsoleURL);
         }
 
         public static ConfigResult GetConfig() 
         {
-            try
-            {
-                return DaemonCommander.GetAllConfig();
-            }
-            catch (Exception ex)
-            {
-                DisplayMessageBox.Error(ex.Message);
-                return new ConfigResult();  // returning an empty result?
-            }
+            return getResultsOrShowMessage<ConfigResult>(DaemonCommander.GetAllConfig);
         }
 
         public static SetUnsetConfig SetConfig(Dictionary<string, dynamic> cfg)
         {
             // TODO: unnecessary wrapping
             var config = new ConfigSetCommand(cfg);
-            try
-            {
-                return DaemonCommander.SetConfig(config);
-            }
-            catch (Exception ex)
-            {
-                DisplayMessageBox.Error(ex.Message);
-                return new SetUnsetConfig();  // returning an empty result?   
-            }
+            return getResultsOrShowMessage<SetUnsetConfig, ConfigSetCommand>(DaemonCommander.SetConfig, config);
         }
 
         public static SetUnsetConfig UnsetConfig(List<string> cfg)
         {
             // TODO: unnecessary wrapping
             var config = new ConfigUnsetCommand(cfg);
-            try
-            {
-                return DaemonCommander.UnsetConfig(config);
-            }
-            catch (Exception ex)
-            {
-                DisplayMessageBox.Error(ex.Message);
-                return new SetUnsetConfig();  // returning an empty result?
-            }
+            return getResultsOrShowMessage<SetUnsetConfig, ConfigUnsetCommand>(DaemonCommander.UnsetConfig, config);
         }
         
         public static ConsoleResult LoginForDeveloper()
