@@ -33,54 +33,54 @@ namespace CRCTray.Helpers
 
         public static VersionResult Version()
         {
-            return getResultsOrShowMessage<VersionResult>(DaemonCommander.GetVersion);
+            return getResultsOrShowMessage(DaemonCommander.GetVersion);
         }
 
 
-        public static StartResult Start() 
+        public static StartResult Start()
         {
-            return getResultsOrShowMessage<StartResult>(DaemonCommander.Start);
+            return getResultsOrShowMessage(DaemonCommander.Start);
         }
 
         public static StopResult Stop()
         {
-            return getResultsOrShowMessage<StopResult>(DaemonCommander.Stop);
+            return getResultsOrShowMessage(DaemonCommander.Stop);
         }
 
         public static DeleteResult Delete()
         {
-            return getResultsOrShowMessage<DeleteResult>(DaemonCommander.Delete);
+            return getResultsOrShowMessage(DaemonCommander.Delete);
         }
 
         public static StatusResult Status()
         {
-            return getResultsOrShowMessage<StatusResult>(DaemonCommander.GetStatus);
+            return getResultsOrShowMessage(DaemonCommander.GetStatus);
         }
 
         public static ConsoleResult WebConsole()
         {
-            return getResultsOrShowMessage<ConsoleResult>(DaemonCommander.GetWebconsoleURL);
+            return getResultsOrShowMessage(DaemonCommander.GetWebconsoleURL);
         }
 
-        public static ConfigResult GetConfig() 
+        public static ConfigResult GetConfig()
         {
-            return getResultsOrShowMessage<ConfigResult>(DaemonCommander.GetAllConfig);
+            return getResultsOrShowMessage(DaemonCommander.GetAllConfig);
         }
 
         public static SetUnsetConfig SetConfig(Dictionary<string, dynamic> cfg)
         {
             // TODO: unnecessary wrapping
             var config = new ConfigSetCommand(cfg);
-            return getResultsOrShowMessage<SetUnsetConfig, ConfigSetCommand>(DaemonCommander.SetConfig, config);
+            return getResultsOrShowMessage(DaemonCommander.SetConfig, config);
         }
 
         public static SetUnsetConfig UnsetConfig(List<string> cfg)
         {
             // TODO: unnecessary wrapping
             var config = new ConfigUnsetCommand(cfg);
-            return getResultsOrShowMessage<SetUnsetConfig, ConfigUnsetCommand>(DaemonCommander.UnsetConfig, config);
+            return getResultsOrShowMessage(DaemonCommander.UnsetConfig, config);
         }
-        
+
         public static ConsoleResult LoginForDeveloper()
         {
             return WebConsole();
