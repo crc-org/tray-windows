@@ -20,7 +20,7 @@ namespace CRCTray.Communication
 			daemonSocketEp = new UnixEndPoint(socketPath);
 		}
 
-		private static T getResultsForBasicCommand<T>(String command)
+		private static T getResultsForBasicCommand<T>(string command)
 		{
 			return JsonSerializer.Deserialize<T>(SendBasicCommand(command));
 		}
@@ -72,7 +72,7 @@ namespace CRCTray.Communication
 
 		private static string SendBasicCommand(string command)
 		{
-            var cmd = JsonSerializer.Serialize<BasicCommand>(new BasicCommand(command));
+            var cmd = JsonSerializer.Serialize(new BasicCommand(command));
             return getSocketResponse(cmd);
 		}
 
@@ -80,7 +80,7 @@ namespace CRCTray.Communication
 		{
 			JsonSerializerOptions options = new JsonSerializerOptions();
 			options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-			var cmd = JsonSerializer.Serialize<ConfigSetCommand>(command, options);
+			var cmd = JsonSerializer.Serialize(command, options);
 
 			return getSocketResponse(cmd);
 		}
@@ -89,7 +89,7 @@ namespace CRCTray.Communication
 		{
 			JsonSerializerOptions options = new JsonSerializerOptions();
 			options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-			var cmd = JsonSerializer.Serialize<ConfigUnsetCommand>(command, options);
+			var cmd = JsonSerializer.Serialize(command, options);
 
 			return getSocketResponse(cmd);
 		}
