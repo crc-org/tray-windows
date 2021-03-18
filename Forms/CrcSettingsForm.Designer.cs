@@ -87,14 +87,14 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabs
             // 
             this.tabs.AccessibleName = "Settings tab";
             this.tabs.Controls.Add(this.properties_tab);
             this.tabs.Controls.Add(this.advance_tab);
             this.tabs.Location = new System.Drawing.Point(7, 7);
             this.tabs.Margin = new System.Windows.Forms.Padding(2);
-            this.tabs.Name = "tabControl1";
+            this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
             this.tabs.Size = new System.Drawing.Size(471, 374);
             this.tabs.TabIndex = 0;
@@ -493,7 +493,7 @@
             // refreshButton2
             // 
             this.refreshButton2.AccessibleName = "Refresh button";
-            this.refreshButton2.Location = new System.Drawing.Point(304, 322);
+            this.refreshButton2.Location = new System.Drawing.Point(304, 216);
             this.refreshButton2.Margin = new System.Windows.Forms.Padding(2);
             this.refreshButton2.Name = "refreshButton2";
             this.refreshButton2.Size = new System.Drawing.Size(61, 22);
@@ -505,7 +505,7 @@
             // applyButton2
             // 
             this.applyButton2.AccessibleName = "Apply button";
-            this.applyButton2.Location = new System.Drawing.Point(393, 322);
+            this.applyButton2.Location = new System.Drawing.Point(393, 216);
             this.applyButton2.Margin = new System.Windows.Forms.Padding(2);
             this.applyButton2.Name = "applyButton2";
             this.applyButton2.Size = new System.Drawing.Size(63, 22);
@@ -639,7 +639,7 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // openFileDialog1
+            // fileRequester
             // 
             this.fileRequester.FileName = "openFileDialog1";
             this.fileRequester.InitialDirectory = "$env:USERPROFILE";
