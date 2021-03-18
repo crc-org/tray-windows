@@ -20,14 +20,15 @@ namespace CRCTray
         public CrcSettingsForm()
         {
             InitializeComponent();
+            getConfigurationAndResetChanged();
         }
 
         private void getConfigurationAndResetChanged()
         {
-            currentConfig = TaskHandlers.ConfigView();
-            loadConfigurationValues(currentConfig);
             this.changedConfigs = new Dictionary<string, dynamic>();
             this.configsNeedingUnset = new List<string>();
+            currentConfig = TaskHandlers.ConfigView();
+            loadConfigurationValues(currentConfig);
             configChanged = false;
         }
 
@@ -38,8 +39,6 @@ namespace CRCTray
             Text = @"CodeReady Containers - Settings";
             this.FormClosing += CrcSettingsForm_FormClosing;
             this.tabs.SelectedIndexChanged += tabs_SelectedIndexChanged;
-
-            getConfigurationAndResetChanged();
         }
 
         private void tabs_SelectedIndexChanged(object sender, EventArgs e)
