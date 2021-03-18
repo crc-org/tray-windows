@@ -24,7 +24,7 @@ namespace CRCTray
 
         private void getConfigurationAndResetChanged()
         {
-            currentConfig = TaskHandlers.GetConfig();
+            currentConfig = TaskHandlers.ConfigView();
             loadConfigurationValues(currentConfig);
             this.changedConfigs = new Dictionary<string, dynamic>();
             this.configsNeedingUnset = new List<string>();

@@ -25,39 +25,39 @@ namespace CRCTray.Communication
 			return JsonSerializer.Deserialize<T>(SendBasicCommand(command));
 		}
 
-		public static StatusResult GetStatus()
+		public static StatusResult Status()
 		{
-			return getResultsForBasicCommand<StatusResult>("status");
+			return getResultsForBasicCommand<StatusResult>(BasicCommands.Status);
 		}
 
-		public static VersionResult GetVersion()
+		public static VersionResult Version()
 		{
-			return getResultsForBasicCommand<VersionResult>("version");
+			return getResultsForBasicCommand<VersionResult>(BasicCommands.Version);
 		}
 
 		public static StartResult Start()
 		{
-			return getResultsForBasicCommand<StartResult>("start");
+			return getResultsForBasicCommand<StartResult>(BasicCommands.Start);
 		}
 
 		public static StopResult Stop()
 		{
-			return getResultsForBasicCommand<StopResult>("stop");
+			return getResultsForBasicCommand<StopResult>(BasicCommands.Stop);
 		}
 
 		public static DeleteResult Delete()
 		{
-			return getResultsForBasicCommand<DeleteResult>("delete");
+			return getResultsForBasicCommand<DeleteResult>(BasicCommands.Delete);
 		}
 
-		public static ConsoleResult GetWebconsoleURL()
+		public static ConsoleResult ConsoleUrl()
 		{
-			return getResultsForBasicCommand<ConsoleResult>("webconsoleurl");
+			return getResultsForBasicCommand<ConsoleResult>(BasicCommands.ConsoleUrl);
 		}
 
-		public static ConfigResult GetAllConfig()
+		public static ConfigResult ConfigView()
 		{
-			return getResultsForBasicCommand<ConfigResult>("getconfig");
+			return getResultsForBasicCommand<ConfigResult>(BasicCommands.Config);
 		}
 
 		public static SetUnsetConfig SetConfig(ConfigSetCommand cmd)

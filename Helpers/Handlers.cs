@@ -33,7 +33,7 @@ namespace CRCTray.Helpers
 
         public static VersionResult Version()
         {
-            return getResultsOrShowMessage(DaemonCommander.GetVersion);
+            return getResultsOrShowMessage(DaemonCommander.Version);
         }
 
 
@@ -54,17 +54,17 @@ namespace CRCTray.Helpers
 
         public static StatusResult Status()
         {
-            return getResultsOrShowMessage(DaemonCommander.GetStatus);
+            return getResultsOrShowMessage(DaemonCommander.Status);
         }
 
         public static ConsoleResult WebConsole()
         {
-            return getResultsOrShowMessage(DaemonCommander.GetWebconsoleURL);
+            return getResultsOrShowMessage(DaemonCommander.ConsoleUrl);
         }
 
-        public static ConfigResult GetConfig()
+        public static ConfigResult ConfigView()
         {
-            return getResultsOrShowMessage(DaemonCommander.GetAllConfig);
+            return getResultsOrShowMessage(DaemonCommander.ConfigView);
         }
 
         public static SetUnsetConfig SetConfig(Dictionary<string, dynamic> cfg)
