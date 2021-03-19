@@ -11,7 +11,6 @@ namespace CRCTray
 {
     public partial class CrcSettingsForm : Form
     {
-        const int TotalPreflightChecks = 15;
         bool configChanged = false;
         List<string> configsNeedingUnset;
         ConfigResult currentConfig;
