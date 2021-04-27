@@ -14,24 +14,42 @@ namespace CRCTray.Communication
 	struct ConfigSetCommand
 	{
 		public string command { get; set; }
-		public Dictionary<string, dynamic> args { get; set; }
+		public ConfigSetCommandArgs args { get; set; }
 
 		public ConfigSetCommand(Dictionary<string, dynamic> args)
         {
 			command = "setconfig";
-			this.args = args;
+            var cargs = new ConfigSetCommandArgs
+            {
+                properties = args
+            };
+            this.args = cargs;
 		}
 	}
 
+	struct ConfigSetCommandArgs
+    {
+		public Dictionary<string, dynamic> properties { get; set; }
+    }
+
 	struct ConfigUnsetCommand
 	{
-		public string command;
-		public List<string> args { get; set; }
+		public string command { get; set; }
+		public ConfigUnsetCommandArgs args { get; set; }
 
 		public ConfigUnsetCommand(List<string> args)
         {
 			command = "unsetconfig";
-			this.args = args;
+			var cargs = new ConfigUnsetCommandArgs
+			{
+				properties = args
+			};
+			this.args = cargs;
         }
 	}
+	
+	struct ConfigUnsetCommandArgs
+    {
+		public List<string> properties { get; set; }
+    }
 }
