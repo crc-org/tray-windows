@@ -156,7 +156,7 @@ namespace CRCTray.Communication
 
     struct SetUnsetConfig
     {
-        public string Error;
-        public string[] Properties;
+        public string Error { get; set; }
+        public string[] Properties { get; set; }
     }
 }
