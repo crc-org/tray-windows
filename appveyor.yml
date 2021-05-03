@@ -10,9 +10,7 @@ before_build:
 build:
   project: crc-tray.sln
 
-after_build:
-  ps: ls bin\
-
 artifacts:
-  - path: bin\Release
+  - path: bin\Release\crc-tray.exe
+    type: File
     name: crc-tray
