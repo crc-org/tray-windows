@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using CRCTray.Communication;
 using CRCTray.Helpers;
@@ -45,6 +46,8 @@ namespace CRCTray
         private Form about;
         private Form statusForm;
 
+        private Task daemonProcess; 
+
         // Initialize tray
         public TrayContext()
         {
@@ -55,6 +58,8 @@ namespace CRCTray
                 Visible = true
             };
             notifyIcon.MouseClick += NotifyIcon_Click;
+            // start daemon
+            daemonProcess = Task.Run(StartDaemon);
             SetContextMenu();
         }
 
@@ -221,6 +226,7 @@ namespace CRCTray
         private void ExitMenu_Click(object sender, EventArgs e)
         {
             notifyIcon.Visible = false;
+            daemonProcess.Dispose();
             Application.Exit();
         }
 
@@ -301,6 +307,22 @@ namespace CRCTray
             notifyIcon.BalloonTipIcon = toolTipIcon;
             notifyIcon.BalloonTipText = msg;
             notifyIcon.ShowBalloonTip(10);
+        }
+
+        private void StartDaemon()
+        {
+            var process = new Process();
+            process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.FileName = string.Format("{0}\\{1}\\crc.exe",
+                Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"CodeReady Containers");
+#if DEBUG
+            process.StartInfo.FileName = string.Format("{0}\\bin\\crc.exe", Environment.GetEnvironmentVariable("GOPATH"));
+#endif
+            process.StartInfo.Arguments = @"daemon --watchdog";
+            process.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            Console.WriteLine(process.StartInfo.FileName);
+            process.Start();
         }
     }
 }
