@@ -41,9 +41,9 @@ namespace CRCTray
         private ToolStripItem settingsMenu;
 
         // Forms
-        private Form settingsWindow = new CrcSettingsForm();
-        private Form about = new AboutForm();
-        private Form statusForm = new StatusForm();
+        private Form settingsWindow;
+        private Form about;
+        private Form statusForm;
 
         // Initialize tray
         public TrayContext()
@@ -55,7 +55,6 @@ namespace CRCTray
                 Visible = true
             };
             notifyIcon.MouseClick += NotifyIcon_Click;
-
             SetContextMenu();
         }
 
@@ -136,6 +135,9 @@ namespace CRCTray
 
         private void SettingsMenu_Click(object sender, EventArgs e)
         {
+            if (settingsWindow == null)
+                settingsWindow = new CrcSettingsForm();
+            
             if (!settingsWindow.Visible)
                 settingsWindow.Show();
             settingsWindow.Focus();
@@ -224,6 +226,9 @@ namespace CRCTray
 
         private void ShowAboutForm(object sender, EventArgs e)
         {
+            if (about == null)
+                about = new AboutForm();
+
             if (!about.Visible)
                 about.Show();
             about.Focus();
@@ -231,6 +236,9 @@ namespace CRCTray
 
         private void ShowDetailedStatusForm(object sender, EventArgs e)
         {
+            if (statusForm == null)
+                statusForm = new StatusForm();
+
             if (!statusForm.Visible)
                 statusForm.Show();
             statusForm.Focus();
