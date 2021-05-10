@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using CRCTray.Communication;
 using CRCTray.Helpers;
@@ -41,9 +42,11 @@ namespace CRCTray
         private ToolStripItem settingsMenu;
 
         // Forms
-        private Form settingsWindow = new CrcSettingsForm();
-        private Form about = new AboutForm();
-        private Form statusForm = new StatusForm();
+        private Form settingsWindow;
+        private Form about;
+        private Form statusForm;
+
+        private Task daemonProcess; 
 
         // Initialize tray
         public TrayContext()
@@ -55,7 +58,8 @@ namespace CRCTray
                 Visible = true
             };
             notifyIcon.MouseClick += NotifyIcon_Click;
-
+            // start daemon
+            daemonProcess = Task.Run(StartDaemon);
             SetContextMenu();
         }
 
@@ -136,6 +140,9 @@ namespace CRCTray
 
         private void SettingsMenu_Click(object sender, EventArgs e)
         {
+            if (settingsWindow == null)
+                settingsWindow = new CrcSettingsForm();
+            
             if (!settingsWindow.Visible)
                 settingsWindow.Show();
             settingsWindow.Focus();
@@ -219,11 +226,15 @@ namespace CRCTray
         private void ExitMenu_Click(object sender, EventArgs e)
         {
             notifyIcon.Visible = false;
+            daemonProcess.Dispose();
             Application.Exit();
         }
 
         private void ShowAboutForm(object sender, EventArgs e)
         {
+            if (about == null)
+                about = new AboutForm();
+
             if (!about.Visible)
                 about.Show();
             about.Focus();
@@ -231,6 +242,9 @@ namespace CRCTray
 
         private void ShowDetailedStatusForm(object sender, EventArgs e)
         {
+            if (statusForm == null)
+                statusForm = new StatusForm();
+
             if (!statusForm.Visible)
                 statusForm.Show();
             statusForm.Focus();
@@ -293,6 +307,22 @@ namespace CRCTray
             notifyIcon.BalloonTipIcon = toolTipIcon;
             notifyIcon.BalloonTipText = msg;
             notifyIcon.ShowBalloonTip(10);
+        }
+
+        private void StartDaemon()
+        {
+            var process = new Process();
+            process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.FileName = string.Format("{0}\\{1}\\crc.exe",
+                Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"CodeReady Containers");
+#if DEBUG
+            process.StartInfo.FileName = string.Format("{0}\\bin\\crc.exe", Environment.GetEnvironmentVariable("GOPATH"));
+#endif
+            process.StartInfo.Arguments = @"daemon --watchdog";
+            process.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            Console.WriteLine(process.StartInfo.FileName);
+            process.Start();
         }
     }
 }
