@@ -76,12 +76,17 @@ namespace CRCTray
             long size = 0;
 
             var dirInfo = new DirectoryInfo(path);
-
-            foreach (FileInfo fi in dirInfo.GetFiles("*", SearchOption.AllDirectories))
+            try
             {
-                size += fi.Length;
+                foreach (FileInfo fi in dirInfo.GetFiles("*", SearchOption.AllDirectories))
+                {
+                    size += fi.Length;
+                }
             }
-
+            catch (Exception e)
+            {
+                DisplayMessageBox.Error(string.Format("Unexpected Error, did you run 'crc setup'? Error: {0}", e.Message));
+            }
             return size;
         }
     }
