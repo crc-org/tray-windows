@@ -46,8 +46,6 @@ namespace CRCTray
         private Form about;
         private Form statusForm;
 
-        private Task daemonProcess; 
-
         // Initialize tray
         public TrayContext()
         {
@@ -59,7 +57,7 @@ namespace CRCTray
             };
             notifyIcon.MouseClick += NotifyIcon_Click;
             // start daemon
-            daemonProcess = Task.Run(StartDaemon);
+            Task.Run(StartDaemon);
             SetContextMenu();
         }
 
@@ -226,7 +224,6 @@ namespace CRCTray
         private void ExitMenu_Click(object sender, EventArgs e)
         {
             notifyIcon.Visible = false;
-            daemonProcess.Dispose();
             Application.Exit();
         }
 
@@ -308,12 +305,12 @@ namespace CRCTray
             notifyIcon.BalloonTipText = msg;
             notifyIcon.ShowBalloonTip(10);
         }
-
         private void StartDaemon()
         {
             var process = new Process();
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardInput = true;
             process.StartInfo.FileName = string.Format("{0}\\{1}\\crc.exe",
                 Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"CodeReady Containers");
 #if DEBUG
@@ -322,7 +319,24 @@ namespace CRCTray
             process.StartInfo.Arguments = @"daemon --watchdog";
             process.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             Console.WriteLine(process.StartInfo.FileName);
-            process.Start();
+            try
+            {
+                process.Start();
+                System.IO.StreamWriter daemonStdinWriter = process.StandardInput;
+            }
+            catch (Exception e)
+            {
+                DisplayMessageBox.Error(string.Format("Cannot start the daemon, Check the logs and restart the application, Error: {0}", e.Message));
+            }
+            process.WaitForExit();
+            if (process.ExitCode == 2)
+            {
+                DisplayMessageBox.Error("Setup incomplete, Open a terminal, run 'crc setup', and start again this application.");
+            }
+            else
+            {
+                DisplayMessageBox.Error("Daemon crashed, check the logs and restart the application");
+            }
         }
     }
 }
