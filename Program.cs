@@ -28,23 +28,25 @@ namespace CRCTray
         private NotifyIcon notifyIcon;
 
         // MenuStrip Items
-        private ToolStripItem status;
-        private ToolStripItem detailedStatusMenu;
-        private ToolStripItem startMenu;
-        private ToolStripItem stopMenu;
-        private ToolStripItem deleteMenu;
-        private ToolStripItem openWebConsoleMenu;
-        private ToolStripItem copyOCLoginCommand;
-        private ToolStripItem copyOCLoginForDeveloperMenu;
-        private ToolStripItem copyOCLoginForKubeadminMenu;
-        private ToolStripItem aboutMenu;
-        private ToolStripItem exitMenu;
-        private ToolStripItem settingsMenu;
+        private static ToolStripItem status;
+        private static ToolStripItem detailedStatusMenu;
+        private static ToolStripItem startMenu;
+        private static ToolStripItem stopMenu;
+        private static ToolStripItem deleteMenu;
+        private static ToolStripItem openWebConsoleMenu;
+        private static ToolStripItem copyOCLoginCommand;
+        private static ToolStripItem copyOCLoginForDeveloperMenu;
+        private static ToolStripItem copyOCLoginForKubeadminMenu;
+        private static ToolStripItem aboutMenu;
+        private static ToolStripItem exitMenu;
+        private static ToolStripItem settingsMenu;
 
         // Forms
         private Form settingsWindow;
         private Form about;
         private Form statusForm;
+
+        private Double pollInterval = 30000; // 30 seconds poll interval
 
         // Initialize tray
         public TrayContext()
@@ -55,25 +57,36 @@ namespace CRCTray
                 Icon = Icon.FromHandle(bm.GetHicon()),
                 Visible = true
             };
-            notifyIcon.MouseClick += NotifyIcon_Click;
+            notifyIcon.MouseClick += NotifyIcon_MouseClick;
             // start daemon
             Task.Run(StartDaemon);
+            System.Threading.Thread.Sleep(6000); // wait 6sec for the daemon to start
+            PollStatus();
+            // Keep polling status and updating the statusMenuItem
+            var statusPollingTimer = new System.Timers.Timer(pollInterval);
+            statusPollingTimer.Enabled = true;
+            statusPollingTimer.Elapsed += pollStatusTimerEventHandler;
+
             SetContextMenu();
         }
 
-        // event handlers and methods
-        async private void NotifyIcon_Click(object sender, MouseEventArgs e)
+        private void NotifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                typeof(NotifyIcon).GetMethod("ShowContextMenu", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(notifyIcon, null);
-                var status = await Task.Run(() => TaskHandlers.Status());
-                if (status != null)
-                {
+            typeof(NotifyIcon).GetMethod("ShowContextMenu", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(notifyIcon, null);
+        }
+
+        // event handlers and methods
+        async static void PollStatus()
+        {
+            var status = await Task.Run(() => TaskHandlers.Status());
+            if (status != null)
                     UpdateClusterStatusMenu(status);
-                    SyncMenuItemStates(status);
-                }
-            }
+        }
+
+        private static void pollStatusTimerEventHandler(object source, System.Timers.ElapsedEventArgs e)
+        {
+            Console.WriteLine("Elapsed event raise, polling status");
+            PollStatus();
         }
 
         // populate the context menu for tray icon
@@ -247,56 +260,27 @@ namespace CRCTray
             statusForm.Focus();
         }
 
-        private void UpdateClusterStatusMenu(StatusResult status)
+        private static void UpdateClusterStatusMenu(StatusResult statusResult)
         {
-            if (!string.IsNullOrEmpty(status.CrcStatus))
-                this.status.Text = status.CrcStatus;
+            if (!string.IsNullOrEmpty(statusResult.CrcStatus))
+                status.Text = statusResult.CrcStatus;
             else
-                this.status.Text = @"Unknown";
+                status.Text = @"Unknown";
+
+            EnableMenuItems();
         }
 
-        private void SyncMenuItemStates(StatusResult status)
+        private static void EnableMenuItems()
         {
-            if (status.CrcStatus == @"Running")
-            {
-                startMenu.Enabled = false;
-                deleteMenu.Enabled = true;
-                stopMenu.Enabled = true;
-                openWebConsoleMenu.Enabled = true;
-                copyOCLoginCommand.Enabled = true;
-                copyOCLoginForDeveloperMenu.Enabled = true;
-                copyOCLoginForKubeadminMenu.Enabled = true;
-            }
-            else if (status.CrcStatus == @"Stopped")
-            {
-                startMenu.Enabled = true;
-                deleteMenu.Enabled = true;
-                stopMenu.Enabled = false;
-                openWebConsoleMenu.Enabled = false;
-                copyOCLoginCommand.Enabled = false;
-                copyOCLoginForDeveloperMenu.Enabled = false;
-                copyOCLoginForKubeadminMenu.Enabled = false;
-            }
-            else if (!string.IsNullOrEmpty(status.Error) && status.Error.Contains("does not exist"))
-            {
-                startMenu.Enabled = true;
-                deleteMenu.Enabled = false;
-                stopMenu.Enabled = false;
-                openWebConsoleMenu.Enabled = false;
-                copyOCLoginCommand.Enabled = false;
-                copyOCLoginForDeveloperMenu.Enabled = false;
-                copyOCLoginForKubeadminMenu.Enabled = false;
-            }
-            else
-            {
-                startMenu.Enabled = true;
-                stopMenu.Enabled = false;
-                deleteMenu.Enabled = true;
-                openWebConsoleMenu.Enabled = false;
-                copyOCLoginCommand.Enabled = false;
-                copyOCLoginForDeveloperMenu.Enabled = false;
-                copyOCLoginForKubeadminMenu.Enabled = false;
-            }
+            startMenu.Enabled = true;
+            deleteMenu.Enabled = true;
+            stopMenu.Enabled = true;
+            openWebConsoleMenu.Enabled = true;
+            copyOCLoginCommand.Enabled = true;
+            copyOCLoginForDeveloperMenu.Enabled = true;
+            copyOCLoginForKubeadminMenu.Enabled = true;
+            aboutMenu.Enabled = true;
+            detailedStatusMenu.Enabled = true;
         }
 
         public void ShowNotification(string msg, ToolTipIcon toolTipIcon)
