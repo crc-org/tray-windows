@@ -7,6 +7,7 @@ namespace CRCTray.Communication
         public string Name { get; set; }
         public string CrcStatus { get; set; }
         public string OpenshiftStatus { get; set; }
+        public string OpenshiftVersion { get; set; }
         public long DiskUse { get; set; }
         public long DiskSize { get; set; }
         public string Error { get; set; }
