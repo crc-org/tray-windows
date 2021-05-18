@@ -111,6 +111,12 @@ namespace CRCTray.Communication
         [JsonPropertyName("network-mode")]
         public string NetworkMode { get; set; }
 
+        [JsonPropertyName("consent-telemetry")]
+        public string ConsentTelemetry { get; set; }
+
+        [JsonPropertyName("autostart-tray")]
+        public bool AutostartTray { get; set; }
+
         [JsonPropertyName("skip-check-admin-helper-cached")]
         public bool SkipCheckAdminHelperCached { get; set; }
 
