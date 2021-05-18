@@ -34,7 +34,7 @@ namespace CRCTray
                 if (status.CrcStatus != "" )
                     CrcStatus.Text = status.CrcStatus;
                 if (status.OpenshiftStatus != "")
-                    OpenShiftStatus.Text = status.OpenshiftStatus;
+                    OpenShiftStatus.Text = string.Format("{0} (v{1})", status.OpenshiftStatus, status.OpenshiftVersion);
                 DiskUsage.Text = string.Format("{0} of {1} (Inside the CRC VM)", FileSize.HumanReadable(status.DiskUse), FileSize.HumanReadable(status.DiskSize));
                 CacheUsage.Text = FileSize.HumanReadable(GetFolderSize.SizeInBytes(cacheFolderPath));
                 CacheFolder.Text = cacheFolderPath;
