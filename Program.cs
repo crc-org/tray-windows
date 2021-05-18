@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using CRCTray.Communication;
 using CRCTray.Helpers;
 
@@ -223,15 +224,34 @@ namespace CRCTray
 
         async private void StartMenu_Click(object sender, EventArgs e)
         {
+            // Check using get-config if pullSecret is configured
+            var configs = TaskHandlers.ConfigView();
+            if (configs.Configs.PullSecretFile == "")
+            {
+                var pullSecretForm = new PullSecretPickerForm();
+                var pullSecretPath = pullSecretForm.ShowFilePicker();
+                if (pullSecretPath == "")
+                {
+                    DisplayMessageBox.Warn("No Pull Secret was provided, Cannot start cluster without pull secret.");
+                    return;
+                }
+                Dictionary<String, dynamic> pullSecretConfig = new Dictionary<String, dynamic>
+                {
+                    ["pull-secret-file"] = pullSecretPath
+                };
+                TaskHandlers.SetConfig(pullSecretConfig);
+            }
+
             ShowNotification(@"Starting Cluster", ToolTipIcon.Info);
             var startResult = await Task.Run(() => TaskHandlers.Start());
-            if (startResult != null)
+            if (startResult == null)
             {
-                if (startResult.KubeletStarted)
-                    DisplayMessageBox.Info(@"CodeReady Containers Cluster has started", @"Cluster Started");
-                else
-                    DisplayMessageBox.Warn(@"Cluster did not start. Please check detailed status");
+                return;
             }
+            if (startResult.KubeletStarted)
+                DisplayMessageBox.Info(@"CodeReady Containers Cluster has started", @"Cluster Started");
+            else
+                DisplayMessageBox.Warn(@"Cluster did not start. Please check detailed status");
         }
 
         private void ExitMenu_Click(object sender, EventArgs e)
