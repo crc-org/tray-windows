@@ -265,7 +265,7 @@ namespace CRCTray
             if (!string.IsNullOrEmpty(statusResult.CrcStatus))
                 status.Text = statusResult.CrcStatus;
             else
-                status.Text = @"Unknown";
+                status.Text = @"Stopped";
 
             EnableMenuItems();
         }
