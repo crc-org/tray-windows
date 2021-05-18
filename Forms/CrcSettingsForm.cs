@@ -60,13 +60,12 @@ namespace CRCTray
         private void loadConfigurationValues(ConfigResult cr)
         {
             // Properties tab configs
-            this.bundleTxtBox.Text = cr.Configs.bundle;
             this.memoryNumBox.Value = cr.Configs.memory;
             this.cpusNumBox.Value = cr.Configs.cpus;
             this.diskSizeNumBox.Value = cr.Configs.DiskSize;
             this.pullSecretTxtBox.Text = cr.Configs.PullSecretFile;
-            //this.networkModeTxtBox.Text = cr.Configs.NetworkMode;
-            this.enableExperimentalFeatures.Checked = cr.Configs.EnableExperimentalFeatures;
+            this.consentTelemetryCheckBox.Checked = cr.Configs.ConsentTelemetry == "no" ? false : true;
+            this.autostartTrayCheckBox.Checked = cr.Configs.AutostartTray;
             // proxy configs
             if (cr.Configs.HttpProxy != String.Empty || cr.Configs.HttpsProxy != String.Empty)
             {
@@ -121,11 +120,6 @@ namespace CRCTray
             fileRequester.FileName = "";
             fileRequester.ShowDialog();
             return fileRequester.FileName;
-        }
-
-        private void BundleSelectButton_Click(object sender, EventArgs e)
-        {
-            this.bundleTxtBox.Text = showAndGetNameFromFileRequester("CRC Bundle|*.crcbundle");
         }
 
         private void PullSecretSelectButton_Click(object sender, EventArgs e)
@@ -210,11 +204,6 @@ namespace CRCTray
                 this.changedConfigs.Add(key, cb.Checked);
         }
 
-        private void bundleTxtBox_TextChanged(object sender, EventArgs e)
-        {
-            handleConfigChangesForTextBoxes("bundle", currentConfig.Configs.bundle, this.bundleTxtBox);
-        }
-
         private void cpusNumBox_ValueChanged(object sender, EventArgs e)
         {
             handleConfigChangesForNumBoxes("cpus", currentConfig.Configs.cpus, this.cpusNumBox);
@@ -233,11 +222,6 @@ namespace CRCTray
         private void diskSizeNumBox_ValueChanged(object sender, EventArgs e)
         {
             handleConfigChangesForNumBoxes("disk-size", currentConfig.Configs.DiskSize, this.diskSizeNumBox);
-        }
-
-        private void enableExperimentalFeatures_CheckedChanged(object sender, EventArgs e)
-        {
-            handleConfigChangesForCheckBoxes("enable-experimental-features", this.enableExperimentalFeatures);
         }
 
         private void httpProxyTxtBox_TextChanged(object sender, EventArgs e)
@@ -283,6 +267,24 @@ namespace CRCTray
         private void SkipCheckUserInHypervAdminsGroup_CheckedChanged(object sender, EventArgs e)
         {
             handleConfigChangesForCheckBoxes("skip-check-user-in-hyperv-group", this.SkipCheckUserInHypervAdminsGroup);
+        }
+
+        private void consentTelemetryCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            var key = "consent-telemetry";
+            var cb = (CheckBox)sender;
+            var value = cb.Checked ? "yes" : "no";
+
+            this.configChanged = true;
+            if (this.changedConfigs.ContainsKey(key))
+                this.changedConfigs[key] = value;
+            else
+                this.changedConfigs.Add(key, value);
+        }
+
+        private void autostartTrayCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            handleConfigChangesForCheckBoxes("autostart-tray", this.autostartTrayCheckBox);
         }
     }
 }
