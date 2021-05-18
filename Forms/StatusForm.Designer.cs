@@ -108,7 +108,7 @@
             this.CrcStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.CrcStatus.Size = new System.Drawing.Size(278, 23);
             this.CrcStatus.TabIndex = 1;
-            this.CrcStatus.Text = "||||||||";
+            this.CrcStatus.Text = "Unknown";
             this.CrcStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // OpenShiftStatus
@@ -124,7 +124,7 @@
             this.OpenShiftStatus.Name = "OpenShiftStatus";
             this.OpenShiftStatus.Size = new System.Drawing.Size(278, 23);
             this.OpenShiftStatus.TabIndex = 2;
-            this.OpenShiftStatus.Text = "||||||||";
+            this.OpenShiftStatus.Text = "Unknown";
             this.OpenShiftStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // DiskUsage
@@ -140,7 +140,7 @@
             this.DiskUsage.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.DiskUsage.Size = new System.Drawing.Size(278, 23);
             this.DiskUsage.TabIndex = 3;
-            this.DiskUsage.Text = "||||||||";
+            this.DiskUsage.Text = "Unknown";
             this.DiskUsage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CacheUsage
@@ -156,7 +156,7 @@
             this.CacheUsage.Name = "CacheUsage";
             this.CacheUsage.Size = new System.Drawing.Size(278, 23);
             this.CacheUsage.TabIndex = 4;
-            this.CacheUsage.Text = "||||||||";
+            this.CacheUsage.Text = "Unknown";
             this.CacheUsage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel1
@@ -213,12 +213,12 @@
             this.CacheFolder.Name = "CacheFolder";
             this.CacheFolder.Size = new System.Drawing.Size(278, 27);
             this.CacheFolder.TabIndex = 5;
-            this.CacheFolder.Text = "||||||||";
+            this.CacheFolder.Text = "Unknown";
             this.CacheFolder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // StatusForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 119);
             this.Controls.Add(this.tableLayoutPanel1);

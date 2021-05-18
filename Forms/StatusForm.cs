@@ -19,13 +19,10 @@ namespace CRCTray
             Bitmap bm = new Bitmap(Resource.ocp_logo);
             Icon = Icon.FromHandle(bm.GetHicon());
             Text = @"Detailed Status";
-            
+            Console.WriteLine("For loaded");
             
             this.FormClosing += StatusForm_Closing;
-            //Activated += GetStatus;
-
-            //VisibleChanged += GetStatus;
-            Shown += GetStatus;
+            Activated += GetStatus;
         }
 
         async private void GetStatus(object sender, EventArgs e)
@@ -34,9 +31,10 @@ namespace CRCTray
             if (status != null)
             {
                 var cacheFolderPath = string.Format("{0}\\.crc\\cache", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
-
-                CrcStatus.Text = status.CrcStatus;
-                OpenShiftStatus.Text = status.OpenshiftStatus;
+                if (status.CrcStatus != "" )
+                    CrcStatus.Text = status.CrcStatus;
+                if (status.OpenshiftStatus != "")
+                    OpenShiftStatus.Text = status.OpenshiftStatus;
                 DiskUsage.Text = string.Format("{0} of {1} (Inside the CRC VM)", FileSize.HumanReadable(status.DiskUse), FileSize.HumanReadable(status.DiskSize));
                 CacheUsage.Text = FileSize.HumanReadable(GetFolderSize.SizeInBytes(cacheFolderPath));
                 CacheFolder.Text = cacheFolderPath;
