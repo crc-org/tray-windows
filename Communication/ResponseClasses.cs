@@ -18,7 +18,7 @@ namespace CRCTray.Communication
     {
         public string Name { get; set; }
         public string Status { get; set; }
-        public ClusterConfig ClusterConfig;
+        public ClusterConfig ClusterConfig { get; set; }
         public bool KubeletStarted { get; set; }
     }
 
@@ -29,15 +29,14 @@ namespace CRCTray.Communication
         public string KubeAdminPass { get; set; }
         public string ClusterAPI { get; set; }
         public string WebConsoleURL { get; set; }
-        public ProxyConfig ProxyConfig;
+        public ProxyConfig ProxyConfig { get; set; } 
     }
 
     public struct ProxyConfig
     {
-        public string HTTPProxy;
-        public string HTTPSProxy;
-        public string[] noProxy;
-        public string ProxyCACert;
+        public string HTTPProxy { get; set; }
+        public string HTTPSProxy { get; set; }
+        public string ProxyCACert { get; set; }
     }
 
     public class StopResult
@@ -57,8 +56,7 @@ namespace CRCTray.Communication
 
     public class ConsoleResult
     {
-        public ClusterConfig ClusterConfig;
-        public int State { get; set; }
+        public ClusterConfig ClusterConfig { get; set; }
         public bool Success { get; set; }
         public string Error { get; set; }
     }
