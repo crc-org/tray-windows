@@ -331,6 +331,7 @@ namespace CRCTray
             catch (Exception e)
             {
                 DisplayMessageBox.Error(string.Format("Cannot start the daemon, Check the logs and restart the application, Error: {0}", e.Message));
+                QuitApp();
             }
             process.WaitForExit();
             if (process.ExitCode == 2)
@@ -341,6 +342,14 @@ namespace CRCTray
             {
                 DisplayMessageBox.Error("Daemon crashed, check the logs and restart the application");
             }
+            QuitApp();
+        }
+
+        private void QuitApp()
+        {
+            notifyIcon.Visible = false;
+            notifyIcon.Dispose();
+            Environment.Exit(-1);
         }
     }
 }
