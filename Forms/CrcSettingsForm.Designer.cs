@@ -45,6 +45,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.useProxyTick = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.consentTelemetryCheckBox = new System.Windows.Forms.CheckBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.diskSizeNumBox = new System.Windows.Forms.NumericUpDown();
@@ -60,6 +61,7 @@
             this.refreshButton2 = new System.Windows.Forms.Button();
             this.applyButton2 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.autostartTrayCheckBox = new System.Windows.Forms.CheckBox();
             this.nameServerTxtBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.disableUpdateCheckBox = new System.Windows.Forms.CheckBox();
@@ -70,8 +72,6 @@
             this.SkipCheckUserInHypervAdminsGroup = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.fileRequester = new System.Windows.Forms.OpenFileDialog();
-            this.autostartTrayCheckBox = new System.Windows.Forms.CheckBox();
-            this.consentTelemetryCheckBox = new System.Windows.Forms.CheckBox();
             this.tabs.SuspendLayout();
             this.properties_tab.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -285,6 +285,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General";
             // 
+            // consentTelemetryCheckBox
+            // 
+            this.consentTelemetryCheckBox.AutoSize = true;
+            this.consentTelemetryCheckBox.Location = new System.Drawing.Point(8, 150);
+            this.consentTelemetryCheckBox.Name = "consentTelemetryCheckBox";
+            this.consentTelemetryCheckBox.Size = new System.Drawing.Size(207, 21);
+            this.consentTelemetryCheckBox.TabIndex = 17;
+            this.consentTelemetryCheckBox.Text = "Report telemetry to Red Hat";
+            this.consentTelemetryCheckBox.UseVisualStyleBackColor = true;
+            this.consentTelemetryCheckBox.CheckedChanged += new System.EventHandler(this.consentTelemetryCheckBox_CheckedChanged);
+            // 
             // label23
             // 
             this.label23.AutoSize = true;
@@ -323,11 +334,6 @@
             0,
             0,
             0});
-            this.memoryNumBox.Minimum = new decimal(new int[] {
-            9126,
-            0,
-            0,
-            0});
             this.memoryNumBox.Name = "memoryNumBox";
             this.memoryNumBox.Size = new System.Drawing.Size(87, 22);
             this.memoryNumBox.TabIndex = 4;
@@ -343,11 +349,6 @@
             this.cpusNumBox.AccessibleName = "vCPUs";
             this.cpusNumBox.Location = new System.Drawing.Point(105, 21);
             this.cpusNumBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cpusNumBox.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
             this.cpusNumBox.Name = "cpusNumBox";
             this.cpusNumBox.Size = new System.Drawing.Size(87, 22);
             this.cpusNumBox.TabIndex = 3;
@@ -470,6 +471,17 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Misc";
             // 
+            // autostartTrayCheckBox
+            // 
+            this.autostartTrayCheckBox.AutoSize = true;
+            this.autostartTrayCheckBox.Location = new System.Drawing.Point(4, 66);
+            this.autostartTrayCheckBox.Name = "autostartTrayCheckBox";
+            this.autostartTrayCheckBox.Size = new System.Drawing.Size(199, 21);
+            this.autostartTrayCheckBox.TabIndex = 21;
+            this.autostartTrayCheckBox.Text = "Automatically start on login";
+            this.autostartTrayCheckBox.UseVisualStyleBackColor = true;
+            this.autostartTrayCheckBox.CheckedChanged += new System.EventHandler(this.autostartTrayCheckBox_CheckedChanged);
+            // 
             // nameServerTxtBox
             // 
             this.nameServerTxtBox.AccessibleName = "Nameserver";
@@ -542,7 +554,7 @@
             this.SkipCheckWindowsVersion.AccessibleName = "Skip Windows version check";
             this.SkipCheckWindowsVersion.AutoSize = true;
             this.SkipCheckWindowsVersion.Location = new System.Drawing.Point(4, 68);
-            this.SkipCheckWindowsVersion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SkipCheckWindowsVersion.Margin = new System.Windows.Forms.Padding(4);
             this.SkipCheckWindowsVersion.Name = "SkipCheckWindowsVersion";
             this.SkipCheckWindowsVersion.Size = new System.Drawing.Size(204, 21);
             this.SkipCheckWindowsVersion.TabIndex = 18;
@@ -556,7 +568,7 @@
             this.SkipCheckRunningAsAdmin.AccessibleName = "Skip administrator check";
             this.SkipCheckRunningAsAdmin.AutoSize = true;
             this.SkipCheckRunningAsAdmin.Location = new System.Drawing.Point(4, 36);
-            this.SkipCheckRunningAsAdmin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SkipCheckRunningAsAdmin.Margin = new System.Windows.Forms.Padding(4);
             this.SkipCheckRunningAsAdmin.Name = "SkipCheckRunningAsAdmin";
             this.SkipCheckRunningAsAdmin.Size = new System.Drawing.Size(264, 21);
             this.SkipCheckRunningAsAdmin.TabIndex = 17;
@@ -570,7 +582,7 @@
             this.SkipCheckUserInHypervAdminsGroup.AccessibleName = "Skip Hyper-V admin check";
             this.SkipCheckUserInHypervAdminsGroup.AutoSize = true;
             this.SkipCheckUserInHypervAdminsGroup.Location = new System.Drawing.Point(4, 4);
-            this.SkipCheckUserInHypervAdminsGroup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SkipCheckUserInHypervAdminsGroup.Margin = new System.Windows.Forms.Padding(4);
             this.SkipCheckUserInHypervAdminsGroup.Name = "SkipCheckUserInHypervAdminsGroup";
             this.SkipCheckUserInHypervAdminsGroup.Size = new System.Drawing.Size(282, 21);
             this.SkipCheckUserInHypervAdminsGroup.TabIndex = 16;
@@ -588,28 +600,6 @@
             // 
             this.fileRequester.FileName = "openFileDialog1";
             this.fileRequester.InitialDirectory = "$env:USERPROFILE";
-            // 
-            // autostartTrayCheckBox
-            // 
-            this.autostartTrayCheckBox.AutoSize = true;
-            this.autostartTrayCheckBox.Location = new System.Drawing.Point(4, 66);
-            this.autostartTrayCheckBox.Name = "autostartTrayCheckBox";
-            this.autostartTrayCheckBox.Size = new System.Drawing.Size(199, 21);
-            this.autostartTrayCheckBox.TabIndex = 21;
-            this.autostartTrayCheckBox.Text = "Automatically start on login";
-            this.autostartTrayCheckBox.UseVisualStyleBackColor = true;
-            this.autostartTrayCheckBox.CheckedChanged += new System.EventHandler(this.autostartTrayCheckBox_CheckedChanged);
-            // 
-            // consentTelemetryCheckBox
-            // 
-            this.consentTelemetryCheckBox.AutoSize = true;
-            this.consentTelemetryCheckBox.Location = new System.Drawing.Point(8, 150);
-            this.consentTelemetryCheckBox.Name = "consentTelemetryCheckBox";
-            this.consentTelemetryCheckBox.Size = new System.Drawing.Size(207, 21);
-            this.consentTelemetryCheckBox.TabIndex = 17;
-            this.consentTelemetryCheckBox.Text = "Report telemetry to Red Hat";
-            this.consentTelemetryCheckBox.UseVisualStyleBackColor = true;
-            this.consentTelemetryCheckBox.CheckedChanged += new System.EventHandler(this.consentTelemetryCheckBox_CheckedChanged);
             // 
             // CrcSettingsForm
             // 
