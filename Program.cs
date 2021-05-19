@@ -316,7 +316,7 @@ namespace CRCTray
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardInput = true;
             process.StartInfo.FileName = string.Format("{0}\\{1}\\crc.exe",
-                Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"CodeReady Containers");
+                Environment.GetEnvironmentVariable("ProgramW6432"), @"CodeReady Containers");
 #if DEBUG
             process.StartInfo.FileName = string.Format("{0}\\bin\\crc.exe", Environment.GetEnvironmentVariable("GOPATH"));
 #endif
