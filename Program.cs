@@ -257,7 +257,7 @@ namespace CRCTray
         private void ExitMenu_Click(object sender, EventArgs e)
         {
             notifyIcon.Visible = false;
-            Application.Exit();
+            QuitApp();
         }
 
         private void ShowAboutForm(object sender, EventArgs e)
