@@ -110,7 +110,6 @@ namespace CRCTray.Communication
 				byte[] msg = Encoding.ASCII.GetBytes(cmd);
 				daemonSocket.Send(msg);
 				daemonSocket.Receive(resp);
-				daemonSocket.Close();
 
 				var result = Encoding.ASCII.GetString(resp);
 				return result.Replace("\0", string.Empty);
@@ -119,7 +118,6 @@ namespace CRCTray.Communication
 			catch (SocketException e)
 			{
 				Console.WriteLine("Exception occured");
-				daemonSocket.Close();
 				throw e;
 			}
 		}
