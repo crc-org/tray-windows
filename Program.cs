@@ -101,7 +101,7 @@ namespace CRCTray
 
             cm.Items.Add(new ToolStripSeparator());
             // Detailed status menu
-            detailedStatusMenu = cm.Items.Add(@"Detailed Status");
+            detailedStatusMenu = cm.Items.Add(@"Status and Logs");
             detailedStatusMenu.Click += ShowDetailedStatusForm;
             cm.Items.Add(new ToolStripSeparator());
 

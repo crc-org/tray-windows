@@ -13,6 +13,8 @@ namespace CRCTray.Communication
 
         internal const string ConsoleUrl = "webconsoleurl";
         internal const string Config = "getconfig";
+
+        internal const string Logs = "logs";
     }
 
 }

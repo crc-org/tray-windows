@@ -18,11 +18,24 @@ namespace CRCTray
         {
             Bitmap bm = new Bitmap(Resource.ocp_logo);
             Icon = Icon.FromHandle(bm.GetHicon());
-            Text = @"Detailed Status";
+            Text = @"Status and Logs";
             Console.WriteLine("For loaded");
             
             this.FormClosing += StatusForm_Closing;
             Activated += GetStatus;
+            // Update logs
+            UpdateLogs();
+
+            var timer = new Timer();
+            timer.Interval = 3000; // 3 seconds
+            timer.Enabled = true;
+            timer.Tick += Timer_Tick;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            Console.WriteLine("Updating logs");
+            UpdateLogs();
         }
 
         async private void GetStatus(object sender, EventArgs e)
@@ -45,6 +58,17 @@ namespace CRCTray
         {
             this.Hide();
             e.Cancel = true;
+        }
+
+        private void UpdateLogs()
+        {
+            var logs = TaskHandlers.GetDaemonLogs();
+            var messages = string.Join("\r\n", logs.Messages);
+            if (logsTextBox.Text == messages)
+                return;
+            logsTextBox.Text = messages;
+            logsTextBox.SelectionStart = logsTextBox.Text.Length;
+            logsTextBox.ScrollToCaret();
         }
     }
 
