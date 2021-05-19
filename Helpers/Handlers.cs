@@ -91,5 +91,9 @@ namespace CRCTray.Helpers
             return WebConsole();
         }
 
+        public static Logs GetDaemonLogs()
+        {
+            return getResultsOrShowMessage(DaemonCommander.GetLogs);
+        }
     }
 }

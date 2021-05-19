@@ -166,4 +166,10 @@ namespace CRCTray.Communication
         public string Error { get; set; }
         public string[] Properties { get; set; }
     }
+
+    struct Logs
+    {
+        public bool Success { get; set; }
+        public string[] Messages { get; set; }
+    }
 }

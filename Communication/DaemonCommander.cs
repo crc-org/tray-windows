@@ -70,6 +70,11 @@ namespace CRCTray.Communication
 			return JsonSerializer.Deserialize<SetUnsetConfig>(SendCommand(cmd));
 		}
 
+		public static Logs GetLogs()
+        {
+			return getResultsForBasicCommand<Logs>(BasicCommands.Logs);
+        }
+
 		private static string SendBasicCommand(string command)
 		{
             var cmd = JsonSerializer.Serialize(new BasicCommand(command));
@@ -113,6 +118,8 @@ namespace CRCTray.Communication
 
 			catch (SocketException e)
 			{
+				Console.WriteLine("Exception occured");
+				daemonSocket.Close();
 				throw e;
 			}
 		}
