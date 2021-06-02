@@ -4,98 +4,140 @@ using CRCTray.Communication;
 
 namespace CRCTray.Helpers
 {
+    // Events for status command
+    public delegate void StatusChangedHandler(StatusResult result);
+    public delegate void StatusReceivedHandler(StatusResult result);
+
+    // Events for commands
+    public delegate void LogsReceivedHandler(LogsResult result);
+    public delegate void StartReceivedHandler(StartResult result);
+    public delegate void StopReceivedHandler(StopResult result);
+    public delegate void DeleteReceivedHandler(DeleteResult result);
+
     static class TaskHandlers
     {
-        private static T getResultsOrShowMessage<T>(Func<T> function)
+        private static string _previousStatus;
+        private static readonly object _statusChangeLock = new object();
+
+        public static event StatusChangedHandler StatusChanged;
+        public static event StatusReceivedHandler StatusReceived;
+        public static event LogsReceivedHandler LogsReceived;
+        public static event StartReceivedHandler StartReceived;
+        public static event StopReceivedHandler StopReceived;
+        public static event DeleteReceivedHandler DeleteReceived;
+
+        private static T getResultsOrDefault<T>(Func<T> function)
         {
             try
             {
                 return function();
             }
-            catch (Exception ex)
+            catch(Exception e)
             {
-                DisplayMessageBox.Error(ex.Message);
                 return default;
             }
         }
-        private static T getResultsOrShowMessage<T, TArgs>(Func<TArgs, T> function, TArgs args)
+        private static T getResultsOrDefault<T, TArgs>(Func<TArgs, T> function, TArgs args)
         {
             try
             {
                 return function(args);
             }
-            catch (Exception ex)
+            catch(Exception e)
             {
-                DisplayMessageBox.Error(ex.Message);
                 return default;
             }
         }
 
         public static VersionResult Version()
         {
-            return getResultsOrShowMessage(DaemonCommander.Version);
+            return getResultsOrDefault(DaemonCommander.Version);
         }
 
 
         public static StartResult Start()
         {
-            return getResultsOrShowMessage(DaemonCommander.Start);
+            StartResult result = getResultsOrDefault(DaemonCommander.Start);
+
+            if (StartReceived != null && result != null)
+                StartReceived(result);
+
+            return result;
         }
 
         public static StopResult Stop()
         {
-            return getResultsOrShowMessage(DaemonCommander.Stop);
+            StopResult result = getResultsOrDefault(DaemonCommander.Stop);
+
+            if (StopReceived != null && result != null)
+                StopReceived(result);
+
+            return result;
         }
 
         public static DeleteResult Delete()
         {
-            return getResultsOrShowMessage(DaemonCommander.Delete);
+            DeleteResult result = getResultsOrDefault(DaemonCommander.Delete);
+
+            if (DeleteReceived != null && result != null)
+                DeleteReceived(result);
+
+            return result;
         }
 
         public static StatusResult Status()
         {
-            try
+            StatusResult result = getResultsOrDefault(DaemonCommander.Status);
+
+            if (StatusReceived != null)
+                StatusReceived(result);
+
+            // TODO: workaround for daemon returning 500/Error state when no VM exists
+            if (result == null)
+                return null;
+
+            lock (_statusChangeLock)
             {
-                return DaemonCommander.Status();
+                if (StatusChanged != null && _previousStatus != result.OpenshiftStatus)
+                    StatusChanged(result);
+
+                _previousStatus = result.OpenshiftStatus;
             }
-            catch (DaemonCommander.DaemonException ex)
-            {
-                StatusResult status = new StatusResult();
-                status.Success = false;
-                status.Error = ex.Message;
-                return status;
-            }
-            catch (Exception ex)
-            {
-                StatusResult status = new StatusResult();
-                status.Success = false;
-                status.Error = ex.ToString();
-                return status;
-            }
+            return result;
+        }
+
+        public static LogsResult GetDaemonLogs()
+        {
+            LogsResult result = getResultsOrDefault(DaemonCommander.GetLogs);
+
+            if (LogsReceived != null && result != null)
+                LogsReceived(result);
+
+            return result;
         }
 
         public static ConsoleResult WebConsole()
         {
-            return getResultsOrShowMessage(DaemonCommander.ConsoleUrl);
+            return getResultsOrDefault(DaemonCommander.ConsoleUrl);
         }
 
         public static ConfigResult ConfigView()
         {
-            return getResultsOrShowMessage(DaemonCommander.ConfigView);
+            return getResultsOrDefault(DaemonCommander.ConfigView);
         }
 
         public static SetUnsetConfig SetConfig(Dictionary<string, dynamic> cfg)
         {
             // TODO: unnecessary wrapping
             var config = new ConfigSetCommand(cfg);
-            return getResultsOrShowMessage(DaemonCommander.SetConfig, config);
+            return getResultsOrDefault(DaemonCommander.SetConfig, config);
         }
 
         public static SetUnsetConfig UnsetConfig(List<string> cfg)
         {
             // TODO: unnecessary wrapping
             var config = new ConfigUnsetCommand(cfg);
-            return getResultsOrShowMessage(DaemonCommander.UnsetConfig, config);
+            return getResultsOrDefault(DaemonCommander.UnsetConfig, config);
         }
 
         public static ConsoleResult LoginForDeveloper()
@@ -106,21 +148,6 @@ namespace CRCTray.Helpers
         public static ConsoleResult LoginForKubeadmin()
         {
             return WebConsole();
-        }
-
-        public static Logs GetDaemonLogs()
-        {
-            try
-            {
-                return DaemonCommander.GetLogs();
-            }
-            catch (Exception ex)
-            {
-                Logs logs = new Logs();
-                logs.Success = true;
-                logs.Messages = new string[1] { ex.ToString() };
-                return logs;
-            }
         }
     }
 }

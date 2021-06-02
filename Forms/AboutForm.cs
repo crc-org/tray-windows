@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 using CRCTray.Communication;
 using CRCTray.Helpers;
+using System.Diagnostics;
 
 namespace CRCTray
 {
@@ -25,16 +27,16 @@ namespace CRCTray
             Shown += GetVersion;
         }
 
-        private void GetVersion(object sender, EventArgs e)
+        private async void GetVersion(object sender, EventArgs e)
         {
-            version = TaskHandlers.Version();
+            version = await Task.Run(TaskHandlers.Version);
             if (version.Success) {
                 CrcVersionLabel.Text = String.Format("{0}+{1}", version.CrcVersion, version.CommitSha);
                 OcpVersion.Text = version.OpenshiftVersion;
             }
             else
             {
-                DisplayMessageBox.Warn("Unable to fetch version information from daemon");
+                TrayIcon.NotifyWarn("Unable to fetch version information from daemon");
             }
         }
         private void AboutForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -49,12 +51,12 @@ namespace CRCTray
             var v = crcVersionWithGitSha[0].Substring(0, crcVersionWithGitSha[0].Length - 2);
             var docsUrl = string.Format("https://access.redhat.com/documentation/en-us/red_hat_codeready_containers/{0}/", v);
 
-            System.Diagnostics.Process.Start(docsUrl);
+            Process.Start(docsUrl);
         }
 
         private void linkLabel2_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/code-ready/tray-windows");
+            Process.Start("https://github.com/code-ready/tray-windows");
         }
     }
 }
