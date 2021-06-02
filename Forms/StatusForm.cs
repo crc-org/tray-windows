@@ -3,101 +3,174 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading.Tasks;
-using CRCTray.Communication;
 using CRCTray.Helpers;
+using CRCTray.Communication;
 
 namespace CRCTray
 {
     public partial class StatusForm : Form
     {
+        delegate void UpdateReceivedCallback(StatusResult status);
+        delegate void StopReceivedCallback(StopResult status);
+        delegate void DeleteReceivedCallback(DeleteResult status);
+        Timer UpdateStatusTimer;
+
+        private readonly string InitialState = @"Stopped";
+
         public StatusForm()
         {
             InitializeComponent();
+
+            TaskHandlers.StatusReceived += UpdateReceived;
+            TaskHandlers.StopReceived += StopReceived;
+            TaskHandlers.DeleteReceived += DeleteReceived;
         }
 
         private void StatusForm_Load(object sender, EventArgs e)
         {
+            // deal with async behaviour
+            ResetStatusFields();
+
             Bitmap bm = new Bitmap(Resource.ocp_logo);
             Icon = Icon.FromHandle(bm.GetHicon());
             Text = @"Status and Logs";
-            Console.WriteLine("For loaded");
-            
-            this.FormClosing += StatusForm_Closing;
-            // Update logs
-            GetStatus();
-            UpdateLogs();
 
-            var timer = new Timer();
-            timer.Interval = 3000; // 3 seconds
-            timer.Enabled = true;
-            timer.Tick += Timer_Tick;
+            this.FormClosing += StatusForm_Closing;
+            this.Activated += StatusForm_Activated;
+
+            UpdateStatusTimer = new Timer();
+            UpdateStatusTimer.Interval = 3000; // 3 seconds
+            UpdateStatusTimer.Enabled = true;
+            UpdateStatusTimer.Tick += Timer_Tick;
+
+            // Initial states
+            GetStatus();
+            GetLogs();
+        }
+
+        private void ResetStatusFields()
+        {
+            const string _3dot = "...";
+            CrcStatus.Text = InitialState;
+            OpenShiftStatus.Text = _3dot;
+            DiskUsage.Text = _3dot;
+            CacheUsage.Text = _3dot;
+            CacheFolder.Text = _3dot;
+        }
+
+        private void StatusForm_Activated(object sender, EventArgs e)
+        {
+            UpdateStatusTimer.Enabled = true;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            Console.WriteLine("Updating logs");
-            UpdateLogs();
+            // Run as task to make sure it doesn't block this window
             GetStatus();
+            GetLogs();
         }
 
-        async private void GetStatus()
+        private void StatusForm_Closing(object sender, FormClosingEventArgs e)
         {
-            var status = await Task.Run(() => TaskHandlers.Status());
-            if (status != null)
+            this.Hide();
+            UpdateStatusTimer.Enabled = false;
+            e.Cancel = true;
+        }
+
+
+        private void DeleteReceived(DeleteResult result)
+        {
+            if (CrcStatus.InvokeRequired)
             {
-                var cacheFolderPath = string.Format("{0}\\.crc\\cache", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
-                Console.WriteLine(status);
-                Console.WriteLine(status.OpenshiftStatus);
-                if (status.Error != "")
-                {
-                    CrcStatus.Text = ErrorText(status);
-                    OpenShiftStatus.Text = "Unknown";
-                }
-                else if (status.CrcStatus != "")
-                {
-                    CrcStatus.Text = status.CrcStatus;
-                    OpenShiftStatus.Text = StatusText(status);
-                }
-                DiskUsage.Text = string.Format("{0} of {1} (Inside the CRC VM)", FileSize.HumanReadable(status.DiskUse), FileSize.HumanReadable(status.DiskSize));
-                CacheUsage.Text = FileSize.HumanReadable(GetFolderSize.SizeInBytes(cacheFolderPath));
-                CacheFolder.Text = cacheFolderPath;
+                DeleteReceivedCallback c = DeleteReceived;
+                Invoke(c, result);
+            }
+            else
+            {
+                ResetStatusFields();
             }
         }
 
+        private void StopReceived(StopResult result)
+        {
+            if (CrcStatus.InvokeRequired)
+            {
+                StopReceivedCallback c = StopReceived;
+                Invoke(c, result);
+            }
+            else
+            {
+                ResetStatusFields();
+            }
+        }
+
+        private void UpdateReceived(StatusResult status)
+        {
+            if (status != null)
+            {
+                if (CrcStatus.InvokeRequired)
+                {
+                    UpdateReceivedCallback c = UpdateReceived;
+                    Invoke(c, status);
+                }
+                else
+                {
+                    var cacheFolderPath = string.Format("{0}\\.crc\\cache",
+                        Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+
+                    if (status.CrcStatus != "")
+                        CrcStatus.Text = status.CrcStatus;
+
+                    if (status.OpenshiftStatus != "")
+                        OpenShiftStatus.Text = StatusText(status);
+
+                    DiskUsage.Text = string.Format("{0} of {1} (Inside the CRC VM)",
+                        FileSize.HumanReadable(status.DiskUse), FileSize.HumanReadable(status.DiskSize));
+                    CacheUsage.Text = FileSize.HumanReadable(GetFolderSize.SizeInBytes(cacheFolderPath));
+                    CacheFolder.Text = cacheFolderPath;
+                }
+            }
+            else
+            {
+                // TODO: workaround for no VM
+                if (CrcStatus.InvokeRequired)
+                {
+                    UpdateReceivedCallback c = UpdateReceived;
+                    Invoke(c, new StatusResult { CrcStatus = InitialState, OpenshiftStatus = "Stopped"});
+                }
+            }
+        }
+        
         private static string StatusText(StatusResult status)
         {
             var ret = "";
-            if (!string.IsNullOrEmpty(status.OpenshiftStatus)) 
+            if (!string.IsNullOrEmpty(status.OpenshiftStatus))
                 ret += status.OpenshiftStatus;
             if (!string.IsNullOrEmpty(status.OpenshiftVersion))
                 ret += string.Format(" (v{0})", status.OpenshiftVersion);
             return ret;
         }
 
-        private static string ErrorText(StatusResult status)
+
+        private void GetStatus()
         {
-            if (status.Error.Length > 200)
+            Task.Run(TaskHandlers.Status);
+        }
+
+        private async void GetLogs()
+        {
+            var logs = await Task.Run(TaskHandlers.GetDaemonLogs);
+            if (logs != null)
             {
-                return status.Error.Substring(0, Math.Min(200, status.Error.Length)) + " ...";                
+                var messages = string.Join("\r\n", logs.Messages);
+
+                if (logsTextBox.Text == messages)
+                    return;
+
+                logsTextBox.Text = messages;
+                logsTextBox.SelectionStart = logsTextBox.Text.Length;
+                logsTextBox.ScrollToCaret();
             }
-            return status.Error;
-        }
-
-        private void StatusForm_Closing(object sender, FormClosingEventArgs e)
-        {
-            this.Hide();
-            e.Cancel = true;
-        }
-
-        private void UpdateLogs()
-        {
-            var logs = TaskHandlers.GetDaemonLogs();
-            var messages = string.Join("\r\n", logs.Messages);
-            if (logsTextBox.Text == messages)
-                return;
-            logsTextBox.Text = messages;
-            logsTextBox.SelectionStart = logsTextBox.Text.Length;
-            logsTextBox.ScrollToCaret();
         }
     }
 
@@ -136,7 +209,7 @@ namespace CRCTray
             }
             catch (Exception e)
             {
-                DisplayMessageBox.Error(string.Format("Unexpected Error, did you run 'crc setup'? Error: {0}", e.Message));
+                TrayIcon.NotifyError(string.Format("Unexpected Error, did you run 'crc setup'? Error: {0}", e.Message));
             }
             return size;
         }

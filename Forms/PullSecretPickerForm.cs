@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CRCTray.Helpers;
 
 namespace CRCTray
 {
@@ -57,7 +58,7 @@ namespace CRCTray
             }
             catch (Exception ex)
             {
-                Helpers.DisplayMessageBox.Warn(string.Format("Cannot open URL in default browser {0}", ex.ToString()));
+                TrayIcon.NotifyWarn(string.Format("Cannot open URL in default browser {0}", ex.ToString()));
             }
         }
     }

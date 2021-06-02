@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 using CRCTray.Communication;
 using CRCTray.Helpers;
 
@@ -22,11 +23,11 @@ namespace CRCTray
             getConfigurationAndResetChanged();
         }
 
-        private void getConfigurationAndResetChanged()
+        private async void getConfigurationAndResetChanged()
         {
             this.changedConfigs = new Dictionary<string, dynamic>();
             this.configsNeedingUnset = new List<string>();
-            currentConfig = TaskHandlers.ConfigView();
+            currentConfig = await Task.Run(TaskHandlers.ConfigView);
             loadConfigurationValues(currentConfig);
             configChanged = false;
         }
@@ -139,24 +140,24 @@ namespace CRCTray
         }
 
         // Apply button on properties tab
-        private void ApplyButton_Click(object sender, EventArgs e)
+        private async void ApplyButton_Click(object sender, EventArgs e)
         {
-            if (this.configChanged && changedConfigs.Count > 0)
+            if (this.configChanged && changedConfigs.Count > 0) 
             {
-                SetUnsetConfig r = TaskHandlers.SetConfig(changedConfigs);
+                SetUnsetConfig r = await Task.Run(() => TaskHandlers.SetConfig(changedConfigs));
                 if (r.Error == String.Empty)
-                    DisplayMessageBox.Info("Properties configured: " + String.Join(",", r.Properties), "CodeReady Containers - Settings Applied");
+                    TrayIcon.NotifyInfo("Settings Applied");
                 else
-                    DisplayMessageBox.Error(r.Error);
+                    TrayIcon.NotifyError(r.Error);
             }
 
             if (this.configsNeedingUnset.Count > 0)
-           {
-                SetUnsetConfig r = TaskHandlers.UnsetConfig(configsNeedingUnset);
+            {
+                SetUnsetConfig r = await Task.Run(() => TaskHandlers.UnsetConfig(configsNeedingUnset));
                 if (r.Error == String.Empty)
-                    DisplayMessageBox.Info("Properties unset: " + String.Join(",", r.Properties), "CodeReady Containers - Settings Applied");
+                    TrayIcon.NotifyInfo("Settings Applied");
                 else
-                    DisplayMessageBox.Error(r.Error);
+                    TrayIcon.NotifyError(r.Error);
             }
 
             // Load the configs again and reset the change trackers

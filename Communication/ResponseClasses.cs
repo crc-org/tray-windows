@@ -1,13 +1,8 @@
 ﻿using System.Text.Json.Serialization;
+using System.Windows.Forms.VisualStyles;
 
 namespace CRCTray.Communication
 {
-    public class Result
-    {
-        public string Error { get; set; }
-        public bool Success { get; set; }
-    }
-    
     public class StatusResult
     {
         public string Name { get; set; }
@@ -18,6 +13,12 @@ namespace CRCTray.Communication
         public long DiskSize { get; set; }
         public string Error { get; set; }
         public bool Success { get; set; }
+    }
+
+    public class LogsResult
+    {
+        public bool Success { get; set; }
+        public string[] Messages { get; set; }
     }
 
     public class StartResult
@@ -163,9 +164,4 @@ namespace CRCTray.Communication
         public string[] Properties { get; set; }
     }
 
-    struct Logs
-    {
-        public bool Success { get; set; }
-        public string[] Messages { get; set; }
-    }
 }
