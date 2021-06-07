@@ -72,6 +72,11 @@
             this.SkipCheckUserInHypervAdminsGroup = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.fileRequester = new System.Windows.Forms.OpenFileDialog();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tabs.SuspendLayout();
             this.properties_tab.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -83,6 +88,11 @@
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabs
@@ -99,8 +109,7 @@
             // 
             // properties_tab
             // 
-            this.properties_tab.Controls.Add(this.applyButton);
-            this.properties_tab.Controls.Add(this.refreshButton);
+            this.properties_tab.Controls.Add(this.tableLayoutPanel6);
             this.properties_tab.Controls.Add(this.groupBox2);
             this.properties_tab.Controls.Add(this.groupBox1);
             this.properties_tab.Location = new System.Drawing.Point(4, 25);
@@ -115,10 +124,10 @@
             // applyButton
             // 
             this.applyButton.AccessibleName = "Apply button";
-            this.applyButton.Location = new System.Drawing.Point(524, 398);
+            this.applyButton.Location = new System.Drawing.Point(94, 2);
             this.applyButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.applyButton.Name = "applyButton";
-            this.applyButton.Size = new System.Drawing.Size(83, 26);
+            this.applyButton.Size = new System.Drawing.Size(85, 28);
             this.applyButton.TabIndex = 15;
             this.applyButton.Text = "Apply";
             this.applyButton.UseVisualStyleBackColor = true;
@@ -127,10 +136,10 @@
             // refreshButton
             // 
             this.refreshButton.AccessibleName = "Refresh button";
-            this.refreshButton.Location = new System.Drawing.Point(408, 398);
+            this.refreshButton.Location = new System.Drawing.Point(3, 2);
             this.refreshButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(80, 26);
+            this.refreshButton.Size = new System.Drawing.Size(85, 28);
             this.refreshButton.TabIndex = 14;
             this.refreshButton.Text = "Refresh";
             this.refreshButton.UseVisualStyleBackColor = true;
@@ -138,21 +147,12 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.proxyCABrowseButton);
-            this.groupBox2.Controls.Add(this.proxyCAFileTxtBox);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.noProxyTxtBox);
-            this.groupBox2.Controls.Add(this.httpsProxyTxtBox);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.httpProxyTxtBox);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.useProxyTick);
+            this.groupBox2.Controls.Add(this.tableLayoutPanel5);
             this.groupBox2.Location = new System.Drawing.Point(4, 188);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(607, 193);
+            this.groupBox2.Size = new System.Drawing.Size(607, 180);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Proxy";
@@ -160,10 +160,10 @@
             // proxyCABrowseButton
             // 
             this.proxyCABrowseButton.AccessibleName = "Proxy CA filerequester";
-            this.proxyCABrowseButton.Location = new System.Drawing.Point(520, 142);
+            this.proxyCABrowseButton.Location = new System.Drawing.Point(513, 130);
             this.proxyCABrowseButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.proxyCABrowseButton.Name = "proxyCABrowseButton";
-            this.proxyCABrowseButton.Size = new System.Drawing.Size(83, 27);
+            this.proxyCABrowseButton.Size = new System.Drawing.Size(85, 28);
             this.proxyCABrowseButton.TabIndex = 13;
             this.proxyCABrowseButton.Text = "Select file";
             this.proxyCABrowseButton.UseVisualStyleBackColor = true;
@@ -172,80 +172,88 @@
             // proxyCAFileTxtBox
             // 
             this.proxyCAFileTxtBox.AccessibleName = "Proxy CA file";
+            this.proxyCAFileTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.proxyCAFileTxtBox.Enabled = false;
-            this.proxyCAFileTxtBox.Location = new System.Drawing.Point(140, 143);
+            this.proxyCAFileTxtBox.Location = new System.Drawing.Point(123, 130);
             this.proxyCAFileTxtBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.proxyCAFileTxtBox.Name = "proxyCAFileTxtBox";
-            this.proxyCAFileTxtBox.Size = new System.Drawing.Size(345, 22);
+            this.proxyCAFileTxtBox.Size = new System.Drawing.Size(384, 22);
             this.proxyCAFileTxtBox.TabIndex = 12;
             this.proxyCAFileTxtBox.TextChanged += new System.EventHandler(this.proxyCAFileTxtBox_TextChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(8, 145);
+            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label8.Location = new System.Drawing.Point(3, 128);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(87, 17);
+            this.label8.Size = new System.Drawing.Size(114, 33);
             this.label8.TabIndex = 7;
             this.label8.Text = "Proxy CA file";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 110);
+            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label7.Location = new System.Drawing.Point(3, 96);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(82, 17);
+            this.label7.Size = new System.Drawing.Size(114, 32);
             this.label7.TabIndex = 6;
             this.label7.Text = "No Proxy(s)";
             // 
             // noProxyTxtBox
             // 
             this.noProxyTxtBox.AccessibleName = "No proxy";
+            this.noProxyTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.noProxyTxtBox.Enabled = false;
-            this.noProxyTxtBox.Location = new System.Drawing.Point(140, 110);
+            this.noProxyTxtBox.Location = new System.Drawing.Point(123, 98);
             this.noProxyTxtBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.noProxyTxtBox.Name = "noProxyTxtBox";
-            this.noProxyTxtBox.Size = new System.Drawing.Size(345, 22);
+            this.noProxyTxtBox.Size = new System.Drawing.Size(384, 22);
             this.noProxyTxtBox.TabIndex = 11;
             this.noProxyTxtBox.TextChanged += new System.EventHandler(this.noProxyTxtBox_TextChanged);
             // 
             // httpsProxyTxtBox
             // 
             this.httpsProxyTxtBox.AccessibleName = "HTTPS proxy";
+            this.httpsProxyTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.httpsProxyTxtBox.Enabled = false;
-            this.httpsProxyTxtBox.Location = new System.Drawing.Point(140, 78);
+            this.httpsProxyTxtBox.Location = new System.Drawing.Point(123, 66);
             this.httpsProxyTxtBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.httpsProxyTxtBox.Name = "httpsProxyTxtBox";
-            this.httpsProxyTxtBox.Size = new System.Drawing.Size(345, 22);
+            this.httpsProxyTxtBox.Size = new System.Drawing.Size(384, 22);
             this.httpsProxyTxtBox.TabIndex = 10;
             this.httpsProxyTxtBox.TextChanged += new System.EventHandler(this.httpsProxyTxtBox_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 78);
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(3, 64);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(93, 17);
+            this.label6.Size = new System.Drawing.Size(114, 32);
             this.label6.TabIndex = 3;
             this.label6.Text = "HTTPS Proxy";
             // 
             // httpProxyTxtBox
             // 
             this.httpProxyTxtBox.AccessibleName = "HTTP proxy";
+            this.httpProxyTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.httpProxyTxtBox.Enabled = false;
-            this.httpProxyTxtBox.Location = new System.Drawing.Point(140, 46);
+            this.httpProxyTxtBox.Location = new System.Drawing.Point(123, 34);
             this.httpProxyTxtBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.httpProxyTxtBox.Name = "httpProxyTxtBox";
-            this.httpProxyTxtBox.Size = new System.Drawing.Size(345, 22);
+            this.httpProxyTxtBox.Size = new System.Drawing.Size(384, 22);
             this.httpProxyTxtBox.TabIndex = 9;
             this.httpProxyTxtBox.TextChanged += new System.EventHandler(this.httpProxyTxtBox_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 48);
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Location = new System.Drawing.Point(3, 32);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(84, 17);
+            this.label5.Size = new System.Drawing.Size(114, 32);
             this.label5.TabIndex = 1;
             this.label5.Text = "HTTP Proxy";
             // 
@@ -253,10 +261,11 @@
             // 
             this.useProxyTick.AccessibleName = "Use proxy";
             this.useProxyTick.AutoSize = true;
-            this.useProxyTick.Location = new System.Drawing.Point(8, 18);
+            this.useProxyTick.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.useProxyTick.Location = new System.Drawing.Point(123, 2);
             this.useProxyTick.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.useProxyTick.Name = "useProxyTick";
-            this.useProxyTick.Size = new System.Drawing.Size(94, 21);
+            this.useProxyTick.Size = new System.Drawing.Size(384, 28);
             this.useProxyTick.TabIndex = 8;
             this.useProxyTick.Text = "Use Proxy";
             this.useProxyTick.UseVisualStyleBackColor = true;
@@ -264,18 +273,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.consentTelemetryCheckBox);
-            this.groupBox1.Controls.Add(this.label23);
-            this.groupBox1.Controls.Add(this.label22);
-            this.groupBox1.Controls.Add(this.diskSizeNumBox);
-            this.groupBox1.Controls.Add(this.memoryNumBox);
-            this.groupBox1.Controls.Add(this.cpusNumBox);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.PullSecretSelectButton);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.pullSecretTxtBox);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
             this.groupBox1.Location = new System.Drawing.Point(4, 4);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
@@ -288,9 +286,10 @@
             // consentTelemetryCheckBox
             // 
             this.consentTelemetryCheckBox.AutoSize = true;
-            this.consentTelemetryCheckBox.Location = new System.Drawing.Point(8, 150);
+            this.consentTelemetryCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.consentTelemetryCheckBox.Location = new System.Drawing.Point(123, 131);
             this.consentTelemetryCheckBox.Name = "consentTelemetryCheckBox";
-            this.consentTelemetryCheckBox.Size = new System.Drawing.Size(207, 21);
+            this.consentTelemetryCheckBox.Size = new System.Drawing.Size(384, 27);
             this.consentTelemetryCheckBox.TabIndex = 17;
             this.consentTelemetryCheckBox.Text = "Report telemetry to Red Hat";
             this.consentTelemetryCheckBox.UseVisualStyleBackColor = true;
@@ -299,36 +298,41 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(197, 121);
+            this.label23.Location = new System.Drawing.Point(95, 0);
+            this.label23.Margin = new System.Windows.Forms.Padding(0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(28, 17);
+            this.label23.Padding = new System.Windows.Forms.Padding(3);
+            this.label23.Size = new System.Drawing.Size(34, 23);
             this.label23.TabIndex = 16;
             this.label23.Text = "GB";
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(5, 120);
+            this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label22.Location = new System.Drawing.Point(3, 96);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(66, 17);
+            this.label22.Size = new System.Drawing.Size(114, 32);
             this.label22.TabIndex = 15;
             this.label22.Text = "Disk Size";
             // 
             // diskSizeNumBox
             // 
             this.diskSizeNumBox.AccessibleName = "Disk size";
-            this.diskSizeNumBox.Location = new System.Drawing.Point(105, 119);
+            this.diskSizeNumBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.diskSizeNumBox.Location = new System.Drawing.Point(3, 2);
             this.diskSizeNumBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.diskSizeNumBox.Name = "diskSizeNumBox";
-            this.diskSizeNumBox.Size = new System.Drawing.Size(87, 22);
+            this.diskSizeNumBox.Size = new System.Drawing.Size(89, 22);
             this.diskSizeNumBox.TabIndex = 7;
             this.diskSizeNumBox.ValueChanged += new System.EventHandler(this.diskSizeNumBox_ValueChanged);
             // 
             // memoryNumBox
             // 
             this.memoryNumBox.AccessibleName = "Memory";
-            this.memoryNumBox.Location = new System.Drawing.Point(105, 53);
-            this.memoryNumBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.memoryNumBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.memoryNumBox.Location = new System.Drawing.Point(0, 0);
+            this.memoryNumBox.Margin = new System.Windows.Forms.Padding(0);
             this.memoryNumBox.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -347,7 +351,8 @@
             // cpusNumBox
             // 
             this.cpusNumBox.AccessibleName = "vCPUs";
-            this.cpusNumBox.Location = new System.Drawing.Point(105, 21);
+            this.cpusNumBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cpusNumBox.Location = new System.Drawing.Point(123, 2);
             this.cpusNumBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cpusNumBox.Name = "cpusNumBox";
             this.cpusNumBox.Size = new System.Drawing.Size(87, 22);
@@ -362,19 +367,22 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(196, 55);
+            this.label11.Location = new System.Drawing.Point(93, 0);
+            this.label11.Margin = new System.Windows.Forms.Padding(0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(28, 17);
+            this.label11.Padding = new System.Windows.Forms.Padding(3);
+            this.label11.Size = new System.Drawing.Size(34, 23);
             this.label11.TabIndex = 11;
             this.label11.Text = "MB";
             // 
             // PullSecretSelectButton
             // 
             this.PullSecretSelectButton.AccessibleName = "PullSecret filerequester";
-            this.PullSecretSelectButton.Location = new System.Drawing.Point(520, 82);
+            this.PullSecretSelectButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PullSecretSelectButton.Location = new System.Drawing.Point(513, 66);
             this.PullSecretSelectButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PullSecretSelectButton.Name = "PullSecretSelectButton";
-            this.PullSecretSelectButton.Size = new System.Drawing.Size(83, 26);
+            this.PullSecretSelectButton.Size = new System.Drawing.Size(85, 28);
             this.PullSecretSelectButton.TabIndex = 6;
             this.PullSecretSelectButton.Text = "Select file";
             this.PullSecretSelectButton.UseVisualStyleBackColor = true;
@@ -383,37 +391,41 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 87);
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Location = new System.Drawing.Point(3, 64);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(96, 17);
+            this.label4.Size = new System.Drawing.Size(114, 32);
             this.label4.TabIndex = 7;
             this.label4.Text = "Pull secret file";
             // 
             // pullSecretTxtBox
             // 
             this.pullSecretTxtBox.AccessibleName = "PullSecret location";
-            this.pullSecretTxtBox.Location = new System.Drawing.Point(105, 86);
+            this.pullSecretTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pullSecretTxtBox.Location = new System.Drawing.Point(123, 66);
             this.pullSecretTxtBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pullSecretTxtBox.Name = "pullSecretTxtBox";
-            this.pullSecretTxtBox.Size = new System.Drawing.Size(379, 22);
+            this.pullSecretTxtBox.Size = new System.Drawing.Size(384, 22);
             this.pullSecretTxtBox.TabIndex = 5;
             this.pullSecretTxtBox.TextChanged += new System.EventHandler(this.pullSecretTxtBox_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 53);
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(3, 32);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 17);
+            this.label3.Size = new System.Drawing.Size(114, 32);
             this.label3.TabIndex = 4;
             this.label3.Text = "Memory";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 21);
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 17);
+            this.label2.Size = new System.Drawing.Size(114, 32);
             this.label2.TabIndex = 2;
             this.label2.Text = "CPUs";
             // 
@@ -601,6 +613,109 @@
             this.fileRequester.FileName = "openFileDialog1";
             this.fileRequester.InitialDirectory = "$env:USERPROFILE";
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.AutoSize = true;
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.consentTelemetryCheckBox, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.cpusNumBox, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label22, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label4, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.pullSecretTxtBox, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.PullSecretSelectButton, 2, 2);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 3);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 5;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(601, 161);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel3.Controls.Add(this.memoryNumBox, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label11, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(123, 35);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(134, 26);
+            this.tableLayoutPanel3.TabIndex = 18;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel4.Controls.Add(this.diskSizeNumBox, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label23, 1, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(120, 96);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(137, 32);
+            this.tableLayoutPanel4.TabIndex = 19;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 3;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel5.Controls.Add(this.proxyCABrowseButton, 2, 4);
+            this.tableLayoutPanel5.Controls.Add(this.proxyCAFileTxtBox, 1, 4);
+            this.tableLayoutPanel5.Controls.Add(this.label5, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.httpProxyTxtBox, 1, 1);
+            this.tableLayoutPanel5.Controls.Add(this.label6, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.label8, 0, 4);
+            this.tableLayoutPanel5.Controls.Add(this.httpsProxyTxtBox, 1, 2);
+            this.tableLayoutPanel5.Controls.Add(this.noProxyTxtBox, 1, 3);
+            this.tableLayoutPanel5.Controls.Add(this.label7, 0, 3);
+            this.tableLayoutPanel5.Controls.Add(this.useProxyTick, 1, 0);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 5;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(601, 161);
+            this.tableLayoutPanel5.TabIndex = 0;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Controls.Add(this.refreshButton, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.applyButton, 1, 0);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(423, 387);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(182, 35);
+            this.tableLayoutPanel6.TabIndex = 16;
+            // 
             // CrcSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -618,7 +733,6 @@
             this.tabs.ResumeLayout(false);
             this.properties_tab.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diskSizeNumBox)).EndInit();
@@ -630,6 +744,15 @@
             this.groupBox3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -679,5 +802,10 @@
         private System.Windows.Forms.CheckBox SkipCheckUserInHypervAdminsGroup;
         private System.Windows.Forms.CheckBox autostartTrayCheckBox;
         private System.Windows.Forms.CheckBox consentTelemetryCheckBox;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
     }
 }
