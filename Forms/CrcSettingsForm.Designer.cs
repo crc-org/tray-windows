@@ -63,13 +63,15 @@
             this.diskSizeNumBox = new System.Windows.Forms.NumericUpDown();
             this.label23 = new System.Windows.Forms.Label();
             this.advance_tab = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.refreshButton2 = new System.Windows.Forms.Button();
             this.applyButton2 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.autostartTrayCheckBox = new System.Windows.Forms.CheckBox();
-            this.nameServerTxtBox = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.disableUpdateCheckBox = new System.Windows.Forms.CheckBox();
+            this.nameServerTxtBox = new System.Windows.Forms.TextBox();
+            this.autostartTrayCheckBox = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.SkipCheckWindowsVersion = new System.Windows.Forms.CheckBox();
@@ -77,8 +79,6 @@
             this.SkipCheckUserInHypervAdminsGroup = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.fileRequester = new System.Windows.Forms.OpenFileDialog();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.tabs.SuspendLayout();
             this.properties_tab.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
@@ -92,11 +92,11 @@
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diskSizeNumBox)).BeginInit();
             this.advance_tab.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabs
@@ -550,6 +550,20 @@
             this.advance_tab.Text = "Advanced";
             this.advance_tab.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.ColumnCount = 2;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.Controls.Add(this.refreshButton2, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.applyButton2, 1, 0);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(430, 283);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 1;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(182, 35);
+            this.tableLayoutPanel8.TabIndex = 24;
+            // 
             // refreshButton2
             // 
             this.refreshButton2.AccessibleName = "Refresh button";
@@ -586,17 +600,38 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Misc";
             // 
-            // autostartTrayCheckBox
+            // tableLayoutPanel7
             // 
-            this.autostartTrayCheckBox.AutoSize = true;
-            this.autostartTrayCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.autostartTrayCheckBox.Location = new System.Drawing.Point(123, 37);
-            this.autostartTrayCheckBox.Name = "autostartTrayCheckBox";
-            this.autostartTrayCheckBox.Size = new System.Drawing.Size(199, 28);
-            this.autostartTrayCheckBox.TabIndex = 21;
-            this.autostartTrayCheckBox.Text = "Automatically start on login";
-            this.autostartTrayCheckBox.UseVisualStyleBackColor = true;
-            this.autostartTrayCheckBox.CheckedChanged += new System.EventHandler(this.autostartTrayCheckBox_CheckedChanged);
+            this.tableLayoutPanel7.ColumnCount = 2;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel7.Controls.Add(this.disableUpdateCheckBox, 1, 0);
+            this.tableLayoutPanel7.Controls.Add(this.nameServerTxtBox, 1, 2);
+            this.tableLayoutPanel7.Controls.Add(this.autostartTrayCheckBox, 1, 1);
+            this.tableLayoutPanel7.Controls.Add(this.label9, 0, 2);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 3;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(601, 99);
+            this.tableLayoutPanel7.TabIndex = 0;
+            // 
+            // disableUpdateCheckBox
+            // 
+            this.disableUpdateCheckBox.AccessibleName = "Disable update check";
+            this.disableUpdateCheckBox.AutoSize = true;
+            this.disableUpdateCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.disableUpdateCheckBox.Location = new System.Drawing.Point(123, 2);
+            this.disableUpdateCheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.disableUpdateCheckBox.Name = "disableUpdateCheckBox";
+            this.disableUpdateCheckBox.Size = new System.Drawing.Size(166, 30);
+            this.disableUpdateCheckBox.TabIndex = 19;
+            this.disableUpdateCheckBox.Text = "Disable update check";
+            this.disableUpdateCheckBox.UseVisualStyleBackColor = true;
+            this.disableUpdateCheckBox.CheckedChanged += new System.EventHandler(this.disableUpdateCheckBox_CheckedChanged);
             // 
             // nameServerTxtBox
             // 
@@ -615,6 +650,18 @@
             this.nameServerTxtBox.TabIndex = 20;
             this.nameServerTxtBox.TextChanged += new System.EventHandler(this.nameServerTxtBox_TextChanged);
             // 
+            // autostartTrayCheckBox
+            // 
+            this.autostartTrayCheckBox.AutoSize = true;
+            this.autostartTrayCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.autostartTrayCheckBox.Location = new System.Drawing.Point(123, 37);
+            this.autostartTrayCheckBox.Name = "autostartTrayCheckBox";
+            this.autostartTrayCheckBox.Size = new System.Drawing.Size(199, 28);
+            this.autostartTrayCheckBox.TabIndex = 21;
+            this.autostartTrayCheckBox.Text = "Automatically start on login";
+            this.autostartTrayCheckBox.UseVisualStyleBackColor = true;
+            this.autostartTrayCheckBox.CheckedChanged += new System.EventHandler(this.autostartTrayCheckBox_CheckedChanged);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -624,20 +671,6 @@
             this.label9.Size = new System.Drawing.Size(114, 31);
             this.label9.TabIndex = 1;
             this.label9.Text = "Nameserver";
-            // 
-            // disableUpdateCheckBox
-            // 
-            this.disableUpdateCheckBox.AccessibleName = "Disable update check";
-            this.disableUpdateCheckBox.AutoSize = true;
-            this.disableUpdateCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.disableUpdateCheckBox.Location = new System.Drawing.Point(123, 2);
-            this.disableUpdateCheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.disableUpdateCheckBox.Name = "disableUpdateCheckBox";
-            this.disableUpdateCheckBox.Size = new System.Drawing.Size(166, 30);
-            this.disableUpdateCheckBox.TabIndex = 19;
-            this.disableUpdateCheckBox.Text = "Disable update check";
-            this.disableUpdateCheckBox.UseVisualStyleBackColor = true;
-            this.disableUpdateCheckBox.CheckedChanged += new System.EventHandler(this.disableUpdateCheckBox_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -720,43 +753,10 @@
             this.fileRequester.FileName = "openFileDialog1";
             this.fileRequester.InitialDirectory = "$env:USERPROFILE";
             // 
-            // tableLayoutPanel7
-            // 
-            this.tableLayoutPanel7.ColumnCount = 2;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel7.Controls.Add(this.disableUpdateCheckBox, 1, 0);
-            this.tableLayoutPanel7.Controls.Add(this.nameServerTxtBox, 1, 2);
-            this.tableLayoutPanel7.Controls.Add(this.autostartTrayCheckBox, 1, 1);
-            this.tableLayoutPanel7.Controls.Add(this.label9, 0, 2);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 17);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 3;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(601, 99);
-            this.tableLayoutPanel7.TabIndex = 0;
-            // 
-            // tableLayoutPanel8
-            // 
-            this.tableLayoutPanel8.ColumnCount = 2;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Controls.Add(this.refreshButton2, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.applyButton2, 1, 0);
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(430, 283);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 1;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(182, 35);
-            this.tableLayoutPanel8.TabIndex = 24;
-            // 
             // CrcSettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(645, 476);
             this.Controls.Add(this.tabs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -785,13 +785,13 @@
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diskSizeNumBox)).EndInit();
             this.advance_tab.ResumeLayout(false);
+            this.tableLayoutPanel8.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel7.ResumeLayout(false);
-            this.tableLayoutPanel7.PerformLayout();
-            this.tableLayoutPanel8.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
