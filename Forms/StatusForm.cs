@@ -22,8 +22,8 @@ namespace CRCTray
             Console.WriteLine("For loaded");
             
             this.FormClosing += StatusForm_Closing;
-            Activated += GetStatus;
             // Update logs
+            GetStatus();
             UpdateLogs();
 
             var timer = new Timer();
@@ -36,17 +36,20 @@ namespace CRCTray
         {
             Console.WriteLine("Updating logs");
             UpdateLogs();
+            GetStatus();
         }
 
-        async private void GetStatus(object sender, EventArgs e)
+        async private void GetStatus()
         {
             var status = await Task.Run(() => TaskHandlers.Status());
             if (status != null)
             {
                 var cacheFolderPath = string.Format("{0}\\.crc\\cache", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+                Console.WriteLine(status);
+                Console.WriteLine(status.OpenshiftStatus);
                 if (status.CrcStatus != "" )
                     CrcStatus.Text = status.CrcStatus;
-                if (status.OpenshiftStatus != "")
+                if (status.OpenshiftStatus != "" && status.OpenshiftVersion != "")
                     OpenShiftStatus.Text = string.Format("{0} (v{1})", status.OpenshiftStatus, status.OpenshiftVersion);
                 DiskUsage.Text = string.Format("{0} of {1} (Inside the CRC VM)", FileSize.HumanReadable(status.DiskUse), FileSize.HumanReadable(status.DiskSize));
                 CacheUsage.Text = FileSize.HumanReadable(GetFolderSize.SizeInBytes(cacheFolderPath));
