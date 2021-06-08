@@ -220,6 +220,7 @@
             // 
             // logsTextBox
             // 
+            this.logsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.logsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
             this.logsTextBox.Location = new System.Drawing.Point(10, 152);
             this.logsTextBox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 4);
