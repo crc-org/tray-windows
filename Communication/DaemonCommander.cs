@@ -11,14 +11,6 @@ namespace CRCTray.Communication
 	static class DaemonCommander
 	{
 		static private string socketPath = string.Format("{0}\\.crc\\crc.sock", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
-		static private Socket daemonSocket;
-		static private UnixEndPoint daemonSocketEp;
-		
-		public static void Initialize()
-		{
-			daemonSocket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
-			daemonSocketEp = new UnixEndPoint(socketPath);
-		}
 
 		private static T getResultsForBasicCommand<T>(string command)
 		{
@@ -103,7 +95,8 @@ namespace CRCTray.Communication
 		{
 			try
 			{
-				Initialize();
+				Socket daemonSocket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+				UnixEndPoint daemonSocketEp = new UnixEndPoint(socketPath);
 
 				var resp = new byte[16 * 1024];
 				daemonSocket.Connect(daemonSocketEp);
