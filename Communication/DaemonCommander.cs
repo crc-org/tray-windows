@@ -14,7 +14,11 @@ namespace CRCTray.Communication
 
 		private static T getResultsForBasicCommand<T>(string command)
 		{
-			return JsonSerializer.Deserialize<T>(SendBasicCommand(command));
+			var options = new JsonSerializerOptions
+			{
+				IgnoreNullValues = true
+			};
+			return JsonSerializer.Deserialize<T>(SendBasicCommand(command), options);
 		}
 
 		public static StatusResult Status()
