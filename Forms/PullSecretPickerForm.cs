@@ -46,5 +46,19 @@ namespace CRCTray
         {
             Hide();
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            const String url = "https://cloud.redhat.com/openshift/create/local";
+            try
+            {
+                linkLabel1.LinkVisited = true;
+                System.Diagnostics.Process.Start(url);
+            }
+            catch (Exception ex)
+            {
+                Helpers.DisplayMessageBox.Warn(string.Format("Cannot open URL in default browser {0}", ex.ToString()));
+            }
+        }
     }
 }
