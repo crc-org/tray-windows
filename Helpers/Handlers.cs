@@ -54,7 +54,17 @@ namespace CRCTray.Helpers
 
         public static StatusResult Status()
         {
-            return getResultsOrShowMessage(DaemonCommander.Status);
+            try
+            {
+                return DaemonCommander.Status();
+            }
+            catch (SystemException ex)
+            {
+                StatusResult status = new StatusResult();
+                status.Success = false;
+                status.Error = ex.ToString();
+                return status;
+            }
         }
 
         public static ConsoleResult WebConsole()

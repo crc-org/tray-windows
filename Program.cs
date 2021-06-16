@@ -290,12 +290,29 @@ namespace CRCTray
 
         private static void UpdateClusterStatusMenu(StatusResult statusResult)
         {
-            if (!string.IsNullOrEmpty(statusResult.CrcStatus))
-                status.Text = statusResult.CrcStatus;
+            if (!string.IsNullOrEmpty(statusResult.Error))
+            {
+                status.Text = ErrorText(statusResult);
+            }
+            else if (!string.IsNullOrEmpty(statusResult.CrcStatus))
+            {
+                status.Text = statusResult.CrcStatus;   
+            }
             else
-                status.Text = @"Stopped";
+            {
+                status.Text = @"Stopped";   
+            }
 
             EnableMenuItems();
+        }
+
+        private static string ErrorText(StatusResult status)
+        {
+            if (status.Error.Length > 80)
+            {
+                return status.Error.Substring(0, Math.Min(80, status.Error.Length)) + " ...";                
+            }
+            return status.Error;
         }
 
         private static void EnableMenuItems()
