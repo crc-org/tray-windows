@@ -55,7 +55,7 @@ namespace CRCTray
         private Form about;
         private Form statusForm;
 
-        private Double pollInterval = 30000; // 30 seconds poll interval
+        private Double pollInterval = 5000; // 5 seconds poll interval
 
         // Initialize tray
         public TrayContext()
@@ -69,8 +69,6 @@ namespace CRCTray
             notifyIcon.MouseClick += NotifyIcon_MouseClick;
             // start daemon
             Task.Run(StartDaemon);
-            System.Threading.Thread.Sleep(6000); // wait 6sec for the daemon to start
-            PollStatus();
             // Keep polling status and updating the statusMenuItem
             var statusPollingTimer = new System.Timers.Timer(pollInterval);
             statusPollingTimer.Enabled = true;
