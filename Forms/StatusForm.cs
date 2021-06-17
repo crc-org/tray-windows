@@ -51,17 +51,27 @@ namespace CRCTray
                 if (status.Error != "")
                 {
                     CrcStatus.Text = ErrorText(status);
+                    OpenShiftStatus.Text = "Unknown";
                 }
                 else if (status.CrcStatus != "")
                 {
                     CrcStatus.Text = status.CrcStatus;
+                    OpenShiftStatus.Text = StatusText(status);
                 }
-                if (status.OpenshiftStatus != "" && status.OpenshiftVersion != "")
-                    OpenShiftStatus.Text = string.Format("{0} (v{1})", status.OpenshiftStatus, status.OpenshiftVersion);
                 DiskUsage.Text = string.Format("{0} of {1} (Inside the CRC VM)", FileSize.HumanReadable(status.DiskUse), FileSize.HumanReadable(status.DiskSize));
                 CacheUsage.Text = FileSize.HumanReadable(GetFolderSize.SizeInBytes(cacheFolderPath));
                 CacheFolder.Text = cacheFolderPath;
             }
+        }
+
+        private static string StatusText(StatusResult status)
+        {
+            var ret = "";
+            if (!string.IsNullOrEmpty(status.OpenshiftStatus)) 
+                ret += status.OpenshiftStatus;
+            if (!string.IsNullOrEmpty(status.OpenshiftVersion))
+                ret += string.Format(" (v{0})", status.OpenshiftVersion);
+            return ret;
         }
 
         private static string ErrorText(StatusResult status)
