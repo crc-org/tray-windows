@@ -29,14 +29,6 @@ namespace CRCTray.Communication
         public string KubeAdminPass { get; set; }
         public string ClusterAPI { get; set; }
         public string WebConsoleURL { get; set; }
-        public ProxyConfig ProxyConfig { get; set; } 
-    }
-
-    public struct ProxyConfig
-    {
-        public string HTTPProxy { get; set; }
-        public string HTTPSProxy { get; set; }
-        public string ProxyCACert { get; set; }
     }
 
     public class StopResult
