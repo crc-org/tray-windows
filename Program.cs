@@ -64,17 +64,17 @@ namespace CRCTray
             notifyIcon = new NotifyIcon
             {
                 Icon = Icon.FromHandle(bm.GetHicon()),
-                Visible = true
+                Visible = true,
+                ContextMenuStrip = SetContextMenu()
             };
             notifyIcon.MouseClick += NotifyIcon_MouseClick;
+
             // start daemon
             Task.Run(StartDaemon);
             // Keep polling status and updating the statusMenuItem
             var statusPollingTimer = new System.Timers.Timer(pollInterval);
             statusPollingTimer.Enabled = true;
             statusPollingTimer.Elapsed += pollStatusTimerEventHandler;
-
-            SetContextMenu();
         }
 
         private void NotifyIcon_MouseClick(object sender, MouseEventArgs e)
@@ -97,7 +97,7 @@ namespace CRCTray
         }
 
         // populate the context menu for tray icon
-        private void SetContextMenu()
+        private ContextMenuStrip SetContextMenu()
         {
             ContextMenuStrip cm = new ContextMenuStrip();
 
@@ -152,8 +152,7 @@ namespace CRCTray
             exitMenu = cm.Items.Add(@"Exit");
             exitMenu.Click += ExitMenu_Click;
 
-
-            this.notifyIcon.ContextMenuStrip = cm;
+            return cm;
         }
 
         private void SettingsMenu_Click(object sender, EventArgs e)
@@ -288,20 +287,34 @@ namespace CRCTray
 
         private static void UpdateClusterStatusMenu(StatusResult statusResult)
         {
+            var text = "";
             if (!string.IsNullOrEmpty(statusResult.Error))
             {
-                status.Text = ErrorText(statusResult);
+                text = ErrorText(statusResult);
             }
             else if (!string.IsNullOrEmpty(statusResult.CrcStatus))
             {
-                status.Text = statusResult.CrcStatus;   
+                text = statusResult.CrcStatus;   
             }
             else
             {
-                status.Text = @"Stopped";   
+                text = @"Stopped";   
             }
 
-            EnableMenuItems();
+            // Until the user clicks on the menu the following Invoke method throws
+            // the below exception:
+            //
+            // Exception thrown: 'System.InvalidOperationException' in System.Windows.Forms.dll
+            // Invoke or BeginInvoke cannot be called on a control until the window handle has been created.
+            try
+            {
+                status.GetCurrentParent().Invoke((MethodInvoker) delegate
+                {
+                    status.Text = text;
+                    EnableMenuItems();
+                });
+            }
+            catch (InvalidOperationException) { }
         }
 
         private static string ErrorText(StatusResult status)
