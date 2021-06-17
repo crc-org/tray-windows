@@ -103,7 +103,17 @@ namespace CRCTray.Helpers
 
         public static Logs GetDaemonLogs()
         {
-            return getResultsOrShowMessage(DaemonCommander.GetLogs);
+            try
+            {
+                return DaemonCommander.GetLogs();
+            }
+            catch (SystemException ex)
+            {
+                Logs logs = new Logs();
+                logs.Success = true;
+                logs.Messages = new string[1] { ex.ToString() };
+                return logs;
+            }
         }
     }
 }
