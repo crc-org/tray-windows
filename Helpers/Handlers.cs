@@ -58,7 +58,14 @@ namespace CRCTray.Helpers
             {
                 return DaemonCommander.Status();
             }
-            catch (SystemException ex)
+            catch (DaemonCommander.DaemonException ex)
+            {
+                StatusResult status = new StatusResult();
+                status.Success = false;
+                status.Error = ex.Message;
+                return status;
+            }
+            catch (Exception ex)
             {
                 StatusResult status = new StatusResult();
                 status.Success = false;
@@ -107,7 +114,7 @@ namespace CRCTray.Helpers
             {
                 return DaemonCommander.GetLogs();
             }
-            catch (SystemException ex)
+            catch (Exception ex)
             {
                 Logs logs = new Logs();
                 logs.Success = true;

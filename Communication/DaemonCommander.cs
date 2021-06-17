@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Windows.Forms;
 
 namespace CRCTray.Communication
 {
@@ -12,13 +13,26 @@ namespace CRCTray.Communication
 	{
 		static private string socketPath = string.Format("{0}\\.crc\\crc.sock", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
 
+		public class DaemonException : Exception
+		{
+			public DaemonException(string message) : base(message)
+			{
+			}
+		}
+		
 		private static T getResultsForBasicCommand<T>(string command)
 		{
+			var output = SendBasicCommand(command);
 			var options = new JsonSerializerOptions
 			{
 				IgnoreNullValues = true
 			};
-			return JsonSerializer.Deserialize<T>(SendBasicCommand(command), options);
+			var status = JsonSerializer.Deserialize<Result>(output, options);
+			if (status.Success)
+			{
+				return JsonSerializer.Deserialize<T>(output, options);
+			}
+			throw new DaemonException(status.Error);
 		}
 
 		public static StatusResult Status()

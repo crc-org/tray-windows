@@ -2,6 +2,12 @@
 
 namespace CRCTray.Communication
 {
+    public class Result
+    {
+        public string Error { get; set; }
+        public bool Success { get; set; }
+    }
+    
     public class StatusResult
     {
         public string Name { get; set; }
