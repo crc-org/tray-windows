@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Diagnostics;
@@ -351,11 +352,13 @@ namespace CRCTray
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardInput = true;
-            process.StartInfo.FileName = string.Format("{0}\\{1}\\crc.exe",
-                Environment.GetEnvironmentVariable("ProgramW6432"), @"CodeReady Containers");
-#if DEBUG
-            process.StartInfo.FileName = string.Format("{0}\\bin\\crc.exe", Environment.GetEnvironmentVariable("GOPATH"));
-#endif
+            var currentExecutableLocation = typeof(Program).Assembly.Location;
+            var crcPath = Path.Combine(Path.GetDirectoryName(currentExecutableLocation), "crc.exe");
+            process.StartInfo.FileName = crcPath;
+
+            #if DEBUG
+            process.StartInfo.FileName = Path.Combine(Environment.GetEnvironmentVariable("GOPATH"), "bin", "crc.exe");
+            #endif
             process.StartInfo.Arguments = @"daemon --watchdog";
             process.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             Console.WriteLine(process.StartInfo.FileName);
