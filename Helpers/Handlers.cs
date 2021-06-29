@@ -89,12 +89,12 @@ namespace CRCTray.Helpers
         {
             StatusResult result = getResultsOrDefault(DaemonCommander.Status);
 
-            if (StatusReceived != null)
-                StatusReceived(result);
-
             // TODO: workaround for daemon returning 500/Error state when no VM exists
             if (result == null)
                 return null;
+
+            if (StatusReceived != null)
+                StatusReceived(result);
 
             lock (_statusChangeLock)
             {

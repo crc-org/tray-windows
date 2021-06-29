@@ -115,28 +115,22 @@ namespace CRCTray
                 }
                 else
                 {
+                    if (status.Success)
+                    {
+                        if (status.CrcStatus != "")
+                            CrcStatus.Text = status.CrcStatus;
+
+                        if (status.OpenshiftStatus != "")
+                            OpenShiftStatus.Text = StatusText(status);
+                    }
+
                     var cacheFolderPath = string.Format("{0}\\.crc\\cache",
                         Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
-
-                    if (status.CrcStatus != "")
-                        CrcStatus.Text = status.CrcStatus;
-
-                    if (status.OpenshiftStatus != "")
-                        OpenShiftStatus.Text = StatusText(status);
 
                     DiskUsage.Text = string.Format("{0} of {1} (Inside the CRC VM)",
                         FileSize.HumanReadable(status.DiskUse), FileSize.HumanReadable(status.DiskSize));
                     CacheUsage.Text = FileSize.HumanReadable(GetFolderSize.SizeInBytes(cacheFolderPath));
                     CacheFolder.Text = cacheFolderPath;
-                }
-            }
-            else
-            {
-                // TODO: workaround for no VM
-                if (CrcStatus.InvokeRequired)
-                {
-                    UpdateReceivedCallback c = UpdateReceived;
-                    Invoke(c, new StatusResult { CrcStatus = InitialState, OpenshiftStatus = "Stopped"});
                 }
             }
         }
