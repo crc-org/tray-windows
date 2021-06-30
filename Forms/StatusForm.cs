@@ -21,7 +21,7 @@ namespace CRCTray
         {
             InitializeComponent();
 
-            TaskHandlers.StatusReceived += UpdateReceived;
+            TaskHandlers.StatusReceived += StatusReceived;
             TaskHandlers.StopReceived += StopReceived;
             TaskHandlers.DeleteReceived += DeleteReceived;
         }
@@ -104,13 +104,13 @@ namespace CRCTray
             }
         }
 
-        private void UpdateReceived(StatusResult status)
+        private void StatusReceived(StatusResult status)
         {
             if (status != null)
             {
                 if (CrcStatus.InvokeRequired)
                 {
-                    UpdateReceivedCallback c = UpdateReceived;
+                    UpdateReceivedCallback c = StatusReceived;
                     Invoke(c, status);
                 }
                 else
@@ -122,6 +122,10 @@ namespace CRCTray
 
                         if (status.OpenshiftStatus != "")
                             OpenShiftStatus.Text = StatusText(status);
+                    }
+                    else
+                    {
+                        CrcStatus.Text = InitialState;
                     }
 
                     var cacheFolderPath = string.Format("{0}\\.crc\\cache",

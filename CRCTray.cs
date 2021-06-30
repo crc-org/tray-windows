@@ -52,7 +52,7 @@ namespace CRCTray
             statusPollingTimer.Enabled = true;
             statusPollingTimer.Elapsed += pollStatusTimerEventHandler;
 
-            TaskHandlers.StatusChanged += UpdateReceived;
+            TaskHandlers.StatusChanged += StatusReceived;
             TaskHandlers.StopReceived += StopReceived;
             TaskHandlers.DeleteReceived += DeleteReceived;
 
@@ -279,9 +279,9 @@ namespace CRCTray
             statusForm.Focus();
         }
 
-        private void UpdateReceived(StatusResult statusResult)
+        private void StatusReceived(StatusResult statusResult)
         {
-            status.Text = statusResult.CrcStatus;
+            status.Text = statusResult.Success ? statusResult.CrcStatus : InitialState;
 
             // TODO: enable based on status
             //startMenu.Enabled = false;
