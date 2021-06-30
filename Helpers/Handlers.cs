@@ -1,6 +1,6 @@
-﻿using System;
+﻿using CRCTray.Communication;
+using System;
 using System.Collections.Generic;
-using CRCTray.Communication;
 
 namespace CRCTray.Helpers
 {
@@ -26,38 +26,25 @@ namespace CRCTray.Helpers
         public static event StopReceivedHandler StopReceived;
         public static event DeleteReceivedHandler DeleteReceived;
 
-        private static T getResultsOrDefault<T>(Func<T> function)
+        private static T getTypedResults<T>(Func<T> function)
         {
-            try
-            {
-                return function();
-            }
-            catch(Exception e)
-            {
-                return default;
-            }
+            return function();
         }
-        private static T getResultsOrDefault<T, TArgs>(Func<TArgs, T> function, TArgs args)
+
+        private static T getTypedResults<T, TArgs>(Func<TArgs, T> function, TArgs args)
         {
-            try
-            {
-                return function(args);
-            }
-            catch(Exception e)
-            {
-                return default;
-            }
+            return function(args);
         }
 
         public static VersionResult Version()
         {
-            return getResultsOrDefault(DaemonCommander.Version);
+            return getTypedResults(DaemonCommander.Version);
         }
 
 
         public static StartResult Start()
         {
-            StartResult result = getResultsOrDefault(DaemonCommander.Start);
+            StartResult result = getTypedResults(DaemonCommander.Start);
 
             if (StartReceived != null && result != null)
                 StartReceived(result);
@@ -67,7 +54,7 @@ namespace CRCTray.Helpers
 
         public static StopResult Stop()
         {
-            StopResult result = getResultsOrDefault(DaemonCommander.Stop);
+            StopResult result = getTypedResults(DaemonCommander.Stop);
 
             if (StopReceived != null && result != null)
                 StopReceived(result);
@@ -77,7 +64,7 @@ namespace CRCTray.Helpers
 
         public static DeleteResult Delete()
         {
-            DeleteResult result = getResultsOrDefault(DaemonCommander.Delete);
+            DeleteResult result = getTypedResults(DaemonCommander.Delete);
 
             if (DeleteReceived != null && result != null)
                 DeleteReceived(result);
@@ -87,28 +74,27 @@ namespace CRCTray.Helpers
 
         public static StatusResult Status()
         {
-            StatusResult result = getResultsOrDefault(DaemonCommander.Status);
+            StatusResult result = getTypedResults(DaemonCommander.Status);
 
-            // TODO: workaround for daemon returning 500/Error state when no VM exists
-            if (result == null)
-                return null;
-
-            if (StatusReceived != null)
+            if (StatusReceived != null && result != null)
                 StatusReceived(result);
 
             lock (_statusChangeLock)
             {
-                if (StatusChanged != null && _previousStatus != result.OpenshiftStatus)
+                if (StatusChanged != null && result != null && _previousStatus != result.OpenshiftStatus)
+                {
                     StatusChanged(result);
 
-                _previousStatus = result.OpenshiftStatus;
+                    _previousStatus = result.OpenshiftStatus;
+                }
             }
+
             return result;
         }
 
         public static LogsResult GetDaemonLogs()
         {
-            LogsResult result = getResultsOrDefault(DaemonCommander.GetLogs);
+            LogsResult result = getTypedResults(DaemonCommander.GetLogs);
 
             if (LogsReceived != null && result != null)
                 LogsReceived(result);
@@ -118,26 +104,26 @@ namespace CRCTray.Helpers
 
         public static ConsoleResult WebConsole()
         {
-            return getResultsOrDefault(DaemonCommander.ConsoleUrl);
+            return getTypedResults(DaemonCommander.ConsoleUrl);
         }
 
         public static ConfigResult ConfigView()
         {
-            return getResultsOrDefault(DaemonCommander.ConfigView);
+            return getTypedResults(DaemonCommander.ConfigView);
         }
 
         public static SetUnsetConfig SetConfig(Dictionary<string, dynamic> cfg)
         {
             // TODO: unnecessary wrapping
             var config = new ConfigSetCommand(cfg);
-            return getResultsOrDefault(DaemonCommander.SetConfig, config);
+            return getTypedResults(DaemonCommander.SetConfig, config);
         }
 
         public static SetUnsetConfig UnsetConfig(List<string> cfg)
         {
             // TODO: unnecessary wrapping
             var config = new ConfigUnsetCommand(cfg);
-            return getResultsOrDefault(DaemonCommander.UnsetConfig, config);
+            return getTypedResults(DaemonCommander.UnsetConfig, config);
         }
 
         public static ConsoleResult LoginForDeveloper()

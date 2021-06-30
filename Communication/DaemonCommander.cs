@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Text;
 using System.Net.Http;
 using System.Text.Json;
@@ -22,38 +23,31 @@ namespace CRCTray.Communication
                 IgnoreNullValues = true
             };
 
+            if (String.IsNullOrEmpty(output))
+                return default;
+
             return JsonSerializer.Deserialize<T>(output, options);
         }
 
 		public static StatusResult Status()
 		{
 			return getResultsForBasicCommand<StatusResult>(BasicCommands.Status);
-
-			// 200 status command was successful (json returned)
-			// 500 could refer to VM not existing
-		}
+        }
 
 		public static VersionResult Version()
 		{
 			return getResultsForBasicCommand<VersionResult>(BasicCommands.Version);
-
-			// 200
-		}
+        }
 
 		public static StartResult Start()
 		{
-			return getResultsForBasicCommand<StartResult>(BasicCommands.Start, 300);
-
-			// 200
-			// 500 could refer to VM already starting
-		}
+			return getResultsForBasicCommand<StartResult>(BasicCommands.Start, 600);
+        }
 
 		public static StopResult Stop()
 		{
 			return getResultsForBasicCommand<StopResult>(BasicCommands.Stop, 120);
-
-			// 500 could refer to VM already stopping
-		}
+        }
 
 		public static DeleteResult Delete()
 		{
@@ -87,58 +81,74 @@ namespace CRCTray.Communication
 			return getResultsForBasicCommand<LogsResult>(BasicCommands.Logs);
         }
 
-		private static string SendBasicCommand(string command, int timeout)
-		{
-			return getResponse(command, timeout).Result;
-		}
+        private static string SendBasicCommand(string command, int timeout)
+        {
+            return getResponse(command, timeout).Result;
+        }
 
         private static async Task<string> postResponse(string cmd, string content, int timeout)
         {
+
+            var httpClient = new NamedPipeHttpClientBuilder(_daemonHTTPNamedPipe)
+                .WithPerRequestTimeout(TimeSpan.FromSeconds(timeout))
+                .Build();
+
+            var httpContent = new StringContent(content, Encoding.UTF8, "application/json");
+            string command = String.Format("{0}/{1}", _apiPath, cmd);
+            string body = String.Empty;
+
             try
             {
-                var httpClient = new NamedPipeHttpClientBuilder(_daemonHTTPNamedPipe)
-                    .WithPerRequestTimeout(TimeSpan.FromSeconds(timeout))
-                    .Build();
-
-                var httpContent = new StringContent(content, Encoding.UTF8, "application/json");
-				string command = String.Format("{0}/{1}", _apiPath, cmd);
                 HttpResponseMessage response = await httpClient.PostAsync(command, httpContent);
 
-                // Allow 500
-                //response.EnsureSuccessStatusCode();
+                body = await response.Content.ReadAsStringAsync();
 
-                return await response.Content.ReadAsStringAsync();
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    throw new APIException(body);
+                }
             }
-
+            catch (TimeoutException e)
+            {
+                throw new CommunicationException(e.Message);
+            }
             catch (Exception e)
             {
-                // re-throw to let the caller deal with the specific error codes
                 throw e;
             }
+
+            return body;
         }
 
-		private static async Task<string> getResponse(string cmd, int timeout)
-		{
-			try
-			{
-				var httpClient = new NamedPipeHttpClientBuilder(_daemonHTTPNamedPipe)
-								.WithPerRequestTimeout(TimeSpan.FromSeconds(timeout))
-								.Build();
+        private static async Task<string> getResponse(string cmd, int timeout)
+        {
+            var httpClient = new NamedPipeHttpClientBuilder(_daemonHTTPNamedPipe)
+                .WithPerRequestTimeout(TimeSpan.FromSeconds(timeout))
+                .Build();
 
-				string command = String.Format("{0}/{1}", _apiPath, cmd);
-				HttpResponseMessage response = await httpClient.GetAsync(command);
+            string command = String.Format("{0}/{1}", _apiPath, cmd);
+            string body = String.Empty;
 
-				// Allow 500
-				//response.EnsureSuccessStatusCode();
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(command);
+                body = await response.Content.ReadAsStringAsync();
 
-				return await response.Content.ReadAsStringAsync();
-			}
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    throw new APIException(body);
+                }
+            }
+            catch (TimeoutException e)
+            {
+                throw new CommunicationException(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
 
-			catch (Exception e)
-			{
-				// re-throw to let the caller deal with the specific error codes
-				throw e;
-			}
-		}
+            return body;
+        }
 	}
 }

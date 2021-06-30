@@ -29,12 +29,13 @@ namespace CRCTray
 
         private async void GetVersion(object sender, EventArgs e)
         {
-            version = await Task.Run(TaskHandlers.Version);
-            if (version.Success) {
+            try
+            {
+                version = await Task.Run(TaskHandlers.Version);
                 CrcVersionLabel.Text = String.Format("{0}+{1}", version.CrcVersion, version.CommitSha);
                 OcpVersion.Text = version.OpenshiftVersion;
             }
-            else
+            catch
             {
                 TrayIcon.NotifyWarn("Unable to fetch version information from daemon");
             }

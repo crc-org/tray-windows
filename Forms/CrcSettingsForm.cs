@@ -142,22 +142,22 @@ namespace CRCTray
         // Apply button on properties tab
         private async void ApplyButton_Click(object sender, EventArgs e)
         {
+            // TODO: refactor
+
             if (this.configChanged && changedConfigs.Count > 0) 
             {
-                SetUnsetConfig r = await Task.Run(() => TaskHandlers.SetConfig(changedConfigs));
-                if (r.Error == String.Empty)
-                    TrayIcon.NotifyInfo("Settings Applied");
-                else
-                    TrayIcon.NotifyError(r.Error);
+                await TaskHelpers.TryTaskAndNotify(TaskHandlers.SetConfig, changedConfigs,
+                    "Settings applied",
+                    "Settings not applied",
+                    String.Empty);
             }
 
             if (this.configsNeedingUnset.Count > 0)
             {
-                SetUnsetConfig r = await Task.Run(() => TaskHandlers.UnsetConfig(configsNeedingUnset));
-                if (r.Error == String.Empty)
-                    TrayIcon.NotifyInfo("Settings Applied");
-                else
-                    TrayIcon.NotifyError(r.Error);
+                await TaskHelpers.TryTaskAndNotify(TaskHandlers.UnsetConfig, configsNeedingUnset,
+                    "Settings applied",
+                    "Settings not applied",
+                    String.Empty);
             }
 
             // Load the configs again and reset the change trackers

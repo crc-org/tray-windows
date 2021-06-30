@@ -29,7 +29,7 @@ namespace CRCTray.Helpers
                 process.Start();
                 System.IO.StreamWriter daemonStdinWriter = process.StandardInput;
             }
-            catch (Exception e)
+            catch
             {
                 TrayIcon.NotifyError(@"Cannot start the daemon, Check the logs and restart the application");
  

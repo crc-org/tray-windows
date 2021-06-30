@@ -115,16 +115,15 @@ namespace CRCTray
                 }
                 else
                 {
-                    if (status.Success)
-                    {
-                        if (status.CrcStatus != "")
-                            CrcStatus.Text = status.CrcStatus;
+                    if (status.CrcStatus != "")
+                        CrcStatus.Text = status.CrcStatus;
+                    else
+                        CrcStatus.Text = InitialState;
 
-                        if (status.OpenshiftStatus != "")
-                            OpenShiftStatus.Text = StatusText(status);
-                    }
+                    if (status.OpenshiftStatus != "") 
+                        OpenShiftStatus.Text = StatusText(status);
 
-                    var cacheFolderPath = string.Format("{0}\\.crc\\cache",
+                    var cacheFolderPath = string.Format("{0}\\.crc\\cache", 
                         Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
 
                     DiskUsage.Text = string.Format("{0} of {1} (Inside the CRC VM)",
@@ -148,22 +147,36 @@ namespace CRCTray
 
         private void GetStatus()
         {
-            Task.Run(TaskHandlers.Status);
+            try
+            {
+                Task.Run(TaskHandlers.Status);
+            }
+            catch
+            {
+                // Status failed, but ignoring
+            }
         }
 
         private async void GetLogs()
         {
-            var logs = await Task.Run(TaskHandlers.GetDaemonLogs);
-            if (logs != null)
+            try
             {
-                var messages = string.Join("\r\n", logs.Messages);
+                var logs = await Task.Run(TaskHandlers.GetDaemonLogs);
+                if (logs != null)
+                {
+                    var messages = string.Join("\r\n", logs.Messages);
 
-                if (logsTextBox.Text == messages)
-                    return;
+                    if (logsTextBox.Text == messages)
+                        return;
 
-                logsTextBox.Text = messages;
-                logsTextBox.SelectionStart = logsTextBox.Text.Length;
-                logsTextBox.ScrollToCaret();
+                    logsTextBox.Text = messages;
+                    logsTextBox.SelectionStart = logsTextBox.Text.Length;
+                    logsTextBox.ScrollToCaret();
+                }
+            }
+            catch
+            {
+                // Logs failed, but ignoring
             }
         }
     }
