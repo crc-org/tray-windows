@@ -66,7 +66,14 @@ namespace CRCTray
 
         private static void pollStatusTimerEventHandler(object source, System.Timers.ElapsedEventArgs e)
         {
-            Task.Run(TaskHandlers.Status);
+            try
+            {
+                Task.Run(TaskHandlers.Status);
+            }
+            catch
+            {
+                // Status failed, but ignoring
+            }
         }
 
         // populate the context menu for tray icon
@@ -146,84 +153,81 @@ namespace CRCTray
 
         async private void CopyOCLoginForKubeadminMenu_Click(object sender, EventArgs e)
         {
-            var consoleResult = await Task.Run(TaskHandlers.LoginForKubeadmin);
-
-            if (consoleResult != null)
+            try
             {
-                if (consoleResult.Success)
-                    Clipboard.SetText(string.Format("oc.exe login -u kubeadmin -p {0} {1}", consoleResult.ClusterConfig.KubeAdminPass, consoleResult.ClusterConfig.ClusterAPI));
-                else
-                    TrayIcon.NotifyError(@"Could not find credentials, is CRC runnning?");
+                var consoleResult = await Task.Run(TaskHandlers.LoginForKubeadmin);
+                Clipboard.SetText(string.Format("oc.exe login -u kubeadmin -p {0} {1}",
+                    consoleResult.ClusterConfig.KubeAdminPass, consoleResult.ClusterConfig.ClusterAPI));
+            }
+            catch
+            {
+                TrayIcon.NotifyError(@"Could not find credentials. Is CRC runnning?");
             }
         }
 
         async private void CopyOCLoginForDeveloperMenu_Click(object sender, EventArgs e)
         {
-            var consoleResult = await Task.Run(TaskHandlers.LoginForDeveloper);
-
-            if (consoleResult != null)
+            try
             {
-                if (consoleResult.Success)
-                    Clipboard.SetText(string.Format("oc.exe login -u developer -p developer {0}", consoleResult.ClusterConfig.ClusterAPI));
-                else
-                    TrayIcon.NotifyError(@"Could not find credentials, is CRC running?");
-            }           
+                var consoleResult = await Task.Run(TaskHandlers.LoginForDeveloper);
+                Clipboard.SetText(string.Format("oc.exe login -u developer -p developer {0}",
+                    consoleResult.ClusterConfig.ClusterAPI));
+            }
+            catch
+            {
+                TrayIcon.NotifyError(@"Could not find credentials. Is CRC running?");
+            }
         }
 
         async private void OpenWebConsoleMenu_Click(object sender, EventArgs e)
         {
-            var consoleResult = await Task.Run(TaskHandlers.WebConsole);
-
-            if (consoleResult != null)
+            try
             {
-                if (consoleResult.Success)
-                    Process.Start(consoleResult.ClusterConfig.WebConsoleURL);
-                else
-                    TrayIcon.NotifyError(@"Could not open web console, is CRC running?");
+                var consoleResult = await Task.Run(TaskHandlers.WebConsole);
+                Process.Start(consoleResult.ClusterConfig.WebConsoleURL);
+            }
+            catch
+            {
+                TrayIcon.NotifyError(@"Could not open web console. Is CRC running?");
             }
         }
 
         async private void DeleteMenu_Click(object sender, EventArgs e)
         {
             TrayIcon.NotifyInfo(@"Deleting cluster");
-            var deleteResult = await Task.Run(TaskHandlers.Delete);
 
-            if (deleteResult != null)
-            {
-                if (deleteResult.Success)
-                    TrayIcon.NotifyInfo(@"Cluster deleted");
-                else
-                    TrayIcon.NotifyError(@"Could not delete the cluster. Please check detailed status");
-            }
-            else
-            {
-                TrayIcon.NotifyError(@"Could not delete the cluster. Please check detailed status");
-            }
+            await TaskHelpers.TryTaskAndNotify(TaskHandlers.Delete,
+                "Cluster deleted",
+                "Could not delete the cluster",
+                String.Empty);
         }
 
         async private void StopMenu_Click(object sender, EventArgs e)
         {
             TrayIcon.NotifyInfo(@"Stopping cluster");
-            var stopResult = await Task.Run(TaskHandlers.Stop);
 
-            if (stopResult != null)
-            {
-                if (stopResult.Success)
-                    TrayIcon.NotifyInfo(@"Cluster Stopped");
-                else
-                    TrayIcon.NotifyError(@"Cluster could not be stopped. Please check detailed status");
-            }
-            else
-            {
-                TrayIcon.NotifyError(@"Cluster could not be stopped. Please check detailed status");
-            }         
+            await TaskHelpers.TryTaskAndNotify(TaskHandlers.Stop,
+                "Cluster stopped",
+                "Cluster could not be stopped",
+                String.Empty);
         }
 
         async private void StartMenu_Click(object sender, EventArgs e)
         {
             // Check using get-config if pullSecret is configured
-            var configs = await Task.Run(TaskHandlers.ConfigView);
-            if (configs.Configs.PullSecretFile == String.Empty)
+            var configs = await TaskHelpers.TryTaskAndNotify(TaskHandlers.ConfigView,
+                String.Empty,
+                String.Empty,
+                String.Empty);
+
+            if(configs == null)
+            {
+                // no config was returned, does this mean a communication error?
+                TrayIcon.NotifyError("Unable to read configuration. Is the CRC daemon running?");
+                return;
+            }
+
+            if (configs != null && configs.Configs.PullSecretFile == String.Empty)
             {
                 var pullSecretForm = new PullSecretPickerForm();
                 var pullSecretPath = pullSecretForm.ShowFilePicker();
@@ -236,20 +240,23 @@ namespace CRCTray
                 {
                     ["pull-secret-file"] = pullSecretPath
                 };
-                await Task.Run(() => TaskHandlers.SetConfig(pullSecretConfig));
+
+                await TaskHelpers.TryTaskAndNotify(TaskHandlers.SetConfig, pullSecretConfig,
+                    "Pull Secret stored",
+                    "Pull Secret not stored",
+                    String.Empty);
             }
+
 
             TrayIcon.NotifyInfo(@"Starting Cluster");
-            var startResult = await Task.Run(TaskHandlers.Start);
-            if (startResult == null)
-            {
-                return;
-            }
 
-            if (startResult.KubeletStarted)
+            var startResult = await TaskHelpers.TryTaskAndNotify(TaskHandlers.Start,
+                String.Empty,
+                "Cluster did not start",
+                "Cluster still starting. Please check detailed status.");
+
+            if (startResult != null && startResult.KubeletStarted)
                 TrayIcon.NotifyInfo(@"CodeReady Containers Cluster has started");
-            else
-                TrayIcon.NotifyWarn(@"Cluster did not start. Please check detailed status");
         }
 
         private void ExitMenu_Click(object sender, EventArgs e)

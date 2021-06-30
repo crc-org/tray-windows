@@ -11,13 +11,10 @@ namespace CRCTray.Communication
         public string OpenshiftVersion { get; set; }
         public long DiskUse { get; set; }
         public long DiskSize { get; set; }
-        public string Error { get; set; }
-        public bool Success { get; set; }
     }
 
     public class LogsResult
     {
-        public bool Success { get; set; }
         public string[] Messages { get; set; }
     }
 
@@ -41,23 +38,17 @@ namespace CRCTray.Communication
     public class StopResult
     {
         public string Name { get; set; }
-        public bool Success { get; set; }
         public int State { get; set; }
-        public string Error { get; set; }
     }
 
     public class DeleteResult
     {
         public string Name { get; set; }
-        public bool Success { get; set; }
-        public string Error { get; set; }
     }
 
     public class ConsoleResult
     {
         public ClusterConfig ClusterConfig { get; set; }
-        public bool Success { get; set; }
-        public string Error { get; set; }
     }
 
     public class VersionResult
@@ -65,10 +56,9 @@ namespace CRCTray.Communication
         public string CrcVersion { get; set; }
         public string CommitSha { get; set; }
         public string OpenshiftVersion { get; set; }
-        public bool Success { get; set; }
     }
 
-    struct Config
+    public class Config
     {
         [JsonPropertyName("bundle")]
         public string bundle { get; set; }
@@ -152,15 +142,13 @@ namespace CRCTray.Communication
         public bool SkipCheckWindowsVersion { get; set; }
     }
 
-    struct ConfigResult
+    public class ConfigResult
     {
-        public string Error { get; set; }
         public Config Configs { get; set; }
     }
 
-    struct SetUnsetConfig
+    public class SetUnsetConfig
     {
-        public string Error { get; set; }
         public string[] Properties { get; set; }
     }
 
