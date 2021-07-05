@@ -80,56 +80,69 @@ namespace CRCTray
         private void SetContextMenu()
         {
             ContextMenuStrip cm = new ContextMenuStrip();
+            cm.AccessibleName = "menu";
 
             // Status Menu
             status = cm.Items.Add(InitialState); //TODO: actually "Unknown"
+            status.AccessibleName = "status";
             status.Enabled = false;
 
             cm.Items.Add(new ToolStripSeparator());
             // Detailed status menu
             detailedStatusMenu = cm.Items.Add(@"Status and Logs");
+            detailedStatusMenu.AccessibleName = "status-detailed";
             detailedStatusMenu.Click += ShowDetailedStatusForm;
             cm.Items.Add(new ToolStripSeparator());
 
             // Start Menu
             startMenu = cm.Items.Add(@"Start");
+            startMenu.AccessibleName = "start";
             startMenu.Click += StartMenu_Click;
 
             // Stop Menu
             stopMenu = cm.Items.Add(@"Stop");
+            stopMenu.AccessibleName = "stop";
             stopMenu.Click += StopMenu_Click;
 
             // Delete Menu
             deleteMenu = cm.Items.Add(@"Delete");
+            deleteMenu.AccessibleName = "delete";
             deleteMenu.Click += DeleteMenu_Click;
 
             cm.Items.Add(new ToolStripSeparator());
             // Open web console menu
             openWebConsoleMenu = cm.Items.Add(@"Launch Web Console");
+            openWebConsoleMenu.AccessibleName = "open-web-console";
             openWebConsoleMenu.Click += OpenWebConsoleMenu_Click;
 
             // Copy oc login command
             copyOCLoginCommand = cm.Items.Add(@"Copy OC Login Command");
+            copyOCLoginCommand.AccessibleName = "copy-oc-login";
 
             // Copy oc login command: developer
             copyOCLoginForDeveloperMenu = (copyOCLoginCommand as ToolStripMenuItem).DropDownItems.Add(@"Developer");
+            copyOCLoginForDeveloperMenu.AccessibleName = "developer";
             copyOCLoginForDeveloperMenu.Click += CopyOCLoginForDeveloperMenu_Click;
             // Copy oc login command: kubeadmin
             copyOCLoginForKubeadminMenu = (copyOCLoginCommand as ToolStripMenuItem).DropDownItems.Add(@"Kubeadmin");
+            copyOCLoginForKubeadminMenu.AccessibleName = "kubeadmin";
             copyOCLoginForKubeadminMenu.Click += CopyOCLoginForKubeadminMenu_Click;
 
             cm.Items.Add(new ToolStripSeparator());
             // Settings menu
             settingsMenu = cm.Items.Add(@"Settings");
+            settingsMenu.AccessibleName = "settings";
             settingsMenu.Click += SettingsMenu_Click;
 
             cm.Items.Add(new ToolStripSeparator());
             // About menu
             aboutMenu = cm.Items.Add(@"About");
+            aboutMenu.AccessibleName = "about";
             aboutMenu.Click += ShowAboutForm;
 
             // Exit menu
             exitMenu = cm.Items.Add(@"Exit");
+            exitMenu.AccessibleName = "exit";
             exitMenu.Click += ExitMenu_Click;
 
             // set context menu on trayicon
