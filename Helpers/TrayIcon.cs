@@ -17,7 +17,7 @@ namespace CRCTray.Helpers
                 Icon = Icon.FromHandle(bm.GetHicon()),
                 Visible = true
             };
-
+            notifyIcon.Text = "Codeready Containers";
             notifyIcon.MouseClick += NotifyIcon_MouseClick;
         }
 
