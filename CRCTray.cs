@@ -236,20 +236,16 @@ namespace CRCTray
 
             if (!pullsecret)
             {
-                var pullSecretForm = new PullSecretPickerForm();
-                var pullSecretPath = pullSecretForm.ShowFilePicker();
-                if (pullSecretPath == String.Empty)
+                var pullSecretForm = new PullSecretForm();
+                pullSecretForm.ShowDialog();
+                var pullSecretContent = pullSecretForm.PullSecret;
+                if (pullSecretContent == String.Empty)
                 {
                     TrayIcon.NotifyWarn(@"No Pull Secret was provided, Cannot start cluster without pull secret.");
                     return;
                 }
-                Dictionary<String, dynamic> pullSecretConfig = new Dictionary<String, dynamic>
-                {
-                    ["pull-secret-file"] = pullSecretPath
-                };
 
-                string data = File.ReadAllText(pullSecretPath);
-                await TaskHelpers.TryTaskAndNotify(TaskHandlers.SetPullSecret, data,
+                await TaskHelpers.TryTaskAndNotify(TaskHandlers.SetPullSecret, pullSecretContent,
                     "Pull Secret stored",
                     "Pull Secret not stored",
                     String.Empty);
