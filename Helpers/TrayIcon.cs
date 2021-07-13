@@ -9,15 +9,14 @@ namespace CRCTray.Helpers
         //tray Icon
         private static NotifyIcon notifyIcon;
 
-        public TrayIcon()
+        public TrayIcon(Bitmap icon, string name)
         {
-            Bitmap bm = new Bitmap(Resource.ocp_logo);
             notifyIcon = new NotifyIcon
             {
-                Icon = Icon.FromHandle(bm.GetHicon()),
+                Icon = Icon.FromHandle(icon.GetHicon()),
                 Visible = true
             };
-            notifyIcon.Text = "Codeready Containers";
+            notifyIcon.Text = name;
             notifyIcon.MouseClick += NotifyIcon_MouseClick;
         }
 
