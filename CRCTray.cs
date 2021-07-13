@@ -43,8 +43,8 @@ namespace CRCTray
         // Initialize tray
         public CRCTray()
         {
-            trayIcon = new TrayIcon();
-            
+            trayIcon = new TrayIcon(Resource.ocp_logo, "CodeReady Containers");
+
             StartDaemon();
             
             // Keep polling status and updating the statusMenuItem
