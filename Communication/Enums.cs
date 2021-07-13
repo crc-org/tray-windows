@@ -14,5 +14,7 @@
         internal const string ConfigSet = "config/set";
         internal const string ConfigUnset = "config/unset";
         internal const string Logs = "logs";
+
+        internal const string PullSecret = "pull-secret";
     }
 }

@@ -81,6 +81,38 @@ namespace CRCTray.Communication
 			return getResultsForBasicCommand<LogsResult>(BasicCommands.Logs);
         }
 
+        public static bool GetPullSecret()
+        {
+            try
+            {
+                // On success the API returns 200 but no value.
+                getResultsForBasicCommand<bool>(BasicCommands.PullSecret);
+                return true;
+            }
+
+            catch (AggregateException ae)
+            {
+                ae.Handle((x) =>
+                {
+                    if (x is NotFoundException) // This we know how to handle.
+                    {
+                        // Marking as handled
+                        return true;
+                    }
+
+                    return false;
+                });
+
+                return false;
+            }
+        }
+
+        public static bool SetPullSecret(string data)
+        {
+            var result = postResponse(BasicCommands.PullSecret, data, 30);
+            return true;
+        }
+
         private static string SendBasicCommand(string command, int timeout)
         {
             return getResponse(command, timeout).Result;
@@ -103,9 +135,12 @@ namespace CRCTray.Communication
 
                 body = await response.Content.ReadAsStringAsync();
 
-                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                switch (response.StatusCode)
                 {
-                    throw new APIException(body);
+                    case HttpStatusCode.InternalServerError:
+                        throw new APIException(body);
+                    case HttpStatusCode.NotFound:
+                        throw new NotFoundException(body);
                 }
             }
             catch (TimeoutException e)
@@ -134,9 +169,12 @@ namespace CRCTray.Communication
                 HttpResponseMessage response = await httpClient.GetAsync(command);
                 body = await response.Content.ReadAsStringAsync();
 
-                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                switch (response.StatusCode)
                 {
-                    throw new APIException(body);
+                    case HttpStatusCode.InternalServerError:
+                        throw new APIException(body);
+                    case HttpStatusCode.NotFound:
+                        throw new NotFoundException(body);
                 }
             }
             catch (TimeoutException e)
