@@ -126,6 +126,16 @@ namespace CRCTray.Helpers
             return getTypedResults(DaemonCommander.UnsetConfig, config);
         }
 
+        public static bool GetPullSecret()
+        {
+            return getTypedResults(DaemonCommander.GetPullSecret);
+        }
+
+        public static bool SetPullSecret(string data)
+        {
+            return getTypedResults(DaemonCommander.SetPullSecret, data);
+        }
+
         public static ConsoleResult LoginForDeveloper()
         {
             return WebConsole();

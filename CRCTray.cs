@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.IO;
 using CRCTray.Communication;
 using CRCTray.Helpers;
 
@@ -235,19 +236,12 @@ namespace CRCTray
         async private void StartMenu_Click(object sender, EventArgs e)
         {
             // Check using get-config if pullSecret is configured
-            var configs = await TaskHelpers.TryTaskAndNotify(TaskHandlers.ConfigView,
+            var pullsecret = await TaskHelpers.TryTaskAndNotify(TaskHandlers.GetPullSecret,
                 String.Empty,
                 String.Empty,
                 String.Empty);
 
-            if(configs == null)
-            {
-                // no config was returned, does this mean a communication error?
-                TrayIcon.NotifyError("Unable to read configuration. Is the CRC daemon running?");
-                return;
-            }
-
-            if (configs != null && configs.Configs.PullSecretFile == String.Empty)
+            if (!pullsecret)
             {
                 var pullSecretForm = new PullSecretPickerForm();
                 var pullSecretPath = pullSecretForm.ShowFilePicker();
@@ -261,12 +255,12 @@ namespace CRCTray
                     ["pull-secret-file"] = pullSecretPath
                 };
 
-                await TaskHelpers.TryTaskAndNotify(TaskHandlers.SetConfig, pullSecretConfig,
+                string data = File.ReadAllText(pullSecretPath);
+                await TaskHelpers.TryTaskAndNotify(TaskHandlers.SetPullSecret, data,
                     "Pull Secret stored",
                     "Pull Secret not stored",
                     String.Empty);
             }
-
 
             TrayIcon.NotifyInfo(@"Starting Cluster");
 
