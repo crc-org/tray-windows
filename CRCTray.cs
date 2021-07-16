@@ -13,7 +13,7 @@ namespace CRCTray
         private TrayIcon trayIcon;
 
         // MenuStrip Items
-        private ToolStripItem status;
+        private ToolStripLabel status;
         private ToolStripItem detailedStatusMenu;
         // cluster commands
         private ToolStripItem startMenu;
@@ -83,9 +83,11 @@ namespace CRCTray
             cm.AccessibleName = "menu";
 
             // Status Menu
-            status = cm.Items.Add(InitialState); //TODO: actually "Unknown"
-            status.AccessibleName = "status";
+            ToolStripLabel status = new ToolStripLabel(InitialState); //TODO: actually "Unknown"
+            status.AccessibleName = status.Text;
+            status.TextChanged += Status_TextChanged;
             status.Enabled = false;
+            cm.Items.Add(status); 
 
             cm.Items.Add(new ToolStripSeparator());
             // Detailed status menu
@@ -151,6 +153,11 @@ namespace CRCTray
             // enable items
             aboutMenu.Enabled = true;
             detailedStatusMenu.Enabled = true;
+        }
+
+        private void Status_TextChanged(object sender, EventArgs e)
+        {
+            status.AccessibleName = status.Text;
         }
 
         private void SettingsMenu_Click(object sender, EventArgs e)
