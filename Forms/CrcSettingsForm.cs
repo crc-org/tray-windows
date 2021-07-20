@@ -16,7 +16,8 @@ namespace CRCTray
         List<string> configsNeedingUnset;
         ConfigResult currentConfig;
         Dictionary<string, dynamic> changedConfigs;
-        
+        String pullSecretContent = String.Empty;
+
         public CrcSettingsForm()
         {
             InitializeComponent();
@@ -64,7 +65,6 @@ namespace CRCTray
             this.memoryNumBox.Value = cr.Configs.memory;
             this.cpusNumBox.Value = cr.Configs.cpus;
             this.diskSizeNumBox.Value = cr.Configs.DiskSize;
-            this.pullSecretTxtBox.Text = cr.Configs.PullSecretFile;
             this.consentTelemetryCheckBox.Checked = cr.Configs.ConsentTelemetry == "no" ? false : true;
             this.autostartTrayCheckBox.Checked = cr.Configs.AutostartTray;
             // proxy configs
@@ -123,9 +123,20 @@ namespace CRCTray
             return fileRequester.FileName;
         }
 
-        private void PullSecretSelectButton_Click(object sender, EventArgs e)
+        private void PullSecretChangeButton_Click(object sender, EventArgs e)
         {
-            this.pullSecretTxtBox.Text = showAndGetNameFromFileRequester(null);
+            pullSecretContent = String.Empty;
+
+            var pullSecretForm = new PullSecretForm();
+            pullSecretForm.ShowDialog();
+
+            pullSecretContent = pullSecretForm.PullSecret;
+
+            if (pullSecretContent == String.Empty)
+            {
+                TrayIcon.NotifyWarn(@"No Pull Secret was provided. Cannot start cluster without pull secret.");
+                return;
+            }
         }
 
         private void proxyCABrowseButton_Click(object sender, EventArgs e)
@@ -136,6 +147,9 @@ namespace CRCTray
         // refresh button on properties tab
         private void RefreshButton_Click(object sender, EventArgs e)
         {
+            // Clear value
+            pullSecretContent = String.Empty;
+
             getConfigurationAndResetChanged();
         }
 
@@ -158,6 +172,17 @@ namespace CRCTray
                     "Settings applied",
                     "Settings not applied",
                     String.Empty);
+            }
+
+            if(pullSecretContent != String.Empty)
+            {
+                await TaskHelpers.TryTaskAndNotify(TaskHandlers.SetPullSecret, pullSecretContent,
+                    "Pull Secret stored",
+                    "Pull Secret not stored",
+                    String.Empty);
+
+                // Clear out value to prevent resending
+                pullSecretContent = String.Empty;
             }
 
             // Load the configs again and reset the change trackers
@@ -213,11 +238,6 @@ namespace CRCTray
         private void memoryNumBox_ValueChanged(object sender, EventArgs e)
         {
             handleConfigChangesForNumBoxes("memory", currentConfig.Configs.memory, this.memoryNumBox);
-        }
-
-        private void pullSecretTxtBox_TextChanged(object sender, EventArgs e)
-        {
-            handleConfigChangesForTextBoxes("pull-secret-file", currentConfig.Configs.PullSecretFile, this.pullSecretTxtBox);
         }
 
         private void diskSizeNumBox_ValueChanged(object sender, EventArgs e)
