@@ -2,21 +2,21 @@
 
 namespace CRCTray.Communication
 {
-    internal class NotFoundException : Exception
-    {
-        public NotFoundException(string message) : base(message) { }
-
-    }
-
     internal class APIException : Exception
     {
         public APIException(string message) : base(message) { }
 
     }
 
-    internal class CommunicationException : Exception
+    internal class APINotFoundException : Exception
     {
-        public CommunicationException(string message) : base(message) { }
+        public APINotFoundException(string message) : base(message) { }
+
+    }
+
+    internal class APICommunicationException : Exception
+    {
+        public APICommunicationException(string message) : base(message) { }
 
     }
 

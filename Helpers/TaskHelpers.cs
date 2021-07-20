@@ -25,7 +25,7 @@ namespace CRCTray.Helpers
            {
                ae.Handle((x) =>
                {
-                   if (x is CommunicationException) // This we know how to handle.
+                   if (x is APICommunicationException) // This we know how to handle.
                    {
                        // TODO: start counting and eventually notify
 
@@ -73,7 +73,7 @@ $@"{failureMessage}
            {
                ae.Handle((x) =>
                {
-                   if (x is CommunicationException) // This we know how to handle.
+                   if (x is APICommunicationException) // This we know how to handle.
                    {
                        // TODO: start counting and eventually notify
 
