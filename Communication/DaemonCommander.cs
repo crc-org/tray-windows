@@ -94,7 +94,7 @@ namespace CRCTray.Communication
             {
                 ae.Handle((x) =>
                 {
-                    if (x is NotFoundException) // This we know how to handle.
+                    if (x is APINotFoundException) // This we know how to handle.
                     {
                         // Marking as handled
                         return true;
@@ -140,12 +140,12 @@ namespace CRCTray.Communication
                     case HttpStatusCode.InternalServerError:
                         throw new APIException(body);
                     case HttpStatusCode.NotFound:
-                        throw new NotFoundException(body);
+                        throw new APINotFoundException(body);
                 }
             }
             catch (TimeoutException e)
             {
-                throw new CommunicationException(e.Message);
+                throw new APICommunicationException(e.Message);
             }
             catch (Exception e)
             {
@@ -174,12 +174,12 @@ namespace CRCTray.Communication
                     case HttpStatusCode.InternalServerError:
                         throw new APIException(body);
                     case HttpStatusCode.NotFound:
-                        throw new NotFoundException(body);
+                        throw new APINotFoundException(body);
                 }
             }
             catch (TimeoutException e)
             {
-                throw new CommunicationException(e.Message);
+                throw new APICommunicationException(e.Message);
             }
             catch (Exception e)
             {
