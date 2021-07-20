@@ -241,7 +241,7 @@ namespace CRCTray
                 var pullSecretContent = pullSecretForm.PullSecret;
                 if (pullSecretContent == String.Empty)
                 {
-                    TrayIcon.NotifyWarn(@"No Pull Secret was provided, Cannot start cluster without pull secret.");
+                    TrayIcon.NotifyWarn(@"No Pull Secret was provided. Cannot start cluster without pull secret.");
                     return;
                 }
 
