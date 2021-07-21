@@ -11,6 +11,12 @@ namespace CRCTray.Communication
         }
 	}
 
+	struct TelemetryRecord
+    {
+		public string action { get; set; }
+		public string source { get; set; }
+    }
+
 	struct ConfigSetCommand
 	{
 		public string command { get; set; }

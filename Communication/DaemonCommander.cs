@@ -113,6 +113,16 @@ namespace CRCTray.Communication
             return true;
         }
 
+        public static void PostTelemetryRecord(string action)
+        {
+            var tr = new TelemetryRecord()
+            {
+                action = action,
+                source = "tray"
+            };
+            _ = postResponse(BasicCommands.Telemetry, JsonSerializer.Serialize(tr), 30);
+        }
+
         private static string SendBasicCommand(string command, int timeout)
         {
             return getResponse(command, timeout).Result;

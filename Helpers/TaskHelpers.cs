@@ -9,6 +9,75 @@ namespace CRCTray.Helpers
 {
    internal class TaskHelpers
    {
+       public static async Task<T> TryTask<T>(Func<T> function)
+       {
+            try
+            {
+                return await Task.Run(function);
+            }
+            catch (AggregateException ae)
+            {
+                ae.Handle((x) =>
+                {
+                    if (x is APICommunicationException) // This we know how to handle.
+                    {
+                        // TODO: start counting and eventually notify
+
+                        return true;
+                    }
+
+                    if (x is APIException) // This we know how to handle.
+                    {
+                        return true;
+                    }
+
+                    if (x is TaskCanceledException)
+                    {
+                        return true;
+                    }
+
+                    return false;
+
+                });
+            }
+
+            return default;
+       }
+
+       public static async Task<T> TryTask<T, TArgs>(Func<TArgs, T> function, TArgs args)
+       {
+            try
+            {
+                return await Task.Run(() => function(args));
+            }
+            catch (AggregateException ae)
+            {
+                ae.Handle((x) =>
+                {
+                    if (x is APICommunicationException) // This we know how to handle.
+                    {
+                        // TODO: start counting and eventually notify
+
+                        return true;
+                    }
+
+                    if (x is APIException) // This we know how to handle.
+                    {
+                        return true;
+                    }
+
+                    if (x is TimeoutException || x is TaskCanceledException)
+                    {
+                        return true;
+                    }
+
+                    return false;
+
+                });
+            }
+
+            return default;
+       }
 
        public static async Task<T> TryTaskAndNotify<T>(Func<T> function, string successMessage, string failureMessage, string canceledMessage)
        {

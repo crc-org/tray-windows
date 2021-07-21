@@ -104,6 +104,8 @@
             this.tabs.Controls.Add(this.properties_tab);
             this.tabs.Controls.Add(this.advance_tab);
             this.tabs.Location = new System.Drawing.Point(7, 7);
+            this.tabs.Margin = new System.Windows.Forms.Padding(2);
+            this.tabs.Location = new System.Drawing.Point(7, 7);
             this.tabs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
@@ -116,8 +118,12 @@
             this.properties_tab.Controls.Add(this.groupBox2);
             this.properties_tab.Controls.Add(this.groupBox1);
             this.properties_tab.Location = new System.Drawing.Point(4, 22);
+            this.properties_tab.Margin = new System.Windows.Forms.Padding(2);
+            this.properties_tab.Location = new System.Drawing.Point(4, 22);
             this.properties_tab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.properties_tab.Name = "properties_tab";
+            this.properties_tab.Padding = new System.Windows.Forms.Padding(2);
+            this.properties_tab.Size = new System.Drawing.Size(494, 342);
             this.properties_tab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.properties_tab.Size = new System.Drawing.Size(494, 342);
             this.properties_tab.TabIndex = 0;
@@ -143,6 +149,8 @@
             // 
             this.refreshButton.AccessibleName = "Refresh button";
             this.refreshButton.Location = new System.Drawing.Point(2, 2);
+            this.refreshButton.Margin = new System.Windows.Forms.Padding(2);
+            this.refreshButton.Location = new System.Drawing.Point(2, 2);
             this.refreshButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(68, 22);
@@ -154,6 +162,8 @@
             // applyButton
             // 
             this.applyButton.AccessibleName = "Apply button";
+            this.applyButton.Location = new System.Drawing.Point(75, 2);
+            this.applyButton.Margin = new System.Windows.Forms.Padding(2);
             this.applyButton.Location = new System.Drawing.Point(75, 2);
             this.applyButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.applyButton.Name = "applyButton";
@@ -167,8 +177,12 @@
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel5);
             this.groupBox2.Location = new System.Drawing.Point(3, 150);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Location = new System.Drawing.Point(3, 150);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Size = new System.Drawing.Size(486, 144);
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Size = new System.Drawing.Size(486, 144);
             this.groupBox2.TabIndex = 1;
@@ -193,6 +207,8 @@
             this.tableLayoutPanel5.Controls.Add(this.useProxyTick, 1, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(2, 15);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(2, 15);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 5;
@@ -208,6 +224,8 @@
             // 
             this.proxyCABrowseButton.AccessibleName = "Proxy CA filerequester";
             this.proxyCABrowseButton.Location = new System.Drawing.Point(411, 102);
+            this.proxyCABrowseButton.Margin = new System.Windows.Forms.Padding(2);
+            this.proxyCABrowseButton.Location = new System.Drawing.Point(411, 102);
             this.proxyCABrowseButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.proxyCABrowseButton.Name = "proxyCABrowseButton";
             this.proxyCABrowseButton.Size = new System.Drawing.Size(68, 22);
@@ -221,6 +239,8 @@
             this.proxyCAFileTxtBox.AccessibleName = "Proxy CA file";
             this.proxyCAFileTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.proxyCAFileTxtBox.Enabled = false;
+            this.proxyCAFileTxtBox.Location = new System.Drawing.Point(98, 102);
+            this.proxyCAFileTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.proxyCAFileTxtBox.Location = new System.Drawing.Point(98, 102);
             this.proxyCAFileTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.proxyCAFileTxtBox.Name = "proxyCAFileTxtBox";
@@ -244,6 +264,8 @@
             this.httpProxyTxtBox.AccessibleName = "HTTP proxy";
             this.httpProxyTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.httpProxyTxtBox.Enabled = false;
+            this.httpProxyTxtBox.Location = new System.Drawing.Point(98, 27);
+            this.httpProxyTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.httpProxyTxtBox.Location = new System.Drawing.Point(98, 27);
             this.httpProxyTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.httpProxyTxtBox.Name = "httpProxyTxtBox";
@@ -279,6 +301,8 @@
             this.httpsProxyTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.httpsProxyTxtBox.Enabled = false;
             this.httpsProxyTxtBox.Location = new System.Drawing.Point(98, 52);
+            this.httpsProxyTxtBox.Margin = new System.Windows.Forms.Padding(2);
+            this.httpsProxyTxtBox.Location = new System.Drawing.Point(98, 52);
             this.httpsProxyTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.httpsProxyTxtBox.Name = "httpsProxyTxtBox";
             this.httpsProxyTxtBox.Size = new System.Drawing.Size(309, 20);
@@ -290,6 +314,8 @@
             this.noProxyTxtBox.AccessibleName = "No proxy";
             this.noProxyTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.noProxyTxtBox.Enabled = false;
+            this.noProxyTxtBox.Location = new System.Drawing.Point(98, 77);
+            this.noProxyTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.noProxyTxtBox.Location = new System.Drawing.Point(98, 77);
             this.noProxyTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.noProxyTxtBox.Name = "noProxyTxtBox";
@@ -314,6 +340,8 @@
             this.useProxyTick.AutoSize = true;
             this.useProxyTick.Dock = System.Windows.Forms.DockStyle.Fill;
             this.useProxyTick.Location = new System.Drawing.Point(98, 2);
+            this.useProxyTick.Margin = new System.Windows.Forms.Padding(2);
+            this.useProxyTick.Location = new System.Drawing.Point(98, 2);
             this.useProxyTick.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.useProxyTick.Name = "useProxyTick";
             this.useProxyTick.Size = new System.Drawing.Size(309, 21);
@@ -326,8 +354,12 @@
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel2);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(486, 144);
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Size = new System.Drawing.Size(486, 144);
             this.groupBox1.TabIndex = 0;
@@ -350,6 +382,8 @@
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.button1, 1, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 15);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 15);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -378,8 +412,11 @@
             this.consentTelemetryCheckBox.AutoSize = true;
             this.consentTelemetryCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.consentTelemetryCheckBox.Location = new System.Drawing.Point(98, 102);
+            this.consentTelemetryCheckBox.Margin = new System.Windows.Forms.Padding(2);
+            this.consentTelemetryCheckBox.Location = new System.Drawing.Point(98, 102);
             this.consentTelemetryCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.consentTelemetryCheckBox.Name = "consentTelemetryCheckBox";
+            this.consentTelemetryCheckBox.Size = new System.Drawing.Size(309, 23);
             this.consentTelemetryCheckBox.Size = new System.Drawing.Size(382, 23);
             this.consentTelemetryCheckBox.TabIndex = 17;
             this.consentTelemetryCheckBox.Text = "Report telemetry to Red Hat";
@@ -390,6 +427,8 @@
             // 
             this.cpusNumBox.AccessibleName = "vCPUs";
             this.cpusNumBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cpusNumBox.Location = new System.Drawing.Point(98, 2);
+            this.cpusNumBox.Margin = new System.Windows.Forms.Padding(2);
             this.cpusNumBox.Location = new System.Drawing.Point(98, 2);
             this.cpusNumBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cpusNumBox.Name = "cpusNumBox";
