@@ -145,5 +145,12 @@ namespace CRCTray.Helpers
         {
             return WebConsole();
         }
+
+        public static bool SendTelemetry(string action)
+        {
+            DaemonCommander.PostTelemetryRecord(action);
+            // Return a value to be able to wrap with the TryTask-helper
+            return true;
+        }
     }
 }

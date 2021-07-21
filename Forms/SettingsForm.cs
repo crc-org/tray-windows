@@ -168,6 +168,8 @@ namespace CRCTray
         // Apply button on properties tab
         private async void ApplyButton_Click(object sender, EventArgs e)
         {
+            TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.ApplyPreferences);
+
             // TODO: refactor
 
             if (this.configChanged && changedConfigs.Count > 0) 
