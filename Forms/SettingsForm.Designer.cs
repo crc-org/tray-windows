@@ -1,6 +1,6 @@
 ﻿namespace CRCTray
 {
-    partial class CrcSettingsForm
+    partial class SettingsForm
     {
         /// <summary>
         /// Required designer variable.
