@@ -10,7 +10,7 @@ using CRCTray.Helpers;
 
 namespace CRCTray
 {
-    public partial class CrcSettingsForm : Form
+    public partial class SettingsForm : Form
     {
         bool configChanged = false;
         List<string> configsNeedingUnset;
@@ -18,7 +18,7 @@ namespace CRCTray
         Dictionary<string, dynamic> changedConfigs;
         String pullSecretContent = String.Empty;
 
-        public CrcSettingsForm()
+        public SettingsForm()
         {
             InitializeComponent();
             getConfigurationAndResetChanged();
