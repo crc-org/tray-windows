@@ -29,7 +29,7 @@ namespace CRCTray
             this.changedConfigs = new Dictionary<string, dynamic>();
             this.configsNeedingUnset = new List<string>();
 
-            currentConfig = await Task.Run(Tasks.ConfigView);
+            currentConfig = await TaskHelpers.TryTask(Tasks.ConfigView);
             if (currentConfig != null)
             {
                 loadConfigurationValues(currentConfig);

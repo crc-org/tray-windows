@@ -750,7 +750,7 @@
             this.fileRequester.FileName = "openFileDialog1";
             this.fileRequester.InitialDirectory = "$env:USERPROFILE";
             // 
-            // CrcSettingsForm
+            // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -760,7 +760,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "CrcSettingsForm";
+            this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.CrcSettingsForm_Load);

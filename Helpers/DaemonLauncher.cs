@@ -6,7 +6,7 @@ namespace CRCTray.Helpers
 {
     class DaemonLauncher
     {
-        internal static void Start(Action quitFunc)
+        internal static bool Start(Action quitFunc)
         {
             // TODO: Action to be replaced with an event 'Stopped'
 
@@ -47,6 +47,9 @@ namespace CRCTray.Helpers
             }
 
             quitFunc();
+
+            // Return value to allow wrapping with TryTask
+            return true;
         }
     }
 }
