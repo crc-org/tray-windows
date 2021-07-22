@@ -28,8 +28,20 @@ namespace CRCTray
         {
             this.changedConfigs = new Dictionary<string, dynamic>();
             this.configsNeedingUnset = new List<string>();
-            currentConfig = await Task.Run(TaskHandlers.ConfigView);
-            loadConfigurationValues(currentConfig);
+
+            currentConfig = await TaskHelpers.TryTaskAndNotify(TaskHandlers.ConfigView,
+                String.Empty,
+                String.Empty,
+                String.Empty);
+            if(currentConfig != null)
+            {
+                loadConfigurationValues(currentConfig);
+            }
+            else
+            {
+                TrayIcon.NotifyError("Unable to read configuration. Is the CRC daemon running?");
+            }
+
             configChanged = false;
         }
 
