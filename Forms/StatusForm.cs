@@ -21,9 +21,9 @@ namespace CRCTray
         {
             InitializeComponent();
 
-            TaskHandlers.StatusReceived += UpdateReceived;
-            TaskHandlers.StopReceived += StopReceived;
-            TaskHandlers.DeleteReceived += DeleteReceived;
+            Tasks.StatusReceived += UpdateReceived;
+            Tasks.StopReceived += StopReceived;
+            Tasks.DeleteReceived += DeleteReceived;
         }
 
         private void StatusForm_Load(object sender, EventArgs e)
@@ -149,7 +149,7 @@ namespace CRCTray
         {
             try
             {
-                Task.Run(TaskHandlers.Status);
+                Task.Run(Tasks.Status);
             }
             catch
             {
@@ -161,7 +161,7 @@ namespace CRCTray
         {
             try
             {
-                var logs = await Task.Run(TaskHandlers.GetDaemonLogs);
+                var logs = await Task.Run(Tasks.GetDaemonLogs);
                 if (logs != null)
                 {
                     var messages = string.Join("\r\n", logs.Messages);

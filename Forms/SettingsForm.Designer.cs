@@ -53,12 +53,14 @@
             this.cpusNumBox = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.memoryNumBox = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.diskSizeNumBox = new System.Windows.Forms.NumericUpDown();
             this.label23 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.advance_tab = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.refreshButton2 = new System.Windows.Forms.Button();
@@ -76,8 +78,6 @@
             this.SkipCheckUserInHypervAdminsGroup = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.fileRequester = new System.Windows.Forms.OpenFileDialog();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.properties_tab.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
@@ -105,8 +105,6 @@
             this.tabs.Controls.Add(this.advance_tab);
             this.tabs.Location = new System.Drawing.Point(7, 7);
             this.tabs.Margin = new System.Windows.Forms.Padding(2);
-            this.tabs.Location = new System.Drawing.Point(7, 7);
-            this.tabs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
             this.tabs.Size = new System.Drawing.Size(502, 368);
@@ -119,12 +117,8 @@
             this.properties_tab.Controls.Add(this.groupBox1);
             this.properties_tab.Location = new System.Drawing.Point(4, 22);
             this.properties_tab.Margin = new System.Windows.Forms.Padding(2);
-            this.properties_tab.Location = new System.Drawing.Point(4, 22);
-            this.properties_tab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.properties_tab.Name = "properties_tab";
             this.properties_tab.Padding = new System.Windows.Forms.Padding(2);
-            this.properties_tab.Size = new System.Drawing.Size(494, 342);
-            this.properties_tab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.properties_tab.Size = new System.Drawing.Size(494, 342);
             this.properties_tab.TabIndex = 0;
             this.properties_tab.Text = "Properties";
@@ -150,8 +144,6 @@
             this.refreshButton.AccessibleName = "Refresh button";
             this.refreshButton.Location = new System.Drawing.Point(2, 2);
             this.refreshButton.Margin = new System.Windows.Forms.Padding(2);
-            this.refreshButton.Location = new System.Drawing.Point(2, 2);
-            this.refreshButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(68, 22);
             this.refreshButton.TabIndex = 14;
@@ -164,8 +156,6 @@
             this.applyButton.AccessibleName = "Apply button";
             this.applyButton.Location = new System.Drawing.Point(75, 2);
             this.applyButton.Margin = new System.Windows.Forms.Padding(2);
-            this.applyButton.Location = new System.Drawing.Point(75, 2);
-            this.applyButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.applyButton.Name = "applyButton";
             this.applyButton.Size = new System.Drawing.Size(68, 22);
             this.applyButton.TabIndex = 15;
@@ -178,12 +168,8 @@
             this.groupBox2.Controls.Add(this.tableLayoutPanel5);
             this.groupBox2.Location = new System.Drawing.Point(3, 150);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Location = new System.Drawing.Point(3, 150);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(486, 144);
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Size = new System.Drawing.Size(486, 144);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -208,8 +194,6 @@
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(2, 15);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(2);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(2, 15);
-            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 5;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -225,8 +209,6 @@
             this.proxyCABrowseButton.AccessibleName = "Proxy CA filerequester";
             this.proxyCABrowseButton.Location = new System.Drawing.Point(411, 102);
             this.proxyCABrowseButton.Margin = new System.Windows.Forms.Padding(2);
-            this.proxyCABrowseButton.Location = new System.Drawing.Point(411, 102);
-            this.proxyCABrowseButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.proxyCABrowseButton.Name = "proxyCABrowseButton";
             this.proxyCABrowseButton.Size = new System.Drawing.Size(68, 22);
             this.proxyCABrowseButton.TabIndex = 13;
@@ -241,8 +223,6 @@
             this.proxyCAFileTxtBox.Enabled = false;
             this.proxyCAFileTxtBox.Location = new System.Drawing.Point(98, 102);
             this.proxyCAFileTxtBox.Margin = new System.Windows.Forms.Padding(2);
-            this.proxyCAFileTxtBox.Location = new System.Drawing.Point(98, 102);
-            this.proxyCAFileTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.proxyCAFileTxtBox.Name = "proxyCAFileTxtBox";
             this.proxyCAFileTxtBox.Size = new System.Drawing.Size(309, 20);
             this.proxyCAFileTxtBox.TabIndex = 12;
@@ -266,8 +246,6 @@
             this.httpProxyTxtBox.Enabled = false;
             this.httpProxyTxtBox.Location = new System.Drawing.Point(98, 27);
             this.httpProxyTxtBox.Margin = new System.Windows.Forms.Padding(2);
-            this.httpProxyTxtBox.Location = new System.Drawing.Point(98, 27);
-            this.httpProxyTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.httpProxyTxtBox.Name = "httpProxyTxtBox";
             this.httpProxyTxtBox.Size = new System.Drawing.Size(309, 20);
             this.httpProxyTxtBox.TabIndex = 9;
@@ -302,8 +280,6 @@
             this.httpsProxyTxtBox.Enabled = false;
             this.httpsProxyTxtBox.Location = new System.Drawing.Point(98, 52);
             this.httpsProxyTxtBox.Margin = new System.Windows.Forms.Padding(2);
-            this.httpsProxyTxtBox.Location = new System.Drawing.Point(98, 52);
-            this.httpsProxyTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.httpsProxyTxtBox.Name = "httpsProxyTxtBox";
             this.httpsProxyTxtBox.Size = new System.Drawing.Size(309, 20);
             this.httpsProxyTxtBox.TabIndex = 10;
@@ -316,8 +292,6 @@
             this.noProxyTxtBox.Enabled = false;
             this.noProxyTxtBox.Location = new System.Drawing.Point(98, 77);
             this.noProxyTxtBox.Margin = new System.Windows.Forms.Padding(2);
-            this.noProxyTxtBox.Location = new System.Drawing.Point(98, 77);
-            this.noProxyTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.noProxyTxtBox.Name = "noProxyTxtBox";
             this.noProxyTxtBox.Size = new System.Drawing.Size(309, 20);
             this.noProxyTxtBox.TabIndex = 11;
@@ -341,8 +315,6 @@
             this.useProxyTick.Dock = System.Windows.Forms.DockStyle.Fill;
             this.useProxyTick.Location = new System.Drawing.Point(98, 2);
             this.useProxyTick.Margin = new System.Windows.Forms.Padding(2);
-            this.useProxyTick.Location = new System.Drawing.Point(98, 2);
-            this.useProxyTick.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.useProxyTick.Name = "useProxyTick";
             this.useProxyTick.Size = new System.Drawing.Size(309, 21);
             this.useProxyTick.TabIndex = 8;
@@ -355,12 +327,8 @@
             this.groupBox1.Controls.Add(this.tableLayoutPanel2);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(486, 144);
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Size = new System.Drawing.Size(486, 144);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -384,8 +352,6 @@
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 15);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 15);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 5;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -403,7 +369,7 @@
             this.label2.Location = new System.Drawing.Point(2, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 25);
+            this.label2.Size = new System.Drawing.Size(91, 25);
             this.label2.TabIndex = 2;
             this.label2.Text = "CPUs";
             // 
@@ -411,13 +377,10 @@
             // 
             this.consentTelemetryCheckBox.AutoSize = true;
             this.consentTelemetryCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.consentTelemetryCheckBox.Location = new System.Drawing.Point(98, 102);
+            this.consentTelemetryCheckBox.Location = new System.Drawing.Point(97, 102);
             this.consentTelemetryCheckBox.Margin = new System.Windows.Forms.Padding(2);
-            this.consentTelemetryCheckBox.Location = new System.Drawing.Point(98, 102);
-            this.consentTelemetryCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.consentTelemetryCheckBox.Name = "consentTelemetryCheckBox";
-            this.consentTelemetryCheckBox.Size = new System.Drawing.Size(309, 23);
-            this.consentTelemetryCheckBox.Size = new System.Drawing.Size(382, 23);
+            this.consentTelemetryCheckBox.Size = new System.Drawing.Size(383, 23);
             this.consentTelemetryCheckBox.TabIndex = 17;
             this.consentTelemetryCheckBox.Text = "Report telemetry to Red Hat";
             this.consentTelemetryCheckBox.UseVisualStyleBackColor = true;
@@ -427,10 +390,8 @@
             // 
             this.cpusNumBox.AccessibleName = "vCPUs";
             this.cpusNumBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.cpusNumBox.Location = new System.Drawing.Point(98, 2);
+            this.cpusNumBox.Location = new System.Drawing.Point(97, 2);
             this.cpusNumBox.Margin = new System.Windows.Forms.Padding(2);
-            this.cpusNumBox.Location = new System.Drawing.Point(98, 2);
-            this.cpusNumBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cpusNumBox.Name = "cpusNumBox";
             this.cpusNumBox.Size = new System.Drawing.Size(70, 20);
             this.cpusNumBox.TabIndex = 3;
@@ -448,7 +409,7 @@
             this.label3.Location = new System.Drawing.Point(2, 25);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 25);
+            this.label3.Size = new System.Drawing.Size(91, 25);
             this.label3.TabIndex = 4;
             this.label3.Text = "Memory";
             // 
@@ -459,9 +420,20 @@
             this.label22.Location = new System.Drawing.Point(2, 75);
             this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(92, 25);
+            this.label22.Size = new System.Drawing.Size(91, 25);
             this.label22.TabIndex = 15;
             this.label22.Text = "Disk Size";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Location = new System.Drawing.Point(2, 50);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(91, 25);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Pull secret";
             // 
             // tableLayoutPanel3
             // 
@@ -471,8 +443,8 @@
             this.tableLayoutPanel3.Controls.Add(this.memoryNumBox, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label11, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(98, 27);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(97, 27);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -506,7 +478,7 @@
             this.label11.Location = new System.Drawing.Point(74, 0);
             this.label11.Margin = new System.Windows.Forms.Padding(0);
             this.label11.Name = "label11";
-            this.label11.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.label11.Padding = new System.Windows.Forms.Padding(2);
             this.label11.Size = new System.Drawing.Size(27, 17);
             this.label11.TabIndex = 11;
             this.label11.Text = "MB";
@@ -519,7 +491,7 @@
             this.tableLayoutPanel4.Controls.Add(this.diskSizeNumBox, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.label23, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(96, 75);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(95, 75);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
@@ -532,7 +504,7 @@
             this.diskSizeNumBox.AccessibleName = "Disk size";
             this.diskSizeNumBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.diskSizeNumBox.Location = new System.Drawing.Point(2, 2);
-            this.diskSizeNumBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.diskSizeNumBox.Margin = new System.Windows.Forms.Padding(2);
             this.diskSizeNumBox.Name = "diskSizeNumBox";
             this.diskSizeNumBox.Size = new System.Drawing.Size(71, 20);
             this.diskSizeNumBox.TabIndex = 7;
@@ -544,10 +516,21 @@
             this.label23.Location = new System.Drawing.Point(77, 0);
             this.label23.Margin = new System.Windows.Forms.Padding(0);
             this.label23.Name = "label23";
-            this.label23.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.label23.Padding = new System.Windows.Forms.Padding(2);
             this.label23.Size = new System.Drawing.Size(26, 17);
             this.label23.TabIndex = 16;
             this.label23.Text = "GB";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(95, 50);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(68, 22);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Change";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.PullSecretChangeButton_Click);
             // 
             // advance_tab
             // 
@@ -555,9 +538,9 @@
             this.advance_tab.Controls.Add(this.groupBox4);
             this.advance_tab.Controls.Add(this.groupBox3);
             this.advance_tab.Location = new System.Drawing.Point(4, 22);
-            this.advance_tab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.advance_tab.Margin = new System.Windows.Forms.Padding(2);
             this.advance_tab.Name = "advance_tab";
-            this.advance_tab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.advance_tab.Padding = new System.Windows.Forms.Padding(2);
             this.advance_tab.Size = new System.Drawing.Size(494, 342);
             this.advance_tab.TabIndex = 1;
             this.advance_tab.Text = "Advanced";
@@ -571,7 +554,7 @@
             this.tableLayoutPanel8.Controls.Add(this.refreshButton2, 0, 0);
             this.tableLayoutPanel8.Controls.Add(this.applyButton2, 1, 0);
             this.tableLayoutPanel8.Location = new System.Drawing.Point(344, 226);
-            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -582,7 +565,7 @@
             // 
             this.refreshButton2.AccessibleName = "Refresh button";
             this.refreshButton2.Location = new System.Drawing.Point(2, 2);
-            this.refreshButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.refreshButton2.Margin = new System.Windows.Forms.Padding(2);
             this.refreshButton2.Name = "refreshButton2";
             this.refreshButton2.Size = new System.Drawing.Size(68, 22);
             this.refreshButton2.TabIndex = 22;
@@ -594,7 +577,7 @@
             // 
             this.applyButton2.AccessibleName = "Apply button";
             this.applyButton2.Location = new System.Drawing.Point(75, 2);
-            this.applyButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.applyButton2.Margin = new System.Windows.Forms.Padding(2);
             this.applyButton2.Name = "applyButton2";
             this.applyButton2.Size = new System.Drawing.Size(68, 22);
             this.applyButton2.TabIndex = 23;
@@ -606,9 +589,9 @@
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel7);
             this.groupBox4.Location = new System.Drawing.Point(4, 115);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(486, 94);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
@@ -625,7 +608,7 @@
             this.tableLayoutPanel7.Controls.Add(this.label9, 0, 2);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(2, 15);
-            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 3;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -640,7 +623,7 @@
             this.disableUpdateCheckBox.AutoSize = true;
             this.disableUpdateCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.disableUpdateCheckBox.Location = new System.Drawing.Point(98, 2);
-            this.disableUpdateCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.disableUpdateCheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.disableUpdateCheckBox.Name = "disableUpdateCheckBox";
             this.disableUpdateCheckBox.Size = new System.Drawing.Size(130, 22);
             this.disableUpdateCheckBox.TabIndex = 19;
@@ -659,7 +642,7 @@
             this.nameServerTxtBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.nameServerTxtBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.nameServerTxtBox.Location = new System.Drawing.Point(98, 54);
-            this.nameServerTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nameServerTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.nameServerTxtBox.Name = "nameServerTxtBox";
             this.nameServerTxtBox.Size = new System.Drawing.Size(123, 20);
             this.nameServerTxtBox.TabIndex = 20;
@@ -670,7 +653,7 @@
             this.autostartTrayCheckBox.AutoSize = true;
             this.autostartTrayCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.autostartTrayCheckBox.Location = new System.Drawing.Point(98, 28);
-            this.autostartTrayCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.autostartTrayCheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.autostartTrayCheckBox.Name = "autostartTrayCheckBox";
             this.autostartTrayCheckBox.Size = new System.Drawing.Size(151, 22);
             this.autostartTrayCheckBox.TabIndex = 21;
@@ -693,9 +676,9 @@
             // 
             this.groupBox3.Controls.Add(this.tableLayoutPanel1);
             this.groupBox3.Location = new System.Drawing.Point(4, 4);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(486, 107);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
@@ -709,7 +692,7 @@
             this.tableLayoutPanel1.Controls.Add(this.SkipCheckRunningAsAdmin, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.SkipCheckUserInHypervAdminsGroup, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 17);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
@@ -767,28 +750,6 @@
             this.fileRequester.FileName = "openFileDialog1";
             this.fileRequester.InitialDirectory = "$env:USERPROFILE";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(2, 50);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 25);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Pull secret";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(96, 50);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(68, 22);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Change";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.PullSecretChangeButton_Click);
-            // 
             // CrcSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -796,7 +757,7 @@
             this.ClientSize = new System.Drawing.Size(516, 381);
             this.Controls.Add(this.tabs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CrcSettingsForm";

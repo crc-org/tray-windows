@@ -257,7 +257,7 @@
     </Compile>
     <Compile Include="Helpers\Actions.cs" />
     <Compile Include="Helpers\DaemonLauncher.cs" />
-    <Compile Include="Helpers\TaskHandlers.cs" />
+    <Compile Include="Helpers\Tasks.cs" />
     <Compile Include="Communication\ResponseClasses.cs" />
     <Compile Include="Communication\DaemonCommander.cs" />
     <Compile Include="Forms\SettingsForm.cs">

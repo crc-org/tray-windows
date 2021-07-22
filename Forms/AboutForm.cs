@@ -31,7 +31,7 @@ namespace CRCTray
         {
             try
             {
-                version = await Task.Run(TaskHandlers.Version);
+                version = await Task.Run(Tasks.Version);
                 CrcVersionLabel.Text = String.Format("{0}+{1}", version.CrcVersion, version.CommitSha);
                 OcpVersion.Text = version.OpenshiftVersion;
             }

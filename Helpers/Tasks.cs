@@ -14,7 +14,7 @@ namespace CRCTray.Helpers
     public delegate void StopReceivedHandler(StopResult result);
     public delegate void DeleteReceivedHandler(DeleteResult result);
 
-    static class TaskHandlers
+    static class Tasks
     {
         private static string _previousStatus;
         private static readonly object _statusChangeLock = new object();
