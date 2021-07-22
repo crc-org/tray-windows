@@ -29,11 +29,8 @@ namespace CRCTray
             this.changedConfigs = new Dictionary<string, dynamic>();
             this.configsNeedingUnset = new List<string>();
 
-            currentConfig = await TaskHelpers.TryTaskAndNotify(TaskHandlers.ConfigView,
-                String.Empty,
-                String.Empty,
-                String.Empty);
-            if(currentConfig != null)
+            currentConfig = await Task.Run(Tasks.ConfigView);
+            if (currentConfig != null)
             {
                 loadConfigurationValues(currentConfig);
             }
@@ -168,13 +165,13 @@ namespace CRCTray
         // Apply button on properties tab
         private async void ApplyButton_Click(object sender, EventArgs e)
         {
-            TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.ApplyPreferences);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ApplyPreferences);
 
             // TODO: refactor
 
             if (this.configChanged && changedConfigs.Count > 0) 
             {
-                await TaskHelpers.TryTaskAndNotify(TaskHandlers.SetConfig, changedConfigs,
+                await TaskHelpers.TryTaskAndNotify(Tasks.SetConfig, changedConfigs,
                     "Settings applied",
                     "Settings not applied",
                     String.Empty);
@@ -182,7 +179,7 @@ namespace CRCTray
 
             if (this.configsNeedingUnset.Count > 0)
             {
-                await TaskHelpers.TryTaskAndNotify(TaskHandlers.UnsetConfig, configsNeedingUnset,
+                await TaskHelpers.TryTaskAndNotify(Tasks.UnsetConfig, configsNeedingUnset,
                     "Settings applied",
                     "Settings not applied",
                     String.Empty);
@@ -190,7 +187,7 @@ namespace CRCTray
 
             if(pullSecretContent != String.Empty)
             {
-                await TaskHelpers.TryTaskAndNotify(TaskHandlers.SetPullSecret, pullSecretContent,
+                await TaskHelpers.TryTaskAndNotify(Tasks.SetPullSecret, pullSecretContent,
                     "Pull Secret stored",
                     "Pull Secret not stored",
                     String.Empty);

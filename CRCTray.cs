@@ -53,9 +53,9 @@ namespace CRCTray
             statusPollingTimer.Enabled = true;
             statusPollingTimer.Elapsed += pollStatusTimerEventHandler;
 
-            TaskHandlers.StatusChanged += UpdateReceived;
-            TaskHandlers.StopReceived += StopReceived;
-            TaskHandlers.DeleteReceived += DeleteReceived;
+            Tasks.StatusChanged += UpdateReceived;
+            Tasks.StopReceived += StopReceived;
+            Tasks.DeleteReceived += DeleteReceived;
 
             SetContextMenu();
         }
@@ -69,7 +69,7 @@ namespace CRCTray
         {
             try
             {
-                Task.Run(TaskHandlers.Status);
+                Task.Run(Tasks.Status);
             }
             catch
             {
@@ -163,7 +163,7 @@ namespace CRCTray
 
         private void SettingsMenu_Click(object sender, EventArgs e)
         {
-            TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.OpenPreferences);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.OpenPreferences);
 
             if (settingsWindow == null)
                 settingsWindow = new CrcSettingsForm();
@@ -176,11 +176,11 @@ namespace CRCTray
 
         async private void CopyOCLoginForKubeadminMenu_Click(object sender, EventArgs e)
         {
-            TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.CopyOCLoginForAdmin);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.CopyOCLoginForAdmin);
 
             try
             {
-                var consoleResult = await Task.Run(TaskHandlers.LoginForKubeadmin);
+                var consoleResult = await Task.Run(Tasks.LoginForKubeadmin);
                 Clipboard.SetText(string.Format("oc.exe login -u kubeadmin -p {0} {1}",
                     consoleResult.ClusterConfig.KubeAdminPass, consoleResult.ClusterConfig.ClusterAPI));
             }
@@ -192,11 +192,11 @@ namespace CRCTray
 
         async private void CopyOCLoginForDeveloperMenu_Click(object sender, EventArgs e)
         {
-            TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.CopyOCLoginForDeveloper);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.CopyOCLoginForDeveloper);
 
             try
             {
-                var consoleResult = await Task.Run(TaskHandlers.LoginForDeveloper);
+                var consoleResult = await Task.Run(Tasks.LoginForDeveloper);
                 Clipboard.SetText(string.Format("oc.exe login -u developer -p developer {0}",
                     consoleResult.ClusterConfig.ClusterAPI));
             }
@@ -208,11 +208,11 @@ namespace CRCTray
 
         async private void OpenWebConsoleMenu_Click(object sender, EventArgs e)
         {
-            TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.ClickOpenConsole);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickOpenConsole);
 
             try
             {
-                var consoleResult = await Task.Run(TaskHandlers.WebConsole);
+                var consoleResult = await Task.Run(Tasks.WebConsole);
                 Process.Start(consoleResult.ClusterConfig.WebConsoleURL);
             }
             catch
@@ -223,11 +223,11 @@ namespace CRCTray
 
         async private void DeleteMenu_Click(object sender, EventArgs e)
         {
-            TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.ClickDelete);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickDelete);
 
             TrayIcon.NotifyInfo(@"Deleting cluster");
 
-            await TaskHelpers.TryTaskAndNotify(TaskHandlers.Delete,
+            await TaskHelpers.TryTaskAndNotify(Tasks.Delete,
                 "Cluster deleted",
                 "Could not delete the cluster",
                 String.Empty);
@@ -235,11 +235,11 @@ namespace CRCTray
 
         async private void StopMenu_Click(object sender, EventArgs e)
         {
-            TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.ClickStop);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickStop);
 
             TrayIcon.NotifyInfo(@"Stopping cluster");
 
-            await TaskHelpers.TryTaskAndNotify(TaskHandlers.Stop,
+            await TaskHelpers.TryTaskAndNotify(Tasks.Stop,
                 "Cluster stopped",
                 "Cluster could not be stopped",
                 String.Empty);
@@ -247,14 +247,10 @@ namespace CRCTray
 
         async private void StartMenu_Click(object sender, EventArgs e)
         {
-            TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.ClickStart);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickStart);
 
             // Check using get-config if pullSecret is configured
-            var pullsecret = await TaskHelpers.TryTaskAndNotify(TaskHandlers.GetPullSecret,
-                String.Empty,
-                String.Empty,
-                String.Empty);
-
+            var pullsecret = await TaskHelpers.TryTask(Tasks.GetPullSecret);
             if (!pullsecret)
             {
                 var pullSecretForm = new PullSecretForm();
@@ -266,9 +262,9 @@ namespace CRCTray
                     return;
                 }
 
-                TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.EnterPullSecret);
+                TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.EnterPullSecret);
 
-                await TaskHelpers.TryTaskAndNotify(TaskHandlers.SetPullSecret, pullSecretContent,
+                await TaskHelpers.TryTaskAndNotify(Tasks.SetPullSecret, pullSecretContent,
                     "Pull Secret stored",
                     "Pull Secret not stored",
                     String.Empty);
@@ -276,7 +272,7 @@ namespace CRCTray
 
             TrayIcon.NotifyInfo(@"Starting Cluster");
 
-            var startResult = await TaskHelpers.TryTaskAndNotify(TaskHandlers.Start,
+            var startResult = await TaskHelpers.TryTaskAndNotify(Tasks.Start,
                 String.Empty,
                 "Cluster did not start",
                 "Cluster still starting. Please check detailed status.");
@@ -287,14 +283,14 @@ namespace CRCTray
 
         private void ExitMenu_Click(object sender, EventArgs e)
         {
-            TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.Quit);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.Quit);
 
             QuitApp();
         }
 
         private void ShowAboutForm(object sender, EventArgs e)
         {
-            TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.OpenAbout);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.OpenAbout);
 
             if (about == null)
                 about = new AboutForm();
@@ -307,7 +303,7 @@ namespace CRCTray
 
         private void ShowDetailedStatusForm(object sender, EventArgs e)
         {
-            TaskHelpers.TryTask(TaskHandlers.SendTelemetry, Actions.OpenStatus);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.OpenStatus);
 
             if (statusForm == null)
                 statusForm = new StatusForm();
