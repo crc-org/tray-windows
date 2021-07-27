@@ -31,7 +31,7 @@ namespace CRCTray.Helpers
                         return true;
                     }
 
-                    if (x is TaskCanceledException)
+                    if (x is TimeoutException || x is TaskCanceledException)
                     {
                         return true;
                     }
@@ -111,7 +111,7 @@ $@"{failureMessage}
                        return true;
                    }
 
-                   if (x is TaskCanceledException)
+                   if (x is TimeoutException || x is TaskCanceledException)
                    {
                        if (!String.IsNullOrEmpty(canceledMessage))
                            TrayIcon.NotifyInfo(canceledMessage);
