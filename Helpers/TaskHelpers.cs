@@ -7,172 +7,111 @@ using CRCTray.Communication;
 
 namespace CRCTray.Helpers
 {
-   internal class TaskHelpers
-   {
-       public static async Task<T> TryTask<T>(Func<T> function)
-       {
+    internal class TaskHelpers
+    {
+        public static async Task<T> TryTask<T>(Func<T> function)
+        {
             try
             {
                 return await Task.Run(function);
             }
             catch (AggregateException ae)
             {
-                ae.Handle((x) =>
-                {
-                    if (x is APICommunicationException) // This we know how to handle.
-                    {
-                        // TODO: start counting and eventually notify
-
-                        return true;
-                    }
-
-                    if (x is APIException) // This we know how to handle.
-                    {
-                        return true;
-                    }
-
-                    if (x is TimeoutException || x is TaskCanceledException)
-                    {
-                        return true;
-                    }
-
-                    return false;
-
-                });
+                handleAggregate(ae);
             }
 
             return default;
-       }
+        }
 
-       public static async Task<T> TryTask<T, TArgs>(Func<TArgs, T> function, TArgs args)
-       {
+        public static async Task<T> TryTask<T, TArgs>(Func<TArgs, T> function, TArgs args)
+        {
             try
             {
                 return await Task.Run(() => function(args));
             }
             catch (AggregateException ae)
             {
-                ae.Handle((x) =>
-                {
-                    if (x is APICommunicationException) // This we know how to handle.
-                    {
-                        // TODO: start counting and eventually notify
-
-                        return true;
-                    }
-
-                    if (x is APIException) // This we know how to handle.
-                    {
-                        return true;
-                    }
-
-                    if (x is TimeoutException || x is TaskCanceledException)
-                    {
-                        return true;
-                    }
-
-                    return false;
-
-                });
+                handleAggregate(ae);
             }
 
             return default;
-       }
+        }
 
-       public static async Task<T> TryTaskAndNotify<T>(Func<T> function, string successMessage, string failureMessage, string canceledMessage)
-       {
-           try
-           {
+        public static async Task<T> TryTaskAndNotify<T>(Func<T> function, string successMessage, string failureMessage, string canceledMessage)
+        {
+            try
+            {
                var result = await Task.Run(function);
 
                if (!String.IsNullOrEmpty(successMessage))
                    TrayIcon.NotifyInfo(successMessage);
 
                return result;
-           }
-           catch (AggregateException ae)
-           {
-               ae.Handle((x) =>
-               {
-                   if (x is APICommunicationException) // This we know how to handle.
-                   {
-                       // TODO: start counting and eventually notify
+            }
+            catch (AggregateException ae)
+            {
+                handleAggregateWithNotify(failureMessage, canceledMessage, ae);
+            }
 
-                       return true;
-                   }
-
-                   if (x is APIException) // This we know how to handle.
-                   {
-                       if (!String.IsNullOrEmpty(failureMessage)) 
-                           TrayIcon.NotifyError(
-$@"{failureMessage}
-{x.Message}");
-
-                       return true;
-                   }
-
-                   if (x is TimeoutException || x is TaskCanceledException)
-                   {
-                       if (!String.IsNullOrEmpty(canceledMessage))
-                           TrayIcon.NotifyInfo(canceledMessage);
-
-                       return true;
-                   }
-
-                   return false;
-
-               });
-           }
-
-           return default;
+            return default;
        }
 
-       public static async Task<T> TryTaskAndNotify<T, TArgs>(Func<TArgs, T> function, TArgs args, string successMessage, string failureMessage, string canceledMessage)
-       {
-           try
-           {
+        public static async Task<T> TryTaskAndNotify<T, TArgs>(Func<TArgs, T> function, TArgs args, string successMessage, string failureMessage, string canceledMessage)
+        {
+            try
+            {
                var result = await Task.Run(() => function(args));
 
                if (!String.IsNullOrEmpty(successMessage))
                    TrayIcon.NotifyInfo(successMessage);
 
                return result;
-           }
-           catch (AggregateException ae)
-           {
-               ae.Handle((x) =>
-               {
-                   if (x is APICommunicationException) // This we know how to handle.
-                   {
-                       // TODO: start counting and eventually notify
+            }
+            catch (AggregateException ae)
+            {
+                handleAggregateWithNotify(failureMessage, canceledMessage, ae);
+            }
 
-                       return true;
-                   }
+            return default;
+        }
 
-                   if (x is APIException) // This we know how to handle.
-                   {
-                       if (!String.IsNullOrEmpty(failureMessage))
-                           TrayIcon.NotifyError(
- $@"{failureMessage}
+        private static void handleAggregate(AggregateException ae)
+        {
+            handleAggregateWithNotify(String.Empty, String.Empty, ae);
+        }
+
+        private static void handleAggregateWithNotify(string failureMessage, string canceledMessage, AggregateException ae)
+        {
+            ae.Handle((x) =>
+            {
+                if (x is APICommunicationException) // This we know how to handle.
+                {
+                    // TODO: start counting and eventually notify
+
+                    return true;
+                }
+
+                if (x is APIException) // This we know how to handle.
+                {
+                    if (!String.IsNullOrEmpty(failureMessage))
+                        TrayIcon.NotifyError(
+$@"{failureMessage}
 {x.Message}");
 
-                       return true;
-                   }
+                    return true;
+                }
 
-                   if (x is TimeoutException || x is TaskCanceledException )
-                   {
-                       if(!String.IsNullOrEmpty(canceledMessage))
-                           TrayIcon.NotifyInfo(canceledMessage);
+                if (x is TimeoutException || x is TaskCanceledException)
+                {
+                    if (!String.IsNullOrEmpty(canceledMessage))
+                        TrayIcon.NotifyInfo(canceledMessage);
 
-                       return true;
-                   }
+                    return true;
+                }
 
-                   return false;
+                return false;
 
-               });
-           }
-
-           return default;
-       }
-   }
+            });
+        }
+    }
 }
