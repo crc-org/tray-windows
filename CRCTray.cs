@@ -77,9 +77,8 @@ namespace CRCTray
             cm.AccessibleName = "menu";
 
             // Status Menu
-            status = new ToolStripLabel(InitialState); //TODO: actually "Unknown"
-            status.AccessibleName = status.Text;
-            status.TextChanged += Status_TextChanged;
+            status = new ToolStripLabel();
+            SetStatusText(InitialState); //TODO: actually "Unknown"
             status.Enabled = false;
             cm.Items.Add(status); 
 
@@ -147,11 +146,6 @@ namespace CRCTray
             // enable items
             aboutMenu.Enabled = true;
             detailedStatusMenu.Enabled = true;
-        }
-
-        private void Status_TextChanged(object sender, EventArgs e)
-        {
-            status.AccessibleName = status.Text;
         }
 
         private void SettingsMenu_Click(object sender, EventArgs e)
@@ -309,7 +303,7 @@ namespace CRCTray
 
         private void UpdateReceived(StatusResult statusResult)
         {
-            status.Text = statusResult.CrcStatus;
+            SetStatusText(statusResult.CrcStatus);
 
             // TODO: enable based on status
             //startMenu.Enabled = false;
@@ -317,12 +311,18 @@ namespace CRCTray
 
         private void StopReceived(StopResult result)
         {
-            status.Text = InitialState;
+            SetStatusText(InitialState);
         }
 
         private void DeleteReceived(DeleteResult result)
         {
-            status.Text = InitialState;
+            SetStatusText(InitialState);
+        }
+
+        private void SetStatusText(string state)
+        {
+            status.Text = state;
+            status.AccessibleName = state;
         }
 
         private void QuitApp()
