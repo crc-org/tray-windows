@@ -77,7 +77,7 @@ namespace CRCTray
             cm.AccessibleName = "menu";
 
             // Status Menu
-            ToolStripLabel status = new ToolStripLabel(InitialState); //TODO: actually "Unknown"
+            status = new ToolStripLabel(InitialState); //TODO: actually "Unknown"
             status.AccessibleName = status.Text;
             status.TextChanged += Status_TextChanged;
             status.Enabled = false;
@@ -305,7 +305,7 @@ namespace CRCTray
                 statusForm.Show();
 
             statusForm.Focus();
-        }
+        }   
 
         private void UpdateReceived(StatusResult statusResult)
         {
