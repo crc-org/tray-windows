@@ -165,7 +165,7 @@ namespace CRCTray
         // Apply button on properties tab
         private async void ApplyButton_Click(object sender, EventArgs e)
         {
-            _ = TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ApplyPreferences);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ApplyPreferences).NoAwait();
 
             // TODO: refactor
 
