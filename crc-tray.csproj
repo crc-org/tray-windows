@@ -256,6 +256,7 @@
       <DependentUpon>PullSecretForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Actions.cs" />
+    <Compile Include="Helpers\TaskExtensions.cs" />
     <Compile Include="Helpers\DaemonLauncher.cs" />
     <Compile Include="Helpers\Tasks.cs" />
     <Compile Include="Communication\ResponseClasses.cs" />

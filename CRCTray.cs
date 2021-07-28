@@ -67,7 +67,7 @@ namespace CRCTray
 
         private static void pollStatusTimerEventHandler(object source, System.Timers.ElapsedEventArgs e)
         {
-            _ = TaskHelpers.TryTask(Tasks.Status);
+            TaskHelpers.TryTask(Tasks.Status).NoAwait();
         }
 
         // populate the context menu for tray icon
@@ -150,7 +150,7 @@ namespace CRCTray
 
         private void SettingsMenu_Click(object sender, EventArgs e)
         {
-            _ = TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.OpenPreferences);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.OpenPreferences).NoAwait();
 
             if (settingsWindow == null)
                 settingsWindow = new SettingsForm();
@@ -163,7 +163,7 @@ namespace CRCTray
 
         async private void CopyOCLoginForKubeadminMenu_Click(object sender, EventArgs e)
         {
-            _ = TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.CopyOCLoginForAdmin);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.CopyOCLoginForAdmin).NoAwait();
 
             try
             {
@@ -179,7 +179,7 @@ namespace CRCTray
 
         async private void CopyOCLoginForDeveloperMenu_Click(object sender, EventArgs e)
         {
-            _ = TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.CopyOCLoginForDeveloper);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.CopyOCLoginForDeveloper).NoAwait();
 
             try
             {
@@ -195,7 +195,7 @@ namespace CRCTray
 
         async private void OpenWebConsoleMenu_Click(object sender, EventArgs e)
         {
-            _ = TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickOpenConsole);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickOpenConsole).NoAwait();
 
             try
             {
@@ -210,7 +210,7 @@ namespace CRCTray
 
         async private void DeleteMenu_Click(object sender, EventArgs e)
         {
-            _ = TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickDelete);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickDelete).NoAwait();
 
             TrayIcon.NotifyInfo(@"Deleting cluster");
 
@@ -222,7 +222,7 @@ namespace CRCTray
 
         async private void StopMenu_Click(object sender, EventArgs e)
         {
-            _ = TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickStop);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickStop).NoAwait();
 
             TrayIcon.NotifyInfo(@"Stopping cluster");
 
@@ -234,7 +234,7 @@ namespace CRCTray
 
         async private void StartMenu_Click(object sender, EventArgs e)
         {
-            _ = TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickStart);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickStart).NoAwait();
 
             // Check using get-config if pullSecret is configured
             var pullsecret = await TaskHelpers.TryTask(Tasks.GetPullSecret);
@@ -249,7 +249,7 @@ namespace CRCTray
                     return;
                 }
 
-                _ = TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.EnterPullSecret);
+                TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.EnterPullSecret).NoAwait();
 
                 await TaskHelpers.TryTaskAndNotify(Tasks.SetPullSecret, pullSecretContent,
                     "Pull Secret stored",
@@ -270,14 +270,14 @@ namespace CRCTray
 
         private void ExitMenu_Click(object sender, EventArgs e)
         {
-            _ = TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.Quit);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.Quit).NoAwait();
 
             QuitApp();
         }
 
         private void ShowAboutForm(object sender, EventArgs e)
         {
-            _ = TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.OpenAbout);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.OpenAbout).NoAwait();
 
             if (about == null)
                 about = new AboutForm();
@@ -290,7 +290,7 @@ namespace CRCTray
 
         private void ShowDetailedStatusForm(object sender, EventArgs e)
         {
-            _ = TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.OpenStatus);
+            TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.OpenStatus).NoAwait();
 
             if (statusForm == null)
                 statusForm = new StatusForm();
