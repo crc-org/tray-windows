@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using HttpOverStream.NamedPipe;
+using System.Net.Http.Json;
 
 namespace CRCTray.Communication
 {
@@ -61,18 +62,18 @@ namespace CRCTray.Communication
 
 		public static ConfigResult ConfigView()
 		{
-			return getResultsForBasicCommand<ConfigResult>(BasicCommands.ConfigGet);
+			return getResultsForBasicCommand<ConfigResult>(BasicCommands.Config);
 		}
 
 		public static SetUnsetConfig SetConfig(ConfigSetCommand cmd)
 		{
-            var result = postResponse(BasicCommands.ConfigSet, JsonSerializer.Serialize(cmd.args), 30);
+            var result = sendPostRequest(BasicCommands.Config, JsonSerializer.Serialize(cmd.args), 30);
             return JsonSerializer.Deserialize<SetUnsetConfig>(result.Result);
         }
 
 		public static SetUnsetConfig UnsetConfig(ConfigUnsetCommand cmd)
 		{
-            var result = postResponse(BasicCommands.ConfigUnset, JsonSerializer.Serialize(cmd.args), 30);
+            var result = sendDeleteRequest(BasicCommands.Config, JsonSerializer.Serialize(cmd.args), 30);
             return JsonSerializer.Deserialize<SetUnsetConfig>(result.Result);
 		}
 
@@ -109,7 +110,7 @@ namespace CRCTray.Communication
 
         public static bool SetPullSecret(string data)
         {
-            var result = postResponse(BasicCommands.PullSecret, data, 30);
+            var result = sendPostRequest(BasicCommands.PullSecret, data, 30);
             return true;
         }
 
@@ -120,28 +121,47 @@ namespace CRCTray.Communication
                 action = action,
                 source = "tray"
             };
-            _ = postResponse(BasicCommands.Telemetry, JsonSerializer.Serialize(tr), 30);
+            _ = sendPostRequest(BasicCommands.Telemetry, JsonSerializer.Serialize(tr), 30);
         }
 
         private static string SendBasicCommand(string command, int timeout)
         {
-            return getResponse(command, timeout).Result;
+            return sendGetRequest(command, timeout).Result;
         }
 
-        private static async Task<string> postResponse(string cmd, string content, int timeout)
+        private static async Task<string> sendGetRequest(string command, int timeout)
         {
+            return await sendRequest(prepareRequest(HttpMethod.Get,
+                                                    string.Format("{0}/{1}", _apiPath, command)),
+                                                    timeout);
+        }
 
+        private static async Task<string> sendPostRequest(string command, string content, int timeout)
+        {
+            return await sendRequest(prepareRequest(HttpMethod.Post,
+                                                    string.Format("{0}/{1}", _apiPath, command),
+                                                    content), timeout);
+        }
+
+        
+        private static async Task<string> sendDeleteRequest(string command, string content, int timeout)
+        {    
+            return await sendRequest(prepareRequest(HttpMethod.Delete,
+                                                    String.Format("{0}/{1}", _apiPath, command),
+                                                    content), timeout);
+        }
+
+        private static async Task<string> sendRequest(HttpRequestMessage request, int timeout)
+        {
             var httpClient = new NamedPipeHttpClientBuilder(_daemonHTTPNamedPipe)
                 .WithPerRequestTimeout(TimeSpan.FromSeconds(timeout))
                 .Build();
 
-            var httpContent = new StringContent(content, Encoding.UTF8, "application/json");
-            string command = String.Format("{0}/{1}", _apiPath, cmd);
-            string body = String.Empty;
+            string body = string.Empty;
 
             try
             {
-                HttpResponseMessage response = await httpClient.PostAsync(command, httpContent);
+                HttpResponseMessage response = await httpClient.SendAsync(request);
 
                 body = await response.Content.ReadAsStringAsync();
 
@@ -165,38 +185,23 @@ namespace CRCTray.Communication
             return body;
         }
 
-        private static async Task<string> getResponse(string cmd, int timeout)
+        private static HttpRequestMessage prepareRequest(HttpMethod method, string uri, string content)
         {
-            var httpClient = new NamedPipeHttpClientBuilder(_daemonHTTPNamedPipe)
-                .WithPerRequestTimeout(TimeSpan.FromSeconds(timeout))
-                .Build();
-
-            string command = String.Format("{0}/{1}", _apiPath, cmd);
-            string body = String.Empty;
-
-            try
+            return new HttpRequestMessage
             {
-                HttpResponseMessage response = await httpClient.GetAsync(command);
-                body = await response.Content.ReadAsStringAsync();
-
-                switch (response.StatusCode)
-                {
-                    case HttpStatusCode.InternalServerError:
-                        throw new APIException(body);
-                    case HttpStatusCode.NotFound:
-                        throw new APINotFoundException(body);
-                }
-            }
-            catch (TimeoutException e)
-            {
-                throw new APICommunicationException(e.Message);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return body;
+                Content = new StringContent(content, Encoding.UTF8, "application/json"),
+                Method = method,
+                RequestUri = new Uri(uri, UriKind.RelativeOrAbsolute)
+            };
         }
-	}
+
+        private static HttpRequestMessage prepareRequest(HttpMethod method, string uri)
+        {
+            return  new HttpRequestMessage
+            {
+                Method = method,
+                RequestUri = new Uri(uri, UriKind.RelativeOrAbsolute)
+            };
+        }
+    }
 }
