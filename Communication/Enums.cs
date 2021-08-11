@@ -13,10 +13,7 @@
         internal const string Logs = "logs";
         internal const string Telemetry = "telemetry";
 
-        // TODO: use proper GET/POST verbs
-        internal const string ConfigGet = "config/get";
-        internal const string ConfigSet = "config/set";
-        internal const string ConfigUnset = "config/unset";
+        internal const string Config = "config";
 
         internal const string PullSecret = "pull-secret";
     }
