@@ -251,10 +251,14 @@ namespace CRCTray
 
                 TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.EnterPullSecret).NoAwait();
 
-                await TaskHelpers.TryTaskAndNotify(Tasks.SetPullSecret, pullSecretContent,
-                    "Pull Secret stored",
-                    "Pull Secret not stored",
-                    String.Empty);
+                // Store pullsecret; returns false is not able to
+                var stored = await TaskHelpers.TryTask(Tasks.SetPullSecret, pullSecretContent);
+                if(!stored)
+                {
+                    TrayIcon.NotifyError(@"Pull-secret not stored. Please check if valid format is used.");
+                    return;
+                }
+
             }
 
             TrayIcon.NotifyInfo(@"Starting Cluster");

@@ -17,7 +17,7 @@ namespace CRCTray.Communication
 
         private static T getResultsForBasicCommand<T>(string command, int timeout = 20)
         {
-            var output = SendBasicCommand(command, timeout);
+            var output = BasicGetCommand(command, timeout);
 
             var options = new JsonSerializerOptions
             {
@@ -110,8 +110,26 @@ namespace CRCTray.Communication
 
         public static bool SetPullSecret(string data)
         {
-            var result = sendPostRequest(BasicCommands.PullSecret, data, 30);
-            return true;
+            try
+            {
+                _ = BasicPostCommand(BasicCommands.PullSecret, data, 30);
+                return true;
+            }
+            catch (AggregateException ae)
+            {
+                ae.Handle((x) =>
+                {
+                    if (x is APIException) // This we know how to handle.
+                    {
+                        // Marking as handled
+                        return true;
+                    }
+
+                    return false;
+                });
+
+                return false;
+            }
         }
 
         public static void PostTelemetryRecord(string action)
@@ -124,9 +142,14 @@ namespace CRCTray.Communication
             _ = sendPostRequest(BasicCommands.Telemetry, JsonSerializer.Serialize(tr), 30);
         }
 
-        private static string SendBasicCommand(string command, int timeout)
+        private static string BasicGetCommand(string command, int timeout)
         {
             return sendGetRequest(command, timeout).Result;
+        }
+
+        private static string BasicPostCommand(string command, string content, int timeout)
+        {
+            return sendPostRequest(command, content, timeout).Result;
         }
 
         private static async Task<string> sendGetRequest(string command, int timeout)
