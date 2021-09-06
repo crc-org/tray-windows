@@ -47,7 +47,7 @@ namespace CRCTray
             trayIcon = new TrayIcon(Resource.ocp_logo, "CodeReady Containers");
 
             StartDaemon();
-            
+
             // Keep polling status and updating the statusMenuItem
             var statusPollingTimer = new System.Timers.Timer(pollInterval);
             statusPollingTimer.Enabled = true;
@@ -80,7 +80,7 @@ namespace CRCTray
             status = new ToolStripLabel();
             SetStatusText(InitialState); //TODO: actually "Unknown"
             status.Enabled = false;
-            cm.Items.Add(status); 
+            cm.Items.Add(status);
 
             cm.Items.Add(new ToolStripSeparator());
             // Detailed status menu
@@ -154,7 +154,7 @@ namespace CRCTray
 
             if (settingsWindow == null)
                 settingsWindow = new SettingsForm();
-            
+
             if (!settingsWindow.Visible)
                 settingsWindow.Show();
 
@@ -237,8 +237,17 @@ namespace CRCTray
             TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.ClickStart).NoAwait();
 
             // Check using get-config if pullSecret is configured
-            var pullsecret = await TaskHelpers.TryTask(Tasks.GetPullSecret);
-            if (!pullsecret)
+            bool pullsecretExists = false;
+            try
+            {
+                pullsecretExists = await TaskHelpers.TryTaskWithRetry(Tasks.GetPullSecret);
+            }
+            catch (RetryableTaskFailedException ex)
+            {
+                TrayIcon.NotifyError($"Failed to start cluster as unable to fetch stored pull secret. {ex.Message}");
+                return;
+            }
+            if (!pullsecretExists)
             {
                 var pullSecretForm = new PullSecretForm();
                 pullSecretForm.ShowDialog();
@@ -253,12 +262,11 @@ namespace CRCTray
 
                 // Store pullsecret; returns false is not able to
                 var stored = await TaskHelpers.TryTask(Tasks.SetPullSecret, pullSecretContent);
-                if(!stored)
+                if (!stored)
                 {
                     TrayIcon.NotifyError(@"Pull-secret not stored. Please check if valid format is used.");
                     return;
                 }
-
             }
 
             TrayIcon.NotifyInfo(@"Starting Cluster");
@@ -303,7 +311,7 @@ namespace CRCTray
                 statusForm.Show();
 
             statusForm.Focus();
-        }   
+        }
 
         private void UpdateReceived(StatusResult statusResult)
         {
