@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CRCTray.Communication;
 
@@ -11,16 +9,61 @@ namespace CRCTray.Helpers
     {
         public static async Task<T> TryTask<T>(Func<T> function)
         {
+            return await tryTask(function, false);
+        }
+
+        private static async Task<T> tryTask<T>(Func<T> function, bool OnlyHandleAPIExceptions)
+        {
             try
             {
                 return await Task.Run(function);
             }
             catch (AggregateException ae)
             {
-                handleAggregate(ae);
+                handleAggregate(ae, OnlyHandleAPIExceptions);
             }
 
             return default;
+        }
+
+        public static async Task<T> TryTaskWithRetry<T>(Func<T> function, int attempts = 3, int backOff = 2000)
+        {
+            var retryCount = 0;
+
+            for(; ;)
+            {
+                if(retryCount > attempts)
+                {
+                    throw new RetryableTaskFailedException($"Re-tried task {retryCount} times");
+                }
+
+                try
+                {
+                    return await tryTask(function, true);
+                }
+
+                catch(AggregateException ae)
+                {
+                    ae.Handle((x) =>
+                    {
+
+                        if (x is TimeoutException || x is TaskCanceledException)
+                        {
+                            retryCount++;
+                            // backoff for 2 seconds
+                            Thread.Sleep(backOff);
+                            
+                            return true;
+                        }
+
+                        // should not reach here
+                        return false;
+                    });
+
+                }
+
+            }
+
         }
 
         public static async Task<T> TryTask<T, TArgs>(Func<TArgs, T> function, TArgs args)
@@ -75,12 +118,12 @@ namespace CRCTray.Helpers
             return default;
         }
 
-        private static void handleAggregate(AggregateException ae)
+        private static void handleAggregate(AggregateException ae, bool OnlyHandleAPIExceptions = false)
         {
-            handleAggregateWithNotify(String.Empty, String.Empty, ae);
+            handleAggregateWithNotify(String.Empty, String.Empty, ae, OnlyHandleAPIExceptions);
         }
 
-        private static void handleAggregateWithNotify(string failureMessage, string canceledMessage, AggregateException ae)
+        private static void handleAggregateWithNotify(string failureMessage, string canceledMessage, AggregateException ae, bool OnlyHandleAPIExceptions = false)
         {
             ae.Handle((x) =>
             {
@@ -94,12 +137,15 @@ namespace CRCTray.Helpers
                 if (x is APIException) // This we know how to handle.
                 {
                     if (!String.IsNullOrEmpty(failureMessage))
-                        TrayIcon.NotifyError(
-$@"{failureMessage}
-{x.Message}");
+                        TrayIcon.NotifyError($@"{failureMessage} {x.Message}");
 
                     return true;
                 }
+
+                // The TimeoutException or TaskCacnceledExceptions are returned to be handled outside
+                // this can be used to implement a retry in case of these exceptions
+                if (OnlyHandleAPIExceptions)
+                    return false;
 
                 if (x is TimeoutException || x is TaskCanceledException)
                 {
@@ -114,4 +160,5 @@ $@"{failureMessage}
             });
         }
     }
+
 }
