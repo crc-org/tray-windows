@@ -261,8 +261,18 @@ namespace CRCTray
                 TaskHelpers.TryTask(Tasks.SendTelemetry, Actions.EnterPullSecret).NoAwait();
 
                 // Store pullsecret; returns false is not able to
-                var stored = await TaskHelpers.TryTask(Tasks.SetPullSecret, pullSecretContent);
-                if (!stored)
+                bool pullsecretStored = false;
+                try
+                {
+                    pullsecretStored = await TaskHelpers.TryTaskWithRetry(Tasks.SetPullSecret, pullSecretContent);
+                }
+                catch (RetryableTaskFailedException ex)
+                {
+                    TrayIcon.NotifyError($"Failed to store pull secret. {ex.Message}. You'll be asked to enter it again on next start.");
+                    return;
+                }
+                
+                if (!pullsecretStored)
                 {
                     TrayIcon.NotifyError(@"Pull-secret not stored. Please check if valid format is used.");
                     return;
