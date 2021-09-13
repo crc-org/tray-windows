@@ -26,6 +26,20 @@ namespace CRCTray.Helpers
             return default;
         }
 
+        private static async Task<T> tryTask<T, TArgs>(Func<TArgs, T> function, TArgs args, bool OnlyHandleAPIExceptions)
+        {
+            try
+            {
+                return await Task.Run(() => function(args));
+            }
+            catch (AggregateException ae)
+            {
+                handleAggregate(ae, OnlyHandleAPIExceptions);
+            }
+
+            return default;
+        }
+
         public static async Task<T> TryTaskWithRetry<T>(Func<T> function, int attempts = 3, int backOff = 2000)
         {
             var retryCount = 0;
@@ -53,6 +67,46 @@ namespace CRCTray.Helpers
                             // backoff for 2 seconds
                             Thread.Sleep(backOff);
                             
+                            return true;
+                        }
+
+                        // should not reach here
+                        return false;
+                    });
+
+                }
+
+            }
+
+        }
+
+        public static async Task<T> TryTaskWithRetry<T, TArgs>(Func<TArgs, T> function, TArgs args, int attempts = 3, int backOff = 2000)
+        {
+            var retryCount = 0;
+
+            for (; ; )
+            {
+                if (retryCount > attempts)
+                {
+                    throw new RetryableTaskFailedException($"Re-tried task {retryCount} times");
+                }
+
+                try
+                {
+                    return await tryTask(function, args, true);
+                }
+
+                catch (AggregateException ae)
+                {
+                    ae.Handle((x) =>
+                    {
+
+                        if (x is TimeoutException || x is TaskCanceledException)
+                        {
+                            retryCount++;
+                            // backoff for 2 seconds
+                            Thread.Sleep(backOff);
+
                             return true;
                         }
 
